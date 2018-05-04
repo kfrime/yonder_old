@@ -3,6 +3,12 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# private
+iseek_backend/conf/prod.py
+
+# PyCharm
+.idea/
+
 # C extensions
 *.so
 
