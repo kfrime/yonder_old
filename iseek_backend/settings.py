@@ -59,6 +59,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+    # 自定义的Middleware
+    'core.middleware.logs.LogMiddleware',
 ]
 
 ROOT_URLCONF = 'iseek_backend.urls'
