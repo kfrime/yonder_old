@@ -43,6 +43,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # 其他组件
+    'mptt',     # 树形层次结构
+
+    # 自定义的 app
+    'blog',
 ]
 
 MIDDLEWARE = [

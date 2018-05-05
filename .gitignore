@@ -6,6 +6,9 @@ __pycache__/
 # private
 iseek_backend/conf/prod.py
 
+#
+migrations
+
 # PyCharm
 .idea/
 
