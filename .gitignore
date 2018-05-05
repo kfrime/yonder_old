@@ -5,6 +5,7 @@ __pycache__/
 
 # private
 iseek_backend/conf/prod.py
+.DS_Store
 
 #
 migrations

@@ -1,0 +1,37 @@
+
+{## 这个地方引入 static 的文件路径 #}
+{% load static %}
+
+<html>
+<title>iSeek</title>
+
+<body>
+
+{## {% static "image/logo.png" %} 表示路径#}
+<img src="{% static "blog/img/iseek.png" %}" width="102" height="40" alt="iseek"/>
+
+<h2>标签</h2>
+<ul>
+{% for tag in tags %}
+    <li>{{ tag.name }}</li>
+{% endfor %}
+</ul>
+
+<h2>分类主题</h2>
+<ul>
+{% for topic in topics %}
+    <li>{{ topic.name }}</li>
+{% endfor %}
+</ul>
+
+
+<h2>文章</h2>
+<ul>
+{% for article in articles %}
+    <li>{{ article.title }}</li>
+    <li>{{ article.summary }}</li>
+{% endfor %}
+</ul>
+
+</body>
+</html>
