@@ -28,8 +28,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = '99mu4rt+l5lc(m5h!06p^*-s*-y6q1gxa_da+z5zdr*$jxp2ch'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
 
 ALLOWED_HOSTS = ['*']
 
@@ -135,5 +133,11 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-from iseek_backend.conf import *
+# 导入个人的配置信息
+from .base_settings import *
 
+# log 配置
+from .logs import *
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True

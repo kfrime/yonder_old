@@ -3,9 +3,8 @@ __pycache__/
 *.py[cod]
 *$py.class
 
-# private
-iseek_backend/conf/prod.py
 .DS_Store
+iseek_backend/base_settings.py
 
 #
 migrations
