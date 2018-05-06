@@ -6,11 +6,13 @@ from django.utils.deprecation import MiddlewareMixin
 log = logging.getLogger('info')
 
 
+# 新版的 Django 中间层要继承 MiddlewareMixin
 class LogMiddleware(MiddlewareMixin):
 
     @staticmethod
     def process_request(request):
         try:
+            # multipart/form-data 表示的是二进制的文件
             if request.environ["CONTENT_TYPE"].find("multipart/form-data") < 0:
                 body = request.body.decode('utf-8')
             else:
