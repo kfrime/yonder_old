@@ -51,7 +51,10 @@ class Article(models.Model):
     updated = models.DateTimeField(verbose_name='更新时间', auto_now=True)
     slug = models.SlugField(unique=True)
 
+    # 文章和主题是多对一的关系
     topic = models.ForeignKey(Topic, on_delete=models.CASCADE, verbose_name='文章分类')
+
+    # 文章和标签是多对多的关系
     tags = models.ManyToManyField(Tag, verbose_name='文章标签')
 
     class Meta:
@@ -62,7 +65,6 @@ class Article(models.Model):
         # 显示前20个字符和省略号
         s = self.title[:20]
         return s if len(self.title) < 20 else s + ' ...'
-
 
 
 

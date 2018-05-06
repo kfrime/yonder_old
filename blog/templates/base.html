@@ -1,0 +1,29 @@
+
+{## 这个地方引入 static 的文件路径 #}
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>iSeek</title>
+</head>
+
+<body>
+
+{## {% static "image/logo.png" %} 表示路径#}
+{# 同时创建图像链接 #}
+<a href="/">
+<img src="{% static "img/iseek.png" %}" width="108" height="40" alt="iseek"/>
+</a>
+
+<a href="/">首页</a>
+
+<a href="/admin/">后台</a>
+
+{% block body %}
+    Not Implemented
+{% endblock %}
+
+</body>
+</html>
