@@ -40,7 +40,8 @@ def article_list(request):
     return render(request, 'article_list.html', context=context)
 
 
-
+def about(request):
+    return render(request, 'about.html')
 
 
 
