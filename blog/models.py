@@ -1,5 +1,6 @@
 # -*- coding:utf-8 -*-
 from django.db import models
+from django.shortcuts import reverse
 from django.contrib.auth.models import User
 from mptt.models import MPTTModel, TreeForeignKey
 
@@ -17,6 +18,10 @@ class Tag(models.Model):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """ 查看该标签下的所有文章列表 """
+        pass
 
 
 class Topic(MPTTModel):
@@ -36,6 +41,10 @@ class Topic(MPTTModel):
 
     def __str__(self):
         return self.name
+
+    def get_absolute_url(self):
+        """ 查看该分类下的所有文章列表 """
+        pass
 
 
 class Article(models.Model):
@@ -66,7 +75,9 @@ class Article(models.Model):
         s = self.title[:20]
         return s if len(self.title) < 20 else s + ' ...'
 
-
+    def get_absolute_url(self):
+        """ 查看该文章的具体内容 """
+        return reverse('blog:detail', kwargs={'id': self.id})
 
 
 

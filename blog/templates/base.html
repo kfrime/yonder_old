@@ -11,13 +11,13 @@
     <!-- 宽度等于当前设备的宽度，不缩放 -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-    <title>iSeek</title>
+    <title>iSeek {% block blog_title %}{% endblock %}</title>
 
     <!-- todo: 标题图片后续修改 -->
     <link rel="shortcut icon" href="{% static 'img/favicon.ico'%}" type="image/x-icon"/>
 
     <!-- 引入bootstrap.min.css -->
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+{#    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">#}
 
     <!-- Bootstrap and font-awesome CSS -->
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
