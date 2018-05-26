@@ -1,0 +1,34 @@
+{## 这个地方引入 static 的文件路径 #}
+{% load static %}
+
+{## {% static "image/logo.png" %} 表示路径#}
+
+{# 导航栏，样式，位置 #}
+<nav class="navbar navbar-expand-md bg-white fixed-top blog-navbar py-md-0">
+    {# 同时创建图像链接 #}
+    <a class="navbar-brand d-md-none d-lg-block" href="{% url 'blog:index' %}">
+        <img src="{% static "img/logo.png" %}" width="108" height="40" alt="iseek"/>
+    </a>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item mr-2">
+                {% url 'blog:index' as index_url %}
+                <a class="nav-link py-md-3 {% if request.path == index_url %}active{% endif %}"
+                    href="{{ index_url }}"><i class="fa fa-home mr-1"></i>首页
+                </a>
+            </li>
+
+            <li class="nav-item mr-2">
+                {% url 'blog:about' as about_url %}
+                <a class="nav-link py-md-3 {% if request.path == about_url %}active{% endif %}"
+                    href="{{ about_url }}"><i class="fa fa-anchor mr-1"></i>关于
+                </a>
+            </li>
+
+            <li class="nav-item mr-2">
+                <a class="nav-link py-md-3" href="/admin/">后台</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
