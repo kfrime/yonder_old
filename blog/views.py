@@ -2,6 +2,11 @@
 
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.core.cache import cache
+from django.utils.text import slugify
+
+from markdown.extensions.toc import TocExtension  # 锚点的拓展
+import markdown
 
 from .models import (Tag, Topic, Article)
 
@@ -23,6 +28,23 @@ class IndexView(generic.ListView):
 
 def article_detail(request, id):
     article = get_object_or_404(Article, pk=id)
+
+    update_time = article.update_time.strftime("%Y%m%d%H%M%S")
+    md_key = '{}_md_{}'.format(article.id, update_time)
+    cache_md = cache.get(md_key)
+    if cache_md:
+        md = cache_md
+    else:
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+            # TocExtension(slugify=slugify),
+        ])
+        cache.set(md_key, md, 60 * 60 * 12)
+    article.text = md.convert(article.text)
+    article.toc = md.toc    # 目录
+
     context = {
         'article': article
     }
