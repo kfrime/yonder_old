@@ -21,7 +21,7 @@ class Tag(models.Model):
 
     def get_absolute_url(self):
         """ 查看该标签下的所有文章列表 """
-        pass
+        return reverse('blog:tag', kwargs={'id': self.id})
 
 
 class Topic(MPTTModel):

@@ -54,3 +54,11 @@ def topic(request, id):
     return render(request, 'topic.html', context=context)
 
 
+def tag(request, id):
+    tag = get_object_or_404(Tag, pk=id)
+    articles = Article.objects.filter(tags=tag)
+    context = {
+        'tag': tag,
+        'articles': articles,
+    }
+    return render(request, 'tag.html', context=context)

@@ -5,7 +5,6 @@ from django import template
 
 from ..models import (Tag, Topic, Article)
 
-import request
 
 register = template.Library()
 
