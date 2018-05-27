@@ -44,4 +44,13 @@ def about(request):
     return render(request, 'about.html')
 
 
+def topic(request, id):
+    topic = get_object_or_404(Topic, pk=id)
+    articles = Article.objects.filter(topic=topic)
+    context = {
+        'topic': topic,
+        'articles': articles,
+    }
+    return render(request, 'topic.html', context=context)
+
 

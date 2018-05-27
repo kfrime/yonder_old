@@ -44,7 +44,7 @@ class Topic(MPTTModel):
 
     def get_absolute_url(self):
         """ 查看该分类下的所有文章列表 """
-        pass
+        return reverse('blog:topic', kwargs={'id': self.id})
 
 
 class Article(models.Model):

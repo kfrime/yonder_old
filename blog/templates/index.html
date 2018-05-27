@@ -1,6 +1,7 @@
 
 {% extends 'base.html' %}
 {% load static %}
+{% load blog_tags %}
 
 {% block blog_title %}个人博客{% endblock %}
 
@@ -18,12 +19,13 @@
             </div>
 
             <!-- 文章列表 -->
-            {% include "article_list.html" %}
+            {% get_article_list articles %}
+{#            {% include "article_list.html" %}#}
         </div>
 
         <!-- 主页右边栏 -->
         <div class="col-lg-4">
-            {% include 'index_right.html' %}
+            {% include 'base_right.html' %}
         </div>
 
     </div>
