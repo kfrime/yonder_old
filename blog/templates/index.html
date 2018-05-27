@@ -20,7 +20,7 @@
 
             <!-- 文章列表 -->
             {% get_article_list articles %}
-{#            {% include "article_list.html" %}#}
+            {% if is_paginated %} {% load_pages %} {% endif %}
         </div>
 
         <!-- 主页右边栏 -->

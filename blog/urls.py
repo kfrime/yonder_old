@@ -4,7 +4,8 @@ from django.urls import path, include
 from . import views
 
 urlpatterns = [
-    path(r'', views.index, name='index'),
+    path(r'', views.IndexView.as_view(), name='index'),
+
     path('article/<int:id>', views.article_detail, name='detail'),
     path('topic/<int:id>', views.topic, name='topic'),
     path('tag/<int:id>', views.tag, name='tag'),
