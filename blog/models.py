@@ -56,8 +56,8 @@ class Article(models.Model):
     summary = models.TextField('文章摘要', max_length=256,
                                default='文章摘要将显示在首页，必须填写...')
     text = models.TextField(verbose_name='文章内容')
-    created = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
-    updated = models.DateTimeField(verbose_name='更新时间', auto_now=True)
+    create_time = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
+    update_time = models.DateTimeField(verbose_name='更新时间', auto_now=True)
     slug = models.SlugField(unique=True)
 
     # 文章和主题是多对一的关系
@@ -68,7 +68,7 @@ class Article(models.Model):
 
     class Meta:
         verbose_name = '文章'
-        ordering = ['-created']
+        ordering = ['-create_time']
 
     def __str__(self):
         # 显示前20个字符和省略号
@@ -79,6 +79,11 @@ class Article(models.Model):
         """ 查看该文章的具体内容 """
         return reverse('blog:detail', kwargs={'id': self.id})
 
+    def get_pre(self):
+        return Article.objects.filter(id__lt=self.id).order_by('-id').first()
+
+    def get_next(self):
+        return Article.objects.filter(id__gt=self.id).order_by('id').first()
 
 
 

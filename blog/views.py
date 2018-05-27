@@ -1,19 +1,16 @@
 # -*- coding:utf-8 -*-
 
 from django.shortcuts import render, get_object_or_404
-from django.http import HttpResponse
 from django.views import generic
 
 from .models import (Tag, Topic, Article)
-
-# Create your views here.
 
 
 class IndexView(generic.ListView):
     model = Article
     template_name = 'index.html'
     context_object_name = 'articles'
-    paginate_by = 10
+    paginate_by = 5
     # paginate_orphans = 3
 
     def get_ordering(self):
@@ -24,22 +21,12 @@ class IndexView(generic.ListView):
         return ordering
 
 
-# def index(request):
-#     # return HttpResponse("Hello, world.")
-#     context = {
-#         'tags': Tag.objects.all(),
-#         'topics': Topic.objects.all().exclude(parent=None),
-#         'articles': Article.objects.all(),
-#     }
-#     return render(request, 'index.html', context=context)
-
-
 def article_detail(request, id):
     article = get_object_or_404(Article, pk=id)
     context = {
         'article': article
     }
-    return render(request, 'article_detail.html', context=context)
+    return render(request, 'detail.html', context=context)
 
 
 def article_list(request):
