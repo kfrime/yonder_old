@@ -8,7 +8,7 @@ const config = {
   target: 'web',
   entry: path.join(__dirname, 'src/index.js'),
   output: {
-    filename: 'bundle.js',
+    filename: 'bundle.[hash:8].js',
     path: path.join(__dirname, 'public')
   },
   module: {
@@ -16,6 +16,32 @@ const config = {
       {
         test: /\.vue$/,
         loader: 'vue-loader'
+      },
+      {
+        test: /\.(jsx|js)$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/
+      },
+      {
+        test: /\.css$/,
+        use: [
+          'style-loader',
+          'css-loader'
+        ]
+      },
+      {
+        test: /\.styl$/,
+        use: [
+          'style-loader',
+          'css-loader',
+          {
+            loader: "postcss-loader",
+            options: {
+              sourceMap: true,
+            }
+          },
+          'stylus-loader'
+        ]
       }
     ]
   },
