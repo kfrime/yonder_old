@@ -1,11 +1,18 @@
 <template>
   <div id="app">
+    <!--<Navbar></Navbar>-->
+    <Header></Header>
     <div class="test">{{ content }}</div>
   </div>
 </template>
 
 <script>
+import Header from './blog/header.vue'
+
 export default {
+  components: {
+    Header
+  },
   data () {
     return {
       content: 'Hello Vue'
@@ -15,8 +22,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-#app{
-  background-color #999
+.test{
   color red
   text-align center
 }

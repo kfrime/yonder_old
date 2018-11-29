@@ -46,7 +46,9 @@ const config = {
     ]
   },
   plugins: [
-    new HTMLPlugin()
+    new HTMLPlugin({
+      template: path.join(__dirname, 'src/template.html')
+    })
   ]
 }
 
