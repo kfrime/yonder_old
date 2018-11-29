@@ -1,6 +1,5 @@
 <template>
   <div id="app">
-    <!--<Navbar></Navbar>-->
     <Header></Header>
     <div class="test">{{ content }}</div>
   </div>

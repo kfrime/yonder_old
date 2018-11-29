@@ -17,13 +17,16 @@
 
           <li class="nav-item mr-2">
             <!--{% url 'blog:about' as about_url %}-->
-            <a class="nav-link py-md-3 {% if request.path == about_url %}active{% endif %}"
+            <!--<a class="nav-link py-md-3 {% if request.path == about_url %}active{% endif %}"-->
+            <a class="nav-link py-md-3"
                href="#"><i class="fa fa-anchor mr-1"></i>关于
             </a>
           </li>
 
           <li class="nav-item mr-2">
-            <a class="nav-link py-md-3" href="#">后台</a>
+            <a class="nav-link py-md-3"
+               href="#"><i class="fa fa-diamond mr-1"></i>后台
+            </a>
           </li>
         </ul>
       </div>
