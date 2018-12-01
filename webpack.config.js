@@ -42,7 +42,19 @@ const config = {
           },
           'stylus-loader'
         ]
-      }
+      },
+      {
+        test: /\.(gif|jpg|jpeg|png|svg)$/,
+        use: [
+          {
+            loader: 'url-loader',
+            options: {
+              limit: 1024,
+              name: 'resources/[path][name]-[hash:8].[ext]'        /* ext，上面的gif, jpg ... */
+            }
+          }
+        ]
+      },
     ]
   },
   plugins: [

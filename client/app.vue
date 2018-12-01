@@ -1,8 +1,11 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div class="content">{{ author }} {{ content }}</div>
-    <div class="blog">{{ blog }}</div>
+    <div class="content">author: {{ article.author }}</div>
+    <div class="content">title: {{ article.title }}</div>
+    <div class="content">summary: {{ article.summary }}</div>
+    <div class="content">content: {{ article.content }}</div>
+    <div class="text">getter text: {{ text }}</div>
   </div>
 </template>
 
@@ -19,18 +22,17 @@ export default {
   },
   computed: {
     ...mapState({
-      content: (state) => state.content,
-      author: (state) => state.author
+      article: (state) => state.article
     }),
     ...mapGetters({
-      blog: 'blog'
+      text: 'text'
     })
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.content, .blog{
+.content, .text{
   text-align center
 }
 .content{

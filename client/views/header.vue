@@ -1,9 +1,9 @@
 <template>
   <header>
     <nav class="navbar navbar-expand-md bg-white fixed-top blog-navbar py-md-0">
-      <a class="navbar-brand d-md-none d-lg-block" href="#">
+      <a class="navbar-brand d-md-none d-lg-block" href="/">
         <i class="fa fa-home mr-1"></i>Home
-        <!--<img src="#" width="108" height="40" alt="blog"/>-->
+        <!--<img href="../assets/images/favicon.ico" width="108" height="40" alt="blog"/>-->
       </a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav ml-auto">

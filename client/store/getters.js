@@ -1,7 +1,7 @@
 // vuex getters
 
 export default {
-  blog (state) {
-    return `${state.author}, ${state.content}`
+  text (state) {
+    return `${state.article.author}, ${state.article.ctime}, ${state.article.title}`
   }
 }
