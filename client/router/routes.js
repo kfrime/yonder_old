@@ -4,6 +4,10 @@ import ArticleDetail from '../views/article-detail.vue'
 
 export default [
   {
+    path: '/',
+    redirect: '/app'
+  },
+  {
     path: '/app',
     component: AppMain
   },

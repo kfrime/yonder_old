@@ -6,7 +6,8 @@
         <span><i class="fa fa-calendar-times-o ml-2 mr-1"></i>{{article.ctime}}</span>
       </div>
       <h2 class="mt-0 font-weight-bold text-info f-17">
-        <a href="#">{{article.title}}</a>
+        <!--<a href="#">{{article.title}}</a>-->
+        <router-link :to="`/article/${article.id}`">{{article.title}}</router-link>
       </h2>
       <p class="d-none d-sm-block mb-2 f-15">{{article.summary}}</p>
       <div class="text-muted mb-0 f-12">

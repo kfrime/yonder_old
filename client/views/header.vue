@@ -1,9 +1,10 @@
 <template id="navbar-tpl">
   <div class="navbar navbar-expand-md bg-white py-md-0 blog-navbar">
     <div class="container">
-      <a class="navbar-brand d-md-none d-lg-block" href="#">首页
+      <router-link to="/" class="navbar-brand d-md-none d-lg-block">首页</router-link>
+      <!--<a class="navbar-brand d-md-none d-lg-block" href="#">首页-->
         <!--<img src="../assets/images/favicon.ico" width="50" height="50" class="img-fluid" alt="首页">-->
-      </a>
+      <!--</a>-->
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>

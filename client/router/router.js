@@ -11,6 +11,9 @@ Vue.use(Router)
 // 所以这里每次都生成一个新的Router返回
 export default () => {
   return new Router({
-    routes
+    routes,
+    mode: 'history',
+    linkActiveClass: 'active-link',
+    linkExactActiveClass: 'exact-active-link'
   })
 }
