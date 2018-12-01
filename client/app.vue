@@ -6,15 +6,18 @@
 </template>
 
 <script>
-import Header from './blog/header.vue'
+import Header from './views/header.vue'
 
 export default {
   components: {
     Header
   },
-  data () {
-    return {
-      content: 'Hello Vue'
+  mounted () {
+    console.log('vuex store', this.$store)
+  },
+  computed: {
+    content () {
+      return this.$store.state.content
     }
   }
 }
