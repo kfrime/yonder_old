@@ -9,7 +9,8 @@ const config = {
   entry: path.join(__dirname, 'client/index.js'),
   output: {
     filename: 'bundle.[hash:8].js',
-    path: path.join(__dirname, 'public')
+    path: path.join(__dirname, 'public'),
+    publicPath: "/public/"
   },
   module: {
     rules: [
@@ -71,6 +72,9 @@ if (isDev) {
     host: '0.0.0.0',
     overlay: {
       errors: true,   /* 显示错误信息 */
+    },
+    historyApiFallback: {
+      index: '/index.html'
     },
     hot: true,          /* 修改某个组件后，只更新该组件的数据，不重新加载整个页面的全部数据 */
   },
