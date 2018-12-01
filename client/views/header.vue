@@ -1,35 +1,43 @@
-<template>
-  <header>
-    <nav class="navbar navbar-expand-md bg-white fixed-top blog-navbar py-md-0">
-      <a class="navbar-brand d-md-none d-lg-block" href="/">
-        <i class="fa fa-home mr-1"></i>Home
-        <!--<img href="../assets/images/favicon.ico" width="108" height="40" alt="blog"/>-->
+<template id="navbar-tpl">
+  <div class="navbar navbar-expand-md bg-white py-md-0 blog-navbar">
+    <div class="container">
+      <a class="navbar-brand d-md-none d-lg-block" href="#">首页
+        <!--<img src="../assets/images/favicon.ico" width="50" height="50" class="img-fluid" alt="首页">-->
       </a>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- 操作按钮 -->
+      <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mr-2">
-            <!--{% url 'blog:index' as index_url %}-->
-            <!--<a class="nav-link py-md-3 {% if request.path == index_url %}active{% endif %}"-->
-            <a class="nav-link py-md-3 active"
-               href="#"><i class="fa fa-home mr-1"></i>首页
+            <a class="nav-link py-md-3" href="#"><i class="fa fa-home mr-1"></i>首页
+              <span class="sr-only">(current)</span>
             </a>
           </li>
-
           <li class="nav-item mr-2">
-            <!--{% url 'blog:about' as about_url %}-->
-            <!--<a class="nav-link py-md-3 {% if request.path == about_url %}active{% endif %}"-->
-            <a class="nav-link py-md-3"
-               href="#"><i class="fa fa-anchor mr-1"></i>关于
-            </a>
+            <a class="nav-link py-md-3" href="#"><i class="fa fa-sitemap mr-1"></i>归档</a>
           </li>
-
           <li class="nav-item mr-2">
-            <a class="nav-link py-md-3"
-               href="#"><i class="fa fa-diamond mr-1"></i>后台
-            </a>
+            <a class="nav-link py-md-3" href="#"><i class="fa fa-key mr-1"></i>API</a>
+          </li>
+          <li class="nav-item mr-2 ">
+            <a class="nav-link py-md-3" href="#"><i class="fa fa-anchor mr-1"></i>关于</a>
           </li>
         </ul>
+        <ul class="navbar-nav navbar-right ">
+          <form class="navbar-form" role="search" method="get" id="searchform" action="">
+            <div class="input-group">
+              <input type="search" name="q" class="form-control rounded-0 f-15" placeholder="搜索" required="True">
+              <div class="input-group-btn">
+                <button class="btn btn-info rounded-0" type="submit"><i class="fa fa-search"></i></button>
+              </div>
+            </div><!-- /input-group -->
+          </form>
+        </ul>
       </div>
-    </nav>
-  </header>
+    </div>
+  </div>
 </template>
