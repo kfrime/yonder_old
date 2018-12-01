@@ -1,0 +1,5 @@
+// vuex mutations
+
+export default {
+
+}
