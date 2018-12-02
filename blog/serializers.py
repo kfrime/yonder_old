@@ -44,17 +44,10 @@ class ArticleSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Article
+        exclude = ('create_time', 'update_time')
+
+
+class SimpleArticleSerializer(ArticleSerializer):
+    class Meta:
+        model = Article
         exclude = ('text', 'create_time', 'update_time')
-        # fields = '__all__'
-        # fields = ('id', 'topic')
-
-
-
-
-
-
-
-
-
-
-
