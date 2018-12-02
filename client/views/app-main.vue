@@ -7,6 +7,7 @@
       </div>
       <div class="col-lg-4">
         <topic-list></topic-list>
+        <tag-list></tag-list>
       </div>
     </div>        <!-- end: row -->
   </div>          <!-- end: container -->
@@ -15,11 +16,13 @@
 <script>
 import ArticleList from './article-list.vue'
 import TopicList from './topic-list.vue'
+import TagList from './tag-list.vue'
 
 export default {
   components: {
     ArticleList,
-    TopicList
+    TopicList,
+    TagList
   }
 }
 </script>

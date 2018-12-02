@@ -35,5 +35,8 @@ export default {
   },
   getAllTopics () {
     return handleRequest(request.get('/api/topics/'))
+  },
+  getAllTags () {
+    return handleRequest(request.get('/api/tags/'))
   }
 }

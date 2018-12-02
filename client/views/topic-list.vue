@@ -27,7 +27,7 @@ export default {
   },
   mounted () {
     this.fetchAllTopics()
-    console.log('topics after mounted', this.topics)
+    // console.log('topics after mounted', this.topics)
   }
 }
 </script>
