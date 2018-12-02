@@ -11,22 +11,23 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+// import { mapState, mapActions } from 'vuex'
 import TagItem from './tag-item.vue'
 
 export default {
+  props: ['tags'],
   components: {
     TagItem
-  },
-  computed: {
-    ...mapState(['tags'])
-  },
-  methods: {
-    ...mapActions(['fetchAllTags'])
-  },
-  mounted () {
-    this.fetchAllTags()
-    // console.log('tags after mounted', this.tags)
   }
+  // computed: {
+  //   ...mapState(['tags'])
+  // },
+  // methods: {
+  //   ...mapActions(['fetchAllTags'])
+  // },
+  // mounted () {
+  //   this.fetchAllTags()
+  //   // console.log('tags after mounted', this.tags)
+  // }
 }
 </script>

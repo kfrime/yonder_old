@@ -6,26 +6,22 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+// import { mapState, mapGetters, mapActions } from 'vuex'
 import ArticleItem from './article-item.vue'
 
 export default {
+  props: ['articles'],
   components: {
     ArticleItem
-  },
-  mounted () {
-    this.fetchAllArticles()
-  },
-  computed: {
-    ...mapState({
-      articles: (state) => state.articles
-    }),
-    ...mapGetters({
-      text: 'text'
-    })
-  },
-  methods: {
-    ...mapActions(['fetchAllArticles'])
   }
+  // mounted () {
+  //   this.fetchAllArticles()
+  // },
+  // computed: {
+  //   ...mapState(['articles']),
+  // },
+  // methods: {
+  //   ...mapActions(['fetchAllArticles'])
+  // }
 }
 </script>

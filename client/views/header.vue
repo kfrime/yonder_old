@@ -16,9 +16,9 @@
       <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mr-2">
-            <a class="nav-link py-md-3" href="#"><i class="fa fa-home mr-1"></i>首页
+            <router-link to="/" class="nav-link py-md-3"><i class="fa fa-home mr-1"></i>首页
               <span class="sr-only">(current)</span>
-            </a>
+            </router-link>
           </li>
           <li class="nav-item mr-2">
             <a class="nav-link py-md-3" href="#"><i class="fa fa-sitemap mr-1"></i>归档</a>

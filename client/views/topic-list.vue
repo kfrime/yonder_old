@@ -12,23 +12,24 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+// import { mapState, mapActions } from 'vuex'
 import TopicItem from './topic-item.vue'
 
 export default {
+  props: ['topics'],
   components: {
     TopicItem
-  },
-  computed: {
-    ...mapState(['topics'])
-  },
-  methods: {
-    ...mapActions(['fetchAllTopics'])
-  },
-  mounted () {
-    this.fetchAllTopics()
-    // console.log('topics after mounted', this.topics)
   }
+  // computed: {
+  //   ...mapState(['topics'])
+  // },
+  // methods: {
+  //   ...mapActions(['fetchAllTopics'])
+  // },
+  // mounted () {
+  //   this.fetchAllTopics()
+  //   // console.log('topics after mounted', this.topics)
+  // }
 }
 </script>
 

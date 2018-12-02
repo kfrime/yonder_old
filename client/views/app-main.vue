@@ -3,17 +3,18 @@
     <div class="row">
       <!--文章列表-->
       <div class="col-lg-8">
-        <article-list></article-list>
+        <article-list :articles="articles"></article-list>
       </div>
       <div class="col-lg-4">
-        <topic-list></topic-list>
-        <tag-list></tag-list>
+        <topic-list :topics="topics"></topic-list>
+        <tag-list :tags="tags"></tag-list>
       </div>
     </div>        <!-- end: row -->
   </div>          <!-- end: container -->
 </template>
 
 <script>
+import { mapState, mapActions } from 'vuex'
 import ArticleList from './article-list.vue'
 import TopicList from './topic-list.vue'
 import TagList from './tag-list.vue'
@@ -23,6 +24,21 @@ export default {
     ArticleList,
     TopicList,
     TagList
+  },
+  mounted () {
+    this.fetchAllArticles()
+    this.fetchAllTopics()
+    this.fetchAllTags()
+  },
+  computed: {
+    ...mapState(['articles', 'topics', 'tags'])
+  },
+  methods: {
+    ...mapActions([
+      'fetchAllArticles',
+      'fetchAllTopics',
+      'fetchAllTags'
+    ])
   }
 }
 </script>
