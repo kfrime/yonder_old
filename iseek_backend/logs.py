@@ -31,7 +31,7 @@ LOGGING = {
             'formatter': 'verbose',
             'filename': 'log/info.log',
             'maxBytes': 1024 * 1024 * 10,
-            'backupCount': '5'
+            'backupCount': 5
         },
         'operatelog': {
             'level': 'DEBUG',
@@ -39,7 +39,7 @@ LOGGING = {
             'formatter': 'verbose',
             'filename': 'log/operate.log',
             'maxBytes': 1024 * 1024 * 10,
-            'backupCount': '5'
+            'backupCount': 5
         },
         'sqllog': {
             'level': 'DEBUG',
@@ -48,7 +48,7 @@ LOGGING = {
             'formatter': 'verbose',
             'filename': 'log/sql.log',
             'maxBytes': 1024 * 1024 * 10,
-            'backupCount': '5'
+            'backupCount': 5
         }
     },
     'loggers': {

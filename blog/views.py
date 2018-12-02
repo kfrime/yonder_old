@@ -149,7 +149,7 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
 
         if tag_id:
             tag_id = int(tag_id)
-            qs = self.queryset.filter(tags__id=tag_id)
+            qs = self.queryset.filter(tags=tag_id)
 
         return qs
 
