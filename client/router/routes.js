@@ -15,5 +15,10 @@ export default [
     path: '/article/:id',
     props: true,
     component: ArticleDetail
+  },
+  {
+    path: '/topic/:id',
+    props: true,
+    component: () => import('../views/topic-page.vue')
   }
 ]

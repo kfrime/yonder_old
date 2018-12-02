@@ -2,5 +2,9 @@
 
 export default {
   articles: [],
-  article: ''
+  article: '',
+  topics: [],
+  topic: '',
+  tags: [],
+  tag: ''
 }

@@ -20,28 +20,28 @@ import TopicList from './topic-list.vue'
 import TagList from './tag-list.vue'
 
 export default {
+  props: ['id'],
   components: {
     ArticleList,
     TopicList,
     TagList
   },
+  computed: {
+    ...mapState(['topics', 'articles', 'tags'])
+  },
   mounted () {
-    this.fetchAllArticles()
+    this.fetchOneTopic(this.id)
+    this.fetchArticlesByTopic(this.id)
     this.fetchAllTopics()
     this.fetchAllTags()
   },
-  computed: {
-    ...mapState(['articles', 'topics', 'tags'])
-  },
   methods: {
     ...mapActions([
-      'fetchAllArticles',
+      'fetchOneTopic',
+      'fetchArticlesByTopic',
       'fetchAllTopics',
       'fetchAllTags'
     ])
   }
 }
 </script>
-
-<style lang="stylus">
-</style>

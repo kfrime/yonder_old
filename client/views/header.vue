@@ -1,7 +1,9 @@
 <template id="navbar-tpl">
   <div class="navbar navbar-expand-md bg-white py-md-0 blog-navbar">
     <div class="container">
-      <router-link to="/" class="navbar-brand d-md-none d-lg-block">首页</router-link>
+      <router-link to="/" class="navbar-brand d-md-none d-lg-block">
+        <span class="fa fa-snowflake-o mr-1"> Blog</span>
+      </router-link>
       <!--<a class="navbar-brand d-md-none d-lg-block" href="#">首页-->
         <!--<img src="../assets/images/favicon.ico" width="50" height="50" class="img-fluid" alt="首页">-->
       <!--</a>-->
@@ -14,9 +16,9 @@
       <div class="collapse navbar-collapse " id="navbarNav">
         <ul class="navbar-nav ml-auto">
           <li class="nav-item mr-2">
-            <a class="nav-link py-md-3" href="#"><i class="fa fa-home mr-1"></i>首页
+            <router-link to="/" class="nav-link py-md-3"><i class="fa fa-home mr-1"></i>首页
               <span class="sr-only">(current)</span>
-            </a>
+            </router-link>
           </li>
           <li class="nav-item mr-2">
             <a class="nav-link py-md-3" href="#"><i class="fa fa-sitemap mr-1"></i>归档</a>

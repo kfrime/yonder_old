@@ -14,7 +14,7 @@ const createError = (code, resp) => {
 const handleRequest = (request) => {
   return new Promise((resolve, reject) => {
     request.then(resp => {
-      console.log('resp', resp)
+      // console.log('resp', resp)
       if (!resp.data) {
         return reject(createError(400, 'no data'))
       }
@@ -28,9 +28,24 @@ const handleRequest = (request) => {
 
 export default {
   getAllArticles () {
-    return handleRequest(request.get('/api/articles'))
+    return handleRequest(request.get('/api/articles/'))
   },
   getArticle (id) {
-    return handleRequest(request.get('/api/articles/' + id))
+    return handleRequest(request.get(`/api/articles/${id}/`))
+  },
+  getArticleByTopic (topicId) {
+    return handleRequest(request.get(`/api/articles/?topic=${topicId}`))
+  },
+  getAllTopics () {
+    return handleRequest(request.get('/api/topics/'))
+  },
+  getTopic (id) {
+    return handleRequest(request.get(`/api/topics/${id}/`))
+  },
+  getAllTags () {
+    return handleRequest(request.get('/api/tags/'))
+  },
+  getTag (id) {
+    return handleRequest(request.get(`/api/tags/${id}/`))
   }
 }
