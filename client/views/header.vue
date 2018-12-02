@@ -1,7 +1,9 @@
 <template id="navbar-tpl">
   <div class="navbar navbar-expand-md bg-white py-md-0 blog-navbar">
     <div class="container">
-      <router-link to="/" class="navbar-brand d-md-none d-lg-block">首页</router-link>
+      <router-link to="/" class="navbar-brand d-md-none d-lg-block">
+        <span class="fa fa-snowflake-o mr-1"> Blog</span>
+      </router-link>
       <!--<a class="navbar-brand d-md-none d-lg-block" href="#">首页-->
         <!--<img src="../assets/images/favicon.ico" width="50" height="50" class="img-fluid" alt="首页">-->
       <!--</a>-->

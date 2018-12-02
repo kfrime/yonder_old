@@ -1,11 +1,49 @@
 <template>
-  <div class="container">
-    <!--<div class="content">article detail</div>-->
-    <div class="content">author: {{ article.author.name }}</div>
-    <div class="content">title: {{ article.title }}</div>
-    <div class="content">summary: {{ article.summary }}</div>
-    <div class="content">content: {{ article.text }}</div>
-    <!--<div class="text">getter text: {{ text }}</div>-->
+  <div class="container app-main">
+    <div class="row">
+      <div class="col-lg-9">
+        <div aria-label="breadcrumb">
+          <ol class="breadcrumb bg-white border-0 rounded-0 mb-2 py-2 f-15">
+            <li class="breadcrumb-item">
+              <i class="fa fa-home mr-1"></i><a href="/">首页</a>
+            </li>
+            <li class="breadcrumb-item" v-if="article">
+              <a href="#">{{ article.topic.name }}</a>
+            </li>
+            <li class="breadcrumb-item active d-none d-md-block" aria-current="page">{{ article.title }}</li>
+            <li class="breadcrumb-item active d-md-none" aria-current="page">当前位置</li>
+          </ol>
+        </div>
+        <div class="card rounded-0 border-0" id="article">
+          <div class="card-body px-2 px-md-3 pb-0">
+            <h1 class="card-title text-center font-weight-bold text-info">{{ article.title }}</h1>
+            <hr>
+            <div class="text-center f-13">
+              <span class="mx-2" data-toggle="tooltip" data-placement="bottom">
+                最后编辑于：{{ article.ctime }}
+              </span>
+            </div>
+            <div class="article-body mt-4 f-17" style="line-height:1.8" v-html="article.text">
+              <!--{{ article.text}}-->
+              <p class="font-weight-bold text-info">
+                <i class="fa fa-bullhorn mx-1"></i>
+                原创文章，转载请注明出处：request.build_absolute_uri
+              </p>
+            </div>
+            <!--tags-->
+            <div class="tag-cloud my-4">
+              <a class="tags f-16" href="#">tag.name</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-lg-3">
+        <!--<span v-if="article.toc">文章目录</span>-->
+        <div class="article-toc d-none d-lg-block f-16" v-if="article" >
+          <div v-html="article.toc"></div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -26,7 +64,7 @@ export default {
 }
 </script>
 
-<style lang="stylus" scoped>
+<style lang="stylus">
   .content, .text{
     text-align center
   }

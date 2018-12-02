@@ -8,7 +8,7 @@ export default {
   fetchAllArticles ({ commit }) {
     api.getAllArticles()
       .then(resp => {
-        console.log('fetchAllArticles', resp)
+        // console.log('fetchAllArticles', resp)
         commit('fillArticles', resp.results)
       })
       .catch(err => {

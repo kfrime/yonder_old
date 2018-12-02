@@ -76,6 +76,4 @@ export default {
 </script>
 
 <style lang="stylus">
-.app-main
-  margin-top 1rem
 </style>
