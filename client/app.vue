@@ -1,28 +1,32 @@
 <template>
   <div id="app">
     <Header></Header>
-    <div class="test">{{ content }}</div>
+    <!--<app-main :articles="articles"></app-main>-->
+    <router-link to="/" articles="articles"></router-link>
+    <router-view />
   </div>
 </template>
 
 <script>
-import Header from './blog/header.vue'
+// import { mapState, mapGetters } from 'vuex'
+import Header from './views/header.vue'
+import AppMain from './views/app-main.vue'
 
 export default {
   components: {
-    Header
+    Header,
+    AppMain
   },
-  data () {
-    return {
-      content: 'Hello Vue'
-    }
+  mounted () {
+    console.log('vuex store', this.$store)
   }
+  // computed: {
+  //   ...mapState({
+  //     articles: (state) => [state.article, state.article]
+  //   }),
+  //   ...mapGetters({
+  //     text: 'text'
+  //   })
+  // }
 }
 </script>
-
-<style lang="stylus" scoped>
-.test{
-  color red
-  text-align center
-}
-</style>
