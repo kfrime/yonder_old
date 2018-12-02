@@ -6,29 +6,42 @@
     </div>
 
     <ul class="list-group list-group-flush f-16">
-      <topic-item :topic="topic" v-for="topic in topics" :key="topic.id"></topic-item>
+      <topic-item
+        :topic="topic"
+        v-for="topic in topics"
+        :key="topic.id"
+        @updateArticleListByTopic="updateArticleListByTopic"
+      ></topic-item>
     </ul>
   </div>
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import TopicItem from './topic-item.vue'
 
 export default {
   props: ['topics'],
   components: {
     TopicItem
+  },
+  methods: {
+    ...mapActions(['fetchArticlesByTopic']),
+
+    updateArticleListByTopic (topicId) {
+      const curTopicId = this.$route.params.id
+      if (curTopicId === topicId.toString()) {
+        return
+      }
+      this.fetchArticlesByTopic(topicId)
+    }
   }
   // computed: {
   //   ...mapState(['topics'])
   // },
-  // methods: {
-  //   ...mapActions(['fetchAllTopics'])
-  // },
   // mounted () {
   //   this.fetchAllTopics()
-  //   // console.log('topics after mounted', this.topics)
+  //   console.log('topics after mounted', this.topics)
   // }
 }
 </script>

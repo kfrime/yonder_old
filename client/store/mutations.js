@@ -11,8 +11,14 @@ export default {
   fillTopics (state, topics) {
     state.topics = topics
   },
+  assignTopic (state, topic) {
+    state.topic = topic
+  },
   fillTags (state, tags) {
     // console.log('fillTags', tags)
     state.tags = tags
+  },
+  assignTag (state, tag) {
+    state.tag = tag
   }
 }

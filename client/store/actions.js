@@ -18,7 +18,7 @@ export default {
   fetchOneArticle ({ commit }, id) {
     api.getArticle(id)
       .then(resp => {
-        console.log('assignArticle', resp)
+        // console.log('assignArticle', resp)
         commit('assignArticle', resp)
       })
       .catch(err => {
@@ -35,11 +35,41 @@ export default {
         handleError(err)
       })
   },
+  fetchOneTopic ({ commit }, id) {
+    api.getTopic(id)
+      .then(resp => {
+        // console.log('fetchAllTopics', resp)
+        commit('assignTopic', resp)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
   fetchAllTags ({ commit }) {
     api.getAllTags()
       .then(resp => {
         // console.log('fetchAllTopics', resp)
         commit('fillTags', resp)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchOneTag ({ commit }, id) {
+    api.getTag(id)
+      .then(resp => {
+        // console.log('fetchAllTopics', resp)
+        commit('assignTag', resp)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchArticlesByTopic ({ commit }, topicId) {
+    api.getArticleByTopic(topicId)
+      .then(resp => {
+        // console.log('fetchAllTopics', resp)
+        commit('fillArticles', resp.results)
       })
       .catch(err => {
         handleError(err)

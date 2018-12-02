@@ -33,10 +33,19 @@ export default {
   getArticle (id) {
     return handleRequest(request.get(`/api/articles/${id}/`))
   },
+  getArticleByTopic (topicId) {
+    return handleRequest(request.get(`/api/articles/?topic=${topicId}`))
+  },
   getAllTopics () {
     return handleRequest(request.get('/api/topics/'))
   },
+  getTopic (id) {
+    return handleRequest(request.get(`/api/topics/${id}/`))
+  },
   getAllTags () {
     return handleRequest(request.get('/api/tags/'))
+  },
+  getTag (id) {
+    return handleRequest(request.get(`/api/tags/${id}/`))
   }
 }
