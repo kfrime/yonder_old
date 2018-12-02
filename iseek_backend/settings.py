@@ -45,6 +45,7 @@ INSTALLED_APPS = [
 
     # 其他组件
     'mptt',     # 树形层次结构
+    'rest_framework',
 
     # 自定义的 app
     'blog',
@@ -105,6 +106,12 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+# REST_FRAMEWORK = {
+#     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+#     'PAGE_SIZE': 10
+# }
+
+PAGE_SIZE = 10
 
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
@@ -133,6 +140,8 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 # 媒体文件收集
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+PAGE_LIMIT = 5
 
 # 导入个人的配置信息
 from .base_settings import *

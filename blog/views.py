@@ -1,11 +1,18 @@
 # -*- coding:utf-8 -*-
 
+import os
+
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
+from django.conf import settings
 from django.core.cache import cache
-from django.utils.text import slugify
+from django.db.models.aggregates import Count
+from rest_framework import viewsets
+from rest_framework.pagination import PageNumberPagination
 
-from markdown.extensions.toc import TocExtension  # 锚点的拓展
+from iseek_backend.settings import BASE_DIR
+from .serializers import (TopicSerializer, TagSerializer, ArticleSerializer, )
+
 import markdown
 
 from .models import (Tag, Topic, Article)
@@ -67,7 +74,23 @@ def article_list(request):
 
 
 def about(request):
-    return render(request, 'about.html')
+    about_file = os.path.join(BASE_DIR, 'doc', 'about.md')
+    file = open(about_file, 'r')
+
+    md_key = '{}_md'.format('about')
+    cache_md = cache.get(md_key)
+    if cache_md:
+        md = cache_md
+    else:
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+            # TocExtension(slugify=slugify),
+        ])
+        cache.set(md_key, md, 60 * 60 * 12)
+    about_text = md.convert(file.read())
+    return render(request, 'about.html', context={'about_text': about_text})
 
 
 def topic(request, id):
@@ -88,3 +111,28 @@ def tag(request, id):
         'articles': articles,
     }
     return render(request, 'tag.html', context=context)
+
+
+class CustomPagination(PageNumberPagination):
+    page_size = 10
+    # page_size_query_param = 'page_size'
+
+
+class TopicAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Topic.objects.all()
+    serializer_class = TopicSerializer
+
+    def get_queryset(self):
+        return Topic.objects.annotate(total=Count('article')).filter(total__gt=0)
+
+
+class TagAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+
+class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Article.objects.all().order_by('update_time')
+    serializer_class = ArticleSerializer
+    pagination_class = CustomPagination
+    # paginate_by = getattr(settings, 'PAGE_LIMIT', 10)
