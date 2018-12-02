@@ -2,7 +2,7 @@
   <div class="media mb-1 ml-0 mb-sm-2 p-2 p-lg-3 article-list-item">
     <div class="text-body">
       <div class="text-muted mb-2 f-12">
-        <span>{{article.author}}</span>
+        <span>{{article.author.name}}</span>
         <span><i class="fa fa-calendar-times-o ml-2 mr-1"></i>{{article.ctime}}</span>
       </div>
       <h2 class="mt-0 font-weight-bold text-info f-17">

@@ -1,6 +1,7 @@
 // default vuex state
 
 export default {
+  articles: [],
   article: {
     id: 1,
     author: 'Tom',

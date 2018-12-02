@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import ArticleItem from './article-item.vue'
 
 export default {
@@ -57,15 +57,19 @@ export default {
     ArticleItem
   },
   mounted () {
+    this.fetchArticles()
     // console.log('main articles:', articles)
   },
   computed: {
     ...mapState({
-      articles: (state) => [state.article, state.article]
+      articles: (state) => state.articles
     }),
     ...mapGetters({
       text: 'text'
     })
+  },
+  methods: {
+    ...mapActions(['fetchArticles'])
   }
   // props: ['articles']
 }
