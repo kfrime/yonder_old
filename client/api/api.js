@@ -26,10 +26,11 @@ const handleRequest = (request) => {
   })
 }
 
-const getAllArticles = () => {
-  return handleRequest(request.get('/api/articles'))
-}
-
 export default {
-  getAllArticles
+  getAllArticles () {
+    return handleRequest(request.get('/api/articles'))
+  },
+  getArticle (id) {
+    return handleRequest(request.get('/api/articles/' + id))
+  }
 }

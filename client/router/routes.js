@@ -12,7 +12,8 @@ export default [
     component: AppMain
   },
   {
-    path: '/article',
+    path: '/article/:id',
+    props: true,
     component: ArticleDetail
   }
 ]

@@ -2,6 +2,6 @@
 
 export default {
   text (state) {
-    return `${state.article.author}, ${state.article.ctime}, ${state.article.title}`
+    return `just test for getters`
   }
 }

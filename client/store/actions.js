@@ -5,11 +5,21 @@ const handleError = (err) => {
 }
 
 export default {
-  fetchArticles ({ commit }) {
+  fetchAllArticles ({ commit }) {
     api.getAllArticles()
       .then(resp => {
-        console.log('fetchArticles', resp)
+        console.log('fetchAllArticles', resp)
         commit('fillArticles', resp.results)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchOneArticle ({ commit }, id) {
+    api.getArticle(id)
+      .then(resp => {
+        console.log('assignArticle', resp)
+        commit('assignArticle', resp)
       })
       .catch(err => {
         handleError(err)

@@ -57,7 +57,7 @@ export default {
     ArticleItem
   },
   mounted () {
-    this.fetchArticles()
+    this.fetchAllArticles()
     // console.log('main articles:', articles)
   },
   computed: {
@@ -69,7 +69,7 @@ export default {
     })
   },
   methods: {
-    ...mapActions(['fetchArticles'])
+    ...mapActions(['fetchAllArticles'])
   }
   // props: ['articles']
 }
