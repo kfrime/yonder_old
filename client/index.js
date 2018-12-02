@@ -3,7 +3,9 @@ import App from './app.vue'
 
 import './assets/styles/bootstrap.min.css'
 // import './assets/styles/github-colorful.css'
-import './assets/styles/base.styl'
+// import './assets/styles/index.styl'
+import './assets/styles/base.css'
+
 import createStore from './store/store'
 import createRouter from './router/router'
 

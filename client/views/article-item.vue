@@ -26,3 +26,31 @@ export default {
   props: ['article']
 }
 </script>
+
+<style scoped>
+/* 用户头像 */
+.article-list .avatar {
+  width:1.2rem;
+  heigth:1.2rem;
+  margin-right:.2rem;
+  border-radius: 50%;
+}
+
+.article-list .media {
+  background-color: #fff;
+}
+
+.article-list .cate {
+  color: #ea6f5a;
+}
+
+.article-list .cate:hover {
+  color: #17a2b8;
+}
+
+.article-list-item {
+  padding-top: 15px;
+  padding-bottom: 15px;
+  border-bottom: 1px solid #eee;
+}
+</style>

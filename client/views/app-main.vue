@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="container app-main">
     <div class="row">
       <!--文章列表-->
       <div class="col-lg-8">
@@ -74,3 +74,8 @@ export default {
   // props: ['articles']
 }
 </script>
+
+<style lang="stylus">
+.app-main
+  margin-top 1rem
+</style>
