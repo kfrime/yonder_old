@@ -5,25 +5,38 @@
     </div>
 
     <div class="card-body px-0 py-3">
-      <tag-item :tag="tag" v-for="tag in tags" :key="tag.id"></tag-item>
+      <tag-item
+        :tag="tag"
+        v-for="tag in tags"
+        :key="tag.id"
+        @updateArticleListByTag="updateArticleListByTag"
+      ></tag-item>
     </div>
   </div>    <!-- end: tag-card -->
 </template>
 
 <script>
-// import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import TagItem from './tag-item.vue'
 
 export default {
   props: ['tags'],
   components: {
     TagItem
+  },
+  methods: {
+    ...mapActions(['fetchArticlesByTag']),
+
+    updateArticleListByTag (tagId) {
+      const curTagId = this.$route.params.id
+      if (curTagId === tagId.toString()) {
+        return
+      }
+      this.fetchArticlesByTag(tagId)
+    }
   }
   // computed: {
   //   ...mapState(['tags'])
-  // },
-  // methods: {
-  //   ...mapActions(['fetchAllTags'])
   // },
   // mounted () {
   //   this.fetchAllTags()

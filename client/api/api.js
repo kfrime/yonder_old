@@ -47,5 +47,8 @@ export default {
   },
   getTag (id) {
     return handleRequest(request.get(`/api/tags/${id}/`))
+  },
+  getArticleByTag (tagId) {
+    return handleRequest(request.get(`/api/articles/?tag=${tagId}`))
   }
 }

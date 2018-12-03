@@ -32,6 +32,7 @@
             </div>
             <!--tags-->
             <div class="tag-cloud my-4">
+              <!--<router-link class="tags f-16" :to="`/tag/${tag.id}`">{{tag.name}}</router-link>-->
               <a class="tags f-16" href="#">tag.name</a>
             </div>
           </div>

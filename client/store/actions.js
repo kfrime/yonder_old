@@ -74,5 +74,15 @@ export default {
       .catch(err => {
         handleError(err)
       })
+  },
+  fetchArticlesByTag ({ commit }, tagId) {
+    api.getArticleByTag(tagId)
+      .then(resp => {
+        // console.log('fetchAllTopics', resp)
+        commit('fillArticles', resp.results)
+      })
+      .catch(err => {
+        handleError(err)
+      })
   }
 }
