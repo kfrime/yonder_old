@@ -8,7 +8,7 @@
               <i class="fa fa-home mr-1"></i><a href="/">首页</a>
             </li>
             <li class="breadcrumb-item" v-if="article">
-              <a href="#">{{ article.topic.name }}</a>
+              <router-link :to="`/topic/${article.topic.id}`">{{article.topic.name}}</router-link>
             </li>
             <li class="breadcrumb-item active d-none d-md-block" aria-current="page">{{ article.title }}</li>
             <li class="breadcrumb-item active d-md-none" aria-current="page">当前位置</li>
