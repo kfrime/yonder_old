@@ -32,8 +32,13 @@
             </div>
             <!--tags-->
             <div class="tag-cloud my-4">
-              <!--<router-link class="tags f-16" :to="`/tag/${tag.id}`">{{tag.name}}</router-link>-->
-              <a class="tags f-16" href="#">tag.name</a>
+              <tag-item
+                class="tags f-16"
+                :tag="tag"
+                v-for="tag in tags"
+                :key="tag.id"
+                @updateArticleListByTag="updateArticleListByTag"
+              ></tag-item>
             </div>
           </div>
         </div>
@@ -49,18 +54,28 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import TagItem from './tag-item.vue'
+
 export default {
+  components: {
+    TagItem
+  },
   props: ['id'],
   computed: {
-    ...mapState(['article']),
-    ...mapGetters(['text'])
+    ...mapState(['article', 'tags'])
+    // ...mapGetters(['text'])
   },
   mounted () {
     this.fetchOneArticle(this.id)
+    this.fetchTagByArticleId(this.id)
   },
   methods: {
-    ...mapActions(['fetchOneArticle'])
+    ...mapActions(['fetchOneArticle', 'fetchTagByArticleId', 'fetchArticlesByTag']),
+    updateArticleListByTag (tagId) {
+      console.log('tag id', tagId)
+      this.fetchArticlesByTag(tagId)
+    }
   }
 }
 </script>
