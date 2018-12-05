@@ -128,8 +128,18 @@ class TopicAPIView(viewsets.ReadOnlyModelViewSet):
 
 
 class TagAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Tag.objects.all()
+    queryset = Tag.objects.exclude(article__isnull=True)
     serializer_class = TagSerializer
+
+    def get_queryset(self):
+        article_id = self.request.query_params.get('article', None)
+
+        qs = self.queryset
+        if article_id:
+            article_id = int(article_id)
+            qs = self.queryset.filter(article=article_id)
+
+        return qs
 
 
 class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
