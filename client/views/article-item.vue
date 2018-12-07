@@ -6,13 +6,12 @@
         <span><i class="fa fa-calendar-times-o ml-2 mr-1"></i>{{article.ctime}}</span>
       </div>
       <h2 class="mt-0 font-weight-bold text-info f-17">
-        <!--<a href="#">{{article.title}}</a>-->
         <router-link :to="`/article/${article.id}`">{{article.title}}</router-link>
       </h2>
       <p class="d-none d-sm-block mb-2 f-15">{{article.summary}}</p>
       <div class="text-muted mb-0 f-12">
         <!--<a class="cate" href="#" title="查看当前分类下更多文章"></a>-->
-        <router-link class="cate" :to="`/topic/${article.topic.id}`">
+        <router-link class="topic" :to="`/topic/${article.topic.id}`">
           <i class="fa fa-book mr-1"></i>{{article.topic.name}}
         </router-link>
         <!--<span><i class="fa fa-eye ml-2 mr-1"></i>1356</span>-->
@@ -30,23 +29,11 @@ export default {
 </script>
 
 <style scoped>
-/* 用户头像 */
-.article-list .avatar {
-  width:1.2rem;
-  heigth:1.2rem;
-  margin-right:.2rem;
-  border-radius: 50%;
-}
-
-.article-list .media {
-  background-color: #fff;
-}
-
-.article-list .cate {
+.topic {
   color: #ea6f5a;
 }
 
-.article-list .cate:hover {
+.topic:hover {
   color: #17a2b8;
 }
 
