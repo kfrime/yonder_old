@@ -25,7 +25,7 @@ export default {
     TagItem
   },
   methods: {
-    ...mapActions(['fetchArticlesByTag']),
+    ...mapActions(['fetchArticlesByTag', 'fetchOneTag']),
 
     updateArticleListByTag (tagId) {
       const curTagId = this.$route.params.id
@@ -33,6 +33,7 @@ export default {
         return
       }
       this.fetchArticlesByTag(tagId)
+      this.fetchOneTag(tagId)
     }
   }
   // computed: {

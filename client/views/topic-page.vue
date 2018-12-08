@@ -3,6 +3,11 @@
     <div class="row">
       <!--文章列表-->
       <div class="col-lg-8">
+        <div class="description bg-white px-3 pt-3 pb-1">
+          <p class="float-right mb-0">共<span class="mx-2 text-info">{{ topic.total }}</span>篇</p>
+          <h1 class="f-17"><strong>文章分类：{{ topic.name }}</strong></h1>
+          <p class="f-16">{{ topic.desc }}</p>
+        </div>
         <article-list :articles="articles"></article-list>
       </div>
       <div class="col-lg-4">
@@ -27,7 +32,7 @@ export default {
     TagList
   },
   computed: {
-    ...mapState(['topics', 'articles', 'tags'])
+    ...mapState(['topics', 'articles', 'tags', 'topic'])
   },
   mounted () {
     this.fetchOneTopic(this.id)

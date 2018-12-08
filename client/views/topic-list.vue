@@ -26,7 +26,7 @@ export default {
     TopicItem
   },
   methods: {
-    ...mapActions(['fetchArticlesByTopic']),
+    ...mapActions(['fetchArticlesByTopic', 'fetchOneTopic']),
 
     updateArticleListByTopic (topicId) {
       const curTopicId = this.$route.params.id
@@ -34,6 +34,7 @@ export default {
         return
       }
       this.fetchArticlesByTopic(topicId)
+      this.fetchOneTopic(topicId)
     }
   }
   // computed: {
