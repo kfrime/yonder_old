@@ -1,32 +1,19 @@
 <template>
-  <div id="app">
-    <Header></Header>
-    <!--<app-main :articles="articles"></app-main>-->
-    <router-link to="/" articles="articles"></router-link>
-    <router-view />
+  <div class="app-main">
+    <navbar></navbar>
+    <blog></blog>
+    <!--<div class="footer">footer</div>-->
   </div>
 </template>
 
 <script>
-// import { mapState, mapGetters } from 'vuex'
-import Header from './views/header.vue'
-import AppMain from './views/app-main.vue'
+import Navbar from './views/navbar.vue'
+import Blog from './views/blog.vue'
 
 export default {
   components: {
-    Header,
-    AppMain
-  },
-  mounted () {
-    console.log('vuex store', this.$store)
+    Navbar,
+    Blog
   }
-  // computed: {
-  //   ...mapState({
-  //     articles: (state) => [state.article, state.article]
-  //   }),
-  //   ...mapGetters({
-  //     text: 'text'
-  //   })
-  // }
 }
 </script>
