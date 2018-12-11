@@ -1,13 +1,15 @@
 <template>
-  <div class="media article-list-item">
-    <div class="text-body mb-3">
-      <div class="text-muted f-12">
-        <span>{{article.author.name}} 创建于：{{article.ctime}}</span>
-      </div>
-      <a class="title f-15 mb-1" href="#">{{article.title}}</a>
-      <p class="d-none d-sm-block mb-1 f-13">{{article.summary}}</p>
-      <div class="text-muted f-12">
-        <a class="topic" href="#" title="主题">{{article.topic.name}}</a>
+  <div class="article-list-item">
+    <div class="card">
+      <div class="card-body">
+        <div class="text-muted f-12">
+          <span>{{article.author.name}} 创建于：{{article.ctime}}</span>
+        </div>
+        <a href="#" class="card-title card-link f-16 title">{{article.title}}</a>
+        <p class="card-text my-0">{{article.summary}}</p>
+        <div class="text-muted f-12 py-md-0">
+          <a class="card-link topic" href="#" title="主题">{{article.topic.name}}</a>
+        </div>
       </div>
     </div>
   </div>
@@ -20,8 +22,21 @@ export default {
 </script>
 
 <style>
+.article-list-item {
+  padding-bottom: 0.5rem;
+}
+.card {
+  border: none;
+  background: #f4f4f4;
+}
+.card:hover {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.275);
+}
+.card .card-body {
+  padding: 0.5rem;
+}
 .title {
-  color: #035fb5;
+  color: #00a1d6;
 }
 .topic {
   color: #a22b16;
