@@ -1,14 +1,14 @@
 <template>
   <div class="article-list-item">
-    <div class="card">
+    <div class="card article-card">
       <div class="card-body">
         <div class="text-muted f-12">
           <span>{{article.author.name}} 创建于：{{article.ctime}}</span>
         </div>
-        <a href="#" class="card-title card-link f-16 title">{{article.title}}</a>
+        <a href="#" class="card-title card-link f-16 article-title">{{article.title}}</a>
         <p class="card-text my-0">{{article.summary}}</p>
         <div class="text-muted f-12 py-md-0">
-          <a class="card-link topic" href="#" title="主题">{{article.topic.name}}</a>
+          <a class="card-link article-topic" href="#" title="主题">{{article.topic.name}}</a>
         </div>
       </div>
     </div>
@@ -25,7 +25,7 @@ export default {
 .article-list-item {
   padding-bottom: 0.5rem;
 }
-.card {
+.article-card {
   border: none;
   background: #f4f4f4;
 }
@@ -35,10 +35,10 @@ export default {
 .card .card-body {
   padding: 0.5rem;
 }
-.title {
+.article-title {
   color: #00a1d6;
 }
-.topic {
+.article-topic {
   color: #a22b16;
 }
 </style>

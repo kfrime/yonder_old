@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="row">
-      <div class="col-lg-8">
+      <div class="col-lg-8 main-module">
         <!-- 文章列表 -->
         <div class="article-list">
           <article-item
@@ -12,15 +12,25 @@
         </div>
       </div>
 
-      <div class="col-lg-4">
+      <div class="col-lg-4 sidebar-module">
         <!-- 主题列表 -->
-        <div class="topic-list">
-          topics
-        </div>
+        <div class="col-md-offset-2 col-md-10">
+          <div class="blog-card topic-list">
+            <div class="topic-title">
+              Topics
+            </div>
 
-        <!-- 标签列表 -->
-        <div class="tag">
-          tags
+            <topic-item
+              :topic = "topic"
+              v-for="topic in topics"
+              :key="topic.id"
+            ></topic-item>
+          </div>
+
+          <!-- 标签列表 -->
+          <div class="tag">
+            tags
+          </div>
         </div>
       </div>
     </div>
@@ -30,10 +40,12 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import ArticleItem from '../components/article-item.vue'
+import TopicItem from '../components/topic-item.vue'
 
 export default {
   components: {
-    ArticleItem
+    ArticleItem,
+    TopicItem
   },
   computed: {
     ...mapState(['articles', 'topics', 'tags'])
@@ -56,3 +68,16 @@ export default {
   }
 }
 </script>
+
+<style>
+.blog-card {
+  border: none;
+  background: #f4f4f4;
+}
+.topic-list {
+  padding: 0.5rem;
+}
+.topic-title {
+  padding-bottom: 0.5rem;
+}
+</style>
