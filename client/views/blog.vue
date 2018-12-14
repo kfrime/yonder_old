@@ -13,8 +13,8 @@
       </div>
 
       <div class="col-lg-4 sidebar-module">
-        <!-- 主题列表 -->
         <div class="col-md-offset-2 col-md-10">
+          <!-- 主题列表 -->
           <div class="blog-card topic-list">
             <div class="topic-title">Topics</div>
 
@@ -79,6 +79,10 @@ export default {
 .blog-card {
   border: none;
   /*background: #f4f4f4;*/
+}
+.sidebar-module{
+  /*display: inline-block;*/
+  clear: both;
 }
 .topic-list, .tag-list {
   padding: 0.5rem;

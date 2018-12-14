@@ -1,7 +1,11 @@
 /* sidebar css */
 
+div .sidebar-item {
+  display: inline-block;
+}
 .sidebar-item {
   margin-bottom: 0.3rem;
+  margin-left: 0.3rem;
 }
 .round-btn {
   border-radius: 1020px;
@@ -18,7 +22,6 @@
 }
 .sidebar-btn .badge {
   color: #fff;
-  background: #30908d;
   border-radius: 1020px;
   padding: 2px;
 }
