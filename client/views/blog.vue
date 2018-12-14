@@ -16,9 +16,7 @@
         <!-- 主题列表 -->
         <div class="col-md-offset-2 col-md-10">
           <div class="blog-card topic-list">
-            <div class="topic-title">
-              Topics
-            </div>
+            <div class="topic-title">Topics</div>
 
             <topic-item
               :topic = "topic"
@@ -28,8 +26,14 @@
           </div>
 
           <!-- 标签列表 -->
-          <div class="tag">
-            tags
+          <div class="blog-card tag-list">
+            <div class="tag-title">Tags</div>
+
+            <tag-item
+              :tag = "tag"
+              v-for="tag in tags"
+              :key="tag.id"
+            ></tag-item>
           </div>
         </div>
       </div>
@@ -41,11 +45,13 @@
 import { mapState, mapActions } from 'vuex'
 import ArticleItem from '../components/article-item.vue'
 import TopicItem from '../components/topic-item.vue'
+import TagItem from '../components/tag-item.vue'
 
 export default {
   components: {
     ArticleItem,
-    TopicItem
+    TopicItem,
+    TagItem
   },
   computed: {
     ...mapState(['articles', 'topics', 'tags'])
@@ -72,12 +78,12 @@ export default {
 <style>
 .blog-card {
   border: none;
-  background: #f4f4f4;
+  /*background: #f4f4f4;*/
 }
-.topic-list {
+.topic-list, .tag-list {
   padding: 0.5rem;
 }
-.topic-title {
+.topic-title, .tag-title{
   padding-bottom: 0.5rem;
 }
 </style>

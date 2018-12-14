@@ -39,8 +39,6 @@ export default {
 
 <style>
   .navbar-extra {
-    /*background-color: #222;*/
-    /*background-color: #24292e;*/
     border-color: #080808;
     margin-bottom: 1rem;
   }
