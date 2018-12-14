@@ -8,16 +8,16 @@ import './assets/styles/blog.css'
 import './assets/styles/sidebar.css'
 
 import createStore from './store/store'
-// import createRouter from './router/router'
+import createRouter from './router/router'
 
 const store = createStore()
-// const router = createRouter()
+const router = createRouter()
 
 // const root = document.createEement('div')
 // document.body.appendChild(root)
 
 new Vue({
   store,
-  // router,
+  router,
   render: (h) => h(App)
 }).$mount('#root')

@@ -1,7 +1,9 @@
 <template>
   <div class="app-main">
     <navbar></navbar>
-    <blog></blog>
+    <!--<blog></blog>-->
+    <router-link to="/"></router-link>
+    <router-view />
     <!--<div class="footer">footer</div>-->
   </div>
 </template>

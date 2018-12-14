@@ -5,7 +5,10 @@
         <div class="text-muted f-12">
           <span>{{article.author.name}} 创建于：{{article.ctime}}</span>
         </div>
-        <a href="#" class="card-title card-link f-16 article-title">{{article.title}}</a>
+        <router-link
+          :to="`/article/${article.id}`"
+          class="card-title card-link f-16 article-title"
+        >{{article.title}}</router-link>
         <p class="card-text my-0">{{article.summary}}</p>
         <div class="text-muted f-12 py-md-0">
           <a class="card-link article-topic" href="#" title="主题">{{article.topic.name}}</a>

@@ -5,13 +5,14 @@
 export default [
   {
     path: '/',
-    component: () => import('../views/app-main.vue')
+    component: () => import('../views/blog.vue')
   },
   {
     path: '/article/:id',
     props: true,
-    component: () => import('../views/article-detail.vue')
-  },
+    component: () => import('../views/detail.vue')
+  }
+  /*
   {
     path: '/topic/:id',
     props: true,
@@ -22,4 +23,5 @@ export default [
     props: true,
     component: () => import('../views/tag-page.vue')
   }
+  */
 ]
