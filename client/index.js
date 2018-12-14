@@ -5,6 +5,7 @@ import App from './app.vue'
 import './assets/styles/bootstrap.css'
 import './assets/styles/normalize.css'
 import './assets/styles/blog.css'
+import './assets/styles/sidebar.css'
 
 import createStore from './store/store'
 // import createRouter from './router/router'
