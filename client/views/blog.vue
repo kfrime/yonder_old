@@ -22,30 +22,32 @@
 
       <div class="col-lg-4 sidebar-module">
         <div class="col-md-offset-2 col-md-10">
+          <topic-list></topic-list>
+          <tag-list></tag-list>
+        </div>
           <!-- 主题列表 -->
-          <div class="blog-card topic-list">
-            <div class="topic-title">Topics</div>
+          <!--<div class="blog-card topic-list">-->
+            <!--<div class="topic-title">Topics</div>-->
 
-            <topic-item
-              :topic = "topic"
-              v-for="topic in topics"
-              :key="topic.id"
-              @updateArticleListByTopic="updateArticleListByTopic"
-            ></topic-item>
-          </div>
+            <!--<topic-item-->
+              <!--:topic = "topic"-->
+              <!--v-for="topic in topics"-->
+              <!--:key="topic.id"-->
+              <!--@updateArticleListByTopic="updateArticleListByTopic"-->
+            <!--&gt;</topic-item>-->
+          <!--</div>-->
 
           <!-- 标签列表 -->
-          <div class="blog-card tag-list">
-            <div class="tag-title">Tags</div>
+          <!--<div class="blog-card tag-list">-->
+            <!--<div class="tag-title">Tags</div>-->
 
-            <tag-item
-              :tag = "tag"
-              v-for="tag in tags"
-              :key="tag.id"
-              @updateArticleListByTag="updateArticleListByTag"
-            ></tag-item>
-          </div>
-        </div>
+            <!--<tag-item-->
+              <!--:tag = "tag"-->
+              <!--v-for="tag in tags"-->
+              <!--:key="tag.id"-->
+              <!--@updateArticleListByTag="updateArticleListByTag"-->
+            <!--&gt;</tag-item>-->
+          <!--</div>-->
       </div>
     </div>
   </div>
@@ -54,17 +56,17 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import ArticleItem from '../components/article-item.vue'
-import TopicItem from '../components/topic-item.vue'
-import TagItem from '../components/tag-item.vue'
+import TopicList from '../components/topics/topic-list.vue'
+import TagList from '../components/tags/tag-list.vue'
 
 export default {
   components: {
     ArticleItem,
-    TopicItem,
-    TagItem
+    TopicList,
+    TagList
   },
   computed: {
-    ...mapState(['articles', 'topics', 'tags'])
+    ...mapState(['articles'])
   },
   data () {
     return {
@@ -75,18 +77,11 @@ export default {
   },
   mounted () {
     this.fetchAllArticles()
-    this.fetchAllTopics()
-    this.fetchAllTags()
-
     console.log('articles', this.articles)
-    console.log('topics', this.topics, this.tags)
-    console.log('tags', this.tags)
   },
   methods: {
     ...mapActions([
       'fetchAllArticles',
-      'fetchAllTopics',
-      'fetchAllTags',
       'fetchArticlesByTopic',
       'fetchArticlesByTag'
     ]),
@@ -105,20 +100,3 @@ export default {
   }
 }
 </script>
-
-<style>
-.blog-card {
-  border: none;
-  /*background: #f4f4f4;*/
-}
-.sidebar-module{
-  /*display: inline-block;*/
-  clear: both;
-}
-.topic-list, .tag-list {
-  padding: 0.5rem;
-}
-.topic-title, .tag-title{
-  padding-bottom: 0.5rem;
-}
-</style>

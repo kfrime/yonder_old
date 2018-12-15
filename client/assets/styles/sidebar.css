@@ -1,5 +1,8 @@
 /* sidebar css */
 
+.sidebar-module{
+  clear: both;
+}
 div .sidebar-item {
   display: inline-block;
 }
