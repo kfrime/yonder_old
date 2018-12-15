@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar-item">
     <a href="#" class="btn round-btn sidebar-btn tag-btn">
-      <span class="f-15">{{tag.name}}</span>
+      <span class="f-15" @click="updateArticles">{{tag.name}}</span>
       <span class="badge f-12">{{tag.total}}</span>
     </a>
   </div>
@@ -9,7 +9,13 @@
 
 <script>
 export default {
-  props: ['tag']
+  props: ['tag'],
+  methods: {
+    updateArticles (e) {
+      console.log('click tag, id:', this.tag.id)
+      this.$emit('updateArticleListByTag', this.tag.id)
+    }
+  }
 }
 </script>
 

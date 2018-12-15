@@ -1,7 +1,7 @@
 <template>
   <div class="sidebar-item">
     <a href="#" class="btn round-btn sidebar-btn topic-btn">
-      <span class="f-15">{{topic.name}}</span>
+      <span class="f-15" @click="updateArticleList">{{topic.name}}</span>
       <span class="badge f-12">{{topic.total}}</span>
       <!--<span class="badge f-12">12345</span>-->
     </a>
@@ -10,7 +10,13 @@
 
 <script>
 export default {
-  props: ['topic']
+  props: ['topic'],
+  methods: {
+    updateArticleList (e) {
+      console.log('click topic, id:', this.topic.id)
+      this.$emit('updateArticleListByTopic', this.topic.id)
+    }
+  }
 }
 </script>
 

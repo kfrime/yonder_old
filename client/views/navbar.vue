@@ -12,7 +12,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item pr-2 active">
-            <router-link to="/" class="nav-link">首页<span class="sr-only">(current)</span></router-link>
+            <router-link to="/" class="nav-link">
+              <span>首页</span>
+              <span class="sr-only">(current)</span>
+            </router-link>
             <!--<a class="nav-link" href="#">首页<span class="sr-only">(current)</span></a>-->
           </li>
           <li class="nav-item pr-2">
@@ -34,7 +37,11 @@
 
 <script>
 export default {
-
+  methods: {
+    updateArticles (e) {
+      console.log('click')
+    }
+  }
 }
 </script>
 

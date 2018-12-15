@@ -2,6 +2,14 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 main-module">
+        <!-- 分类说明 　-->
+        <div v-if="this.cate === 'topic'" class="summary">
+          {{this.topic.name}}, {{this.topic.total}}
+        </div>
+        <div v-else-if="this.cate === 'tag'" class="summary">
+          {{this.tag.name}}, {{this.tag.total}}
+        </div>
+
         <!-- 文章列表 -->
         <div class="article-list">
           <article-item
@@ -22,6 +30,7 @@
               :topic = "topic"
               v-for="topic in topics"
               :key="topic.id"
+              @updateArticleListByTopic="updateArticleListByTopic"
             ></topic-item>
           </div>
 
@@ -33,6 +42,7 @@
               :tag = "tag"
               v-for="tag in tags"
               :key="tag.id"
+              @updateArticleListByTag="updateArticleListByTag"
             ></tag-item>
           </div>
         </div>
@@ -56,6 +66,13 @@ export default {
   computed: {
     ...mapState(['articles', 'topics', 'tags'])
   },
+  data () {
+    return {
+      cate: '',
+      topic: null,
+      tag: null
+    }
+  },
   mounted () {
     this.fetchAllArticles()
     this.fetchAllTopics()
@@ -69,8 +86,22 @@ export default {
     ...mapActions([
       'fetchAllArticles',
       'fetchAllTopics',
-      'fetchAllTags'
-    ])
+      'fetchAllTags',
+      'fetchArticlesByTopic',
+      'fetchArticlesByTag'
+    ]),
+    updateArticleListByTopic (topicId) {
+      this.cate = 'topic'
+      this.topic = this.topics.filter(topic => topic.id === topicId)[0]
+      console.log('topic:', this.topic.name)
+      this.fetchArticlesByTopic(topicId)
+    },
+    updateArticleListByTag (tagId) {
+      this.cate = 'tag'
+      this.tag = this.tags.filter(tag => tag.id === tagId)[0]
+      console.log('tag:', this.tag.name)
+      this.fetchArticlesByTag(tagId)
+    }
   }
 }
 </script>
