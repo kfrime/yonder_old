@@ -8,7 +8,7 @@ export default [
     component: () => import('../views/blog.vue')
   },
   {
-    path: '/article/:id',
+    path: '/articles/:id',
     props: true,
     component: () => import('../views/detail.vue')
   }

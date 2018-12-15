@@ -4,12 +4,12 @@
       <div class="col-lg-8 main-module">
         <!-- 文章列表 -->
         <article-list></article-list>
-        <!--<div class="article-list">-->
-          <!--<article-item-->
-            <!--:article="article"-->
-            <!--v-for="article in articles"-->
-            <!--:key="article.id"-->
-          <!--&gt;</article-item>-->
+        <!--<div class="articles-list">-->
+          <!--<articles-item-->
+            <!--:articles="articles"-->
+            <!--v-for="articles in articles"-->
+            <!--:key="articles.id"-->
+          <!--&gt;</articles-item>-->
         <!--</div>-->
       </div>
 
@@ -50,7 +50,7 @@
 
 <script>
 // import { mapState, mapActions } from 'vuex'
-import ArticleList from '../components/article/article-list.vue'
+import ArticleList from '../components/articles/article-list.vue'
 import TopicList from '../components/topics/topic-list.vue'
 import TagList from '../components/tags/tag-list.vue'
 

@@ -6,7 +6,7 @@
           <span>{{article.author.name}} 创建于：{{article.ctime}}</span>
         </div>
         <router-link
-          :to="`/article/${article.id}`"
+          :to="`/articles/${article.id}`"
           class="card-title card-link f-16 article-title"
         >{{article.title}}</router-link>
         <p class="card-text my-0">{{article.summary}}</p>
