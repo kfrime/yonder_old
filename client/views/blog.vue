@@ -81,22 +81,8 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchAllArticles',
-      'fetchArticlesByTopic',
-      'fetchArticlesByTag'
-    ]),
-    updateArticleListByTopic (topicId) {
-      this.cate = 'topic'
-      this.topic = this.topics.filter(topic => topic.id === topicId)[0]
-      console.log('topic:', this.topic.name)
-      this.fetchArticlesByTopic(topicId)
-    },
-    updateArticleListByTag (tagId) {
-      this.cate = 'tag'
-      this.tag = this.tags.filter(tag => tag.id === tagId)[0]
-      console.log('tag:', this.tag.name)
-      this.fetchArticlesByTag(tagId)
-    }
+      'fetchAllArticles'
+    ])
   }
 }
 </script>
