@@ -1,7 +1,7 @@
 <template>
-  <div class="sidebar-item">
+  <div class="sidebar-item" @click="updateArticleList">
     <a href="#" class="btn round-btn sidebar-btn topic-btn">
-      <span class="f-15" @click="updateArticleList">{{topic.name}}</span>
+      <span class="f-15">{{topic.name}}</span>
       <span class="badge f-12">{{topic.total}}</span>
       <!--<span class="badge f-12">12345</span>-->
     </a>
@@ -9,12 +9,15 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: ['topic'],
   methods: {
+    ...mapActions(['fetchArticlesByTopic']),
     updateArticleList (e) {
-      console.log('click topic, id:', this.topic.id)
-      this.$emit('updateArticleListByTopic', this.topic.id)
+      // console.log('click topic, id:', this.topic.id)
+      this.fetchArticlesByTopic(this.topic.id)
     }
   }
 }

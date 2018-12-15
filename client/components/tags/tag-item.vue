@@ -1,19 +1,22 @@
 <template>
-  <div class="sidebar-item">
+  <div class="sidebar-item" @click="updateArticles">
     <a href="#" class="btn round-btn sidebar-btn tag-btn">
-      <span class="f-15" @click="updateArticles">{{tag.name}}</span>
+      <span class="f-15">{{tag.name}}</span>
       <span class="badge f-12">{{tag.total}}</span>
     </a>
   </div>
 </template>
 
 <script>
+import { mapActions } from 'vuex'
+
 export default {
   props: ['tag'],
   methods: {
+    ...mapActions(['fetchArticlesByTag']),
     updateArticles (e) {
-      console.log('click tag, id:', this.tag.id)
-      this.$emit('updateArticleListByTag', this.tag.id)
+      // console.log('click tag, id:', this.tag.id)
+      this.fetchArticlesByTag(this.tag.id)
     }
   }
 }

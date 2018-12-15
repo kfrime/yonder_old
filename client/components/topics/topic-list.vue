@@ -8,7 +8,6 @@
         :topic = "topic"
         v-for="topic in topics"
         :key="topic.id"
-        @updateArticleListByTopic="updateArticleListByTopic"
       ></topic-item>
     </div>
   <!--</div>-->
@@ -26,10 +25,7 @@ export default {
     ...mapState(['topics'])
   },
   methods: {
-    ...mapActions(['fetchAllTopics']),
-    updateArticleListByTopic (topicId) {
-      console.log('updateArticleListByTopic')
-    }
+    ...mapActions(['fetchAllTopics'])
   },
   mounted () {
     this.fetchAllTopics()

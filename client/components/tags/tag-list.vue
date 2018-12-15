@@ -7,7 +7,6 @@
       :tag = "tag"
       v-for="tag in tags"
       :key="tag.id"
-      @updateArticleListByTag="updateArticleListByTag"
       ></tag-item>
     </div>
   <!--</div>-->
@@ -25,10 +24,7 @@ export default {
     ...mapState(['tags'])
   },
   methods: {
-    ...mapActions(['fetchAllTags']),
-    updateArticleListByTag (tagId) {
-      console.log('updateArticleListByTag')
-    }
+    ...mapActions(['fetchAllTags'])
   },
   mounted () {
     this.fetchAllTags()
