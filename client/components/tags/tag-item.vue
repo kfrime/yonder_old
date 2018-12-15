@@ -13,10 +13,12 @@ import { mapActions } from 'vuex'
 export default {
   props: ['tag'],
   methods: {
-    ...mapActions(['fetchArticlesByTag']),
+    ...mapActions(['fetchArticleListBy']),
     updateArticles (e) {
-      // console.log('click tag, id:', this.tag.id)
-      this.fetchArticlesByTag(this.tag.id)
+      this.fetchArticleListBy({
+        filter: 'tag',
+        id: this.tag.id
+      })
     }
   }
 }

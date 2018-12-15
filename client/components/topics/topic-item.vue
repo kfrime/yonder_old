@@ -14,10 +14,12 @@ import { mapActions } from 'vuex'
 export default {
   props: ['topic'],
   methods: {
-    ...mapActions(['fetchArticlesByTopic']),
+    ...mapActions(['fetchArticleListBy']),
     updateArticleList (e) {
-      // console.log('click topic, id:', this.topic.id)
-      this.fetchArticlesByTopic(this.topic.id)
+      this.fetchArticleListBy({
+        filter: 'topic',
+        id: this.topic.id
+      })
     }
   }
 }

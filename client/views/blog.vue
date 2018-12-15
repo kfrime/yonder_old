@@ -75,14 +75,16 @@ export default {
       tag: null
     }
   },
-  mounted () {
-    this.fetchAllArticles()
-    console.log('articles', this.articles)
-  },
   methods: {
     ...mapActions([
-      'fetchAllArticles'
+      'fetchArticleListBy'
     ])
+  },
+  mounted () {
+    this.fetchArticleListBy({
+      filter: 'all'
+    })
+    console.log('articles', this.articles)
   }
 }
 </script>

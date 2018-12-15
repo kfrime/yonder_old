@@ -27,14 +27,19 @@ const handleRequest = (request) => {
 }
 
 export default {
+  /*
   getAllArticles () {
     return handleRequest(request.get('/api/articles/'))
   },
-  getArticle (id) {
-    return handleRequest(request.get(`/api/articles/${id}/`))
+  getArticleByTag (tagId) {
+    return handleRequest(request.get(`/api/articles/?tag=${tagId}`))
   },
   getArticleByTopic (topicId) {
     return handleRequest(request.get(`/api/articles/?topic=${topicId}`))
+  },
+  */
+  getOneArticle (id) {
+    return handleRequest(request.get(`/api/articles/${id}/`))
   },
   getAllTopics () {
     return handleRequest(request.get('/api/topics/'))
@@ -51,7 +56,24 @@ export default {
   getTagByArticleId (id) {
     return handleRequest(request.get(`/api/tags/?article=${id}`))
   },
-  getArticleByTag (tagId) {
-    return handleRequest(request.get(`/api/articles/?tag=${tagId}`))
+  getArticleList (filter, id) {
+    // console.log('getArticleList, filter:', filter, 'id:', id)
+    let baseUrl = '/api/articles/'
+    let url = ''
+    let query = ''
+
+    if (filter === 'all') {
+      query = '' // `/api/articles/`
+    } else if (filter === 'topic') {
+      query = `?topic=${id}` // `/api/articles/?topic=${id}`
+    } else if (filter === 'tag') {
+      query = `?tag=${id}` // `/api/articles/?tag=${id}`
+    } else {
+      // todo: thrown error
+      console.log(`unknown filter type: ${filter}`)
+    }
+    url = baseUrl + query
+    const resp = handleRequest(request.get(url))
+    return resp
   }
 }

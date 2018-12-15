@@ -5,61 +5,12 @@ const handleError = (err) => {
 }
 
 export default {
+  /*
   fetchAllArticles ({ commit }) {
     api.getAllArticles()
-      .then(resp => {
-        // console.log('fetchAllArticles', resp)
-        commit('fillArticles', resp.results)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchOneArticle ({ commit }, id) {
-    api.getArticle(id)
-      .then(resp => {
-        // console.log('assignArticle', resp)
-        commit('assignArticle', resp)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchAllTopics ({ commit }) {
-    api.getAllTopics()
-      .then(resp => {
-        // console.log('fetchAllTopics', resp)
-        commit('fillTopics', resp)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchOneTopic ({ commit }, id) {
-    api.getTopic(id)
-      .then(resp => {
-        // console.log('fetchAllTopics', resp)
-        commit('assignTopic', resp)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchAllTags ({ commit }) {
-    api.getAllTags()
-      .then(resp => {
-        // console.log('fetchAllTopics', resp)
-        commit('fillTags', resp)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchOneTag ({ commit }, id) {
-    api.getTag(id)
-      .then(resp => {
-        // console.log('fetchAllTopics', resp)
-        commit('assignTag', resp)
+      .then(data => {
+        // console.log('fetchAllArticles', data)
+        commit('fillArticles', data.results)
       })
       .catch(err => {
         handleError(err)
@@ -67,9 +18,9 @@ export default {
   },
   fetchArticlesByTopic ({ commit }, topicId) {
     api.getArticleByTopic(topicId)
-      .then(resp => {
-        // console.log('fetchAllTopics', resp)
-        commit('fillArticles', resp.results)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillArticles', data.results)
       })
       .catch(err => {
         handleError(err)
@@ -77,9 +28,60 @@ export default {
   },
   fetchArticlesByTag ({ commit }, tagId) {
     api.getArticleByTag(tagId)
-      .then(resp => {
-        // console.log('fetchAllTopics', resp)
-        commit('fillArticles', resp.results)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillArticles', data.results)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  */
+  fetchOneArticle ({ commit }, id) {
+    api.getOneArticle(id)
+      .then(data => {
+        // console.log('assignArticle', data)
+        commit('assignArticle', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchAllTopics ({ commit }) {
+    api.getAllTopics()
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillTopics', data.results)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchOneTopic ({ commit }, id) {
+    api.getTopic(id)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('assignTopic', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchAllTags ({ commit }) {
+    api.getAllTags()
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillTags', data.results)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchOneTag ({ commit }, id) {
+    api.getTag(id)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('assignTag', data)
       })
       .catch(err => {
         handleError(err)
@@ -87,9 +89,20 @@ export default {
   },
   fetchTagByArticleId ({ commit }, articleId) {
     api.getTagByArticleId(articleId)
-      .then(resp => {
-        // console.log('fetchAllTopics', resp)
-        commit('fillTags', resp)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillTags', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchArticleListBy ({ commit }, { filter, id }) {
+    // console.log('fetchArticleList, filter:', filter, 'id:', id)
+    api.getArticleList(filter, id)
+      .then(data => {
+        // console.log('fetchArticleList', data)
+        commit('fillArticles', data.results)
       })
       .catch(err => {
         handleError(err)

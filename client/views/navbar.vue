@@ -44,9 +44,11 @@ import { mapActions } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions(['fetchAllArticles']),
+    ...mapActions(['fetchArticleListBy']),
     updateArticles (e) {
-      this.fetchAllArticles()
+      this.fetchArticleListBy({
+        filter: 'all'
+      })
     }
   }
 }
