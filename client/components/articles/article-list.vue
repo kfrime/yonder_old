@@ -9,7 +9,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import ArticleItem from './article-item.vue'
 
 export default {
@@ -17,7 +17,8 @@ export default {
     ArticleItem
   },
   computed: {
-    ...mapState(['articles'])
+    ...mapState(['artResp']),
+    ...mapGetters(['articles'])
   },
   methods: {
     ...mapActions([
@@ -28,7 +29,7 @@ export default {
     this.fetchArticleListBy({
       filter: 'all'
     })
-    console.log('articles', this.articles)
+    console.log('article-list', this.articles)
   }
 }
 </script>

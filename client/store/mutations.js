@@ -1,22 +1,23 @@
 // vuex mutations
 
 export default {
-  fillArticles (state, articles) {
-    state.articles = articles
+  fillArticles (state, resp) {
+    state.artResp = resp
+    // console.log('fillArticles', resp)
+  },
+  fillTopics (state, resp) {
+    state.topicResp = resp
+  },
+  fillTags (state, resp) {
+    // console.log('fillTags', tags)
+    state.tagResp = resp
   },
   assignArticle (state, article) {
     // 只获取一篇文章
     state.article = article
   },
-  fillTopics (state, topics) {
-    state.topics = topics
-  },
   assignTopic (state, topic) {
     state.topic = topic
-  },
-  fillTags (state, tags) {
-    // console.log('fillTags', tags)
-    state.tags = tags
   },
   assignTag (state, tag) {
     state.tag = tag

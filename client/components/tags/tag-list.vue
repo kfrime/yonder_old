@@ -1,7 +1,7 @@
 <template>
   <!--<div class="col-md-offset-2 col-md-10">-->
     <div class="tag-list">
-      <div class="tag-title">Tags</div>
+      <div class="tag-title">文章标签</div>
 
       <tag-item
       :tag = "tag"
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import TagItem from './tag-item.vue'
 
 export default {
@@ -21,7 +21,8 @@ export default {
     TagItem
   },
   computed: {
-    ...mapState(['tags'])
+    ...mapState(['tagResp']),
+    ...mapGetters(['tags'])
   },
   methods: {
     ...mapActions(['fetchAllTags'])

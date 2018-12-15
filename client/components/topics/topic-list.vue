@@ -2,7 +2,7 @@
   <!--<div class="col-md-offset-2 col-md-10">-->
     <!-- 主题列表 -->
     <div class="topic-list">
-      <div class="topic-title">Topics</div>
+      <div class="topic-title">文章主题</div>
 
       <topic-item
         :topic = "topic"
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import TopicItem from './topic-item.vue'
 
 export default {
@@ -22,7 +22,8 @@ export default {
     TopicItem
   },
   computed: {
-    ...mapState(['topics'])
+    ...mapState(['topicResp']),
+    ...mapGetters(['topics'])
   },
   methods: {
     ...mapActions(['fetchAllTopics'])

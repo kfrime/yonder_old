@@ -10,7 +10,7 @@ export default {
     api.getAllArticles()
       .then(data => {
         // console.log('fetchAllArticles', data)
-        commit('fillArticles', data.results)
+        commit('fillArticles', data)
       })
       .catch(err => {
         handleError(err)
@@ -20,7 +20,7 @@ export default {
     api.getArticleByTopic(topicId)
       .then(data => {
         // console.log('fetchAllTopics', data)
-        commit('fillArticles', data.results)
+        commit('fillArticles', data)
       })
       .catch(err => {
         handleError(err)
@@ -30,7 +30,7 @@ export default {
     api.getArticleByTag(tagId)
       .then(data => {
         // console.log('fetchAllTopics', data)
-        commit('fillArticles', data.results)
+        commit('fillArticles', data)
       })
       .catch(err => {
         handleError(err)
@@ -51,7 +51,7 @@ export default {
     api.getAllTopics()
       .then(data => {
         // console.log('fetchAllTopics', data)
-        commit('fillTopics', data.results)
+        commit('fillTopics', data)
       })
       .catch(err => {
         handleError(err)
@@ -71,7 +71,7 @@ export default {
     api.getAllTags()
       .then(data => {
         // console.log('fetchAllTopics', data)
-        commit('fillTags', data.results)
+        commit('fillTags', data)
       })
       .catch(err => {
         handleError(err)
@@ -101,8 +101,8 @@ export default {
     // console.log('fetchArticleList, filter:', filter, 'id:', id)
     api.getArticleList(filter, id)
       .then(data => {
-        console.log('fetchArticleList', data)
-        commit('fillArticles', data.results)
+        // console.log('fetchArticleListBy', filter, data)
+        commit('fillArticles', data)
       })
       .catch(err => {
         handleError(err)

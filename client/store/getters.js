@@ -1,7 +1,13 @@
 // vuex getters
 
 export default {
-  text (state) {
-    return `just test for getters`
+  articles (state) {
+    return state.artResp.results
+  },
+  topics (state) {
+    return state.topicResp.results
+  },
+  tags (state) {
+    return state.tagResp.results
   }
 }
