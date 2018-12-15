@@ -101,7 +101,7 @@ export default {
     // console.log('fetchArticleList, filter:', filter, 'id:', id)
     api.getArticleList(filter, id)
       .then(data => {
-        // console.log('fetchArticleList', data)
+        console.log('fetchArticleList', data)
         commit('fillArticles', data.results)
       })
       .catch(err => {

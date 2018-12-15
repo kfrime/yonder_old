@@ -57,17 +57,22 @@ export default {
     return handleRequest(request.get(`/api/tags/?article=${id}`))
   },
   getArticleList (filter, id) {
+    /* filter:
+     *  all - 获取所有文章列表
+     *  topic - 根据 topic id 筛选文章列表
+     *  tag - 根据 tag id 筛选文章列表
+     */
     // console.log('getArticleList, filter:', filter, 'id:', id)
     let baseUrl = '/api/articles/'
     let url = ''
     let query = ''
 
     if (filter === 'all') {
-      query = '' // `/api/articles/`
+      query = ''              // `/api/articles/`
     } else if (filter === 'topic') {
-      query = `?topic=${id}` // `/api/articles/?topic=${id}`
+      query = `?topic=${id}`  // `/api/articles/?topic=${id}`
     } else if (filter === 'tag') {
-      query = `?tag=${id}` // `/api/articles/?tag=${id}`
+      query = `?tag=${id}`    // `/api/articles/?tag=${id}`
     } else {
       // todo: thrown error
       console.log(`unknown filter type: ${filter}`)
