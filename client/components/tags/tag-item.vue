@@ -16,7 +16,7 @@ export default {
     ...mapActions(['fetchArticleListBy']),
     updateArticles (e) {
       this.fetchArticleListBy({
-        filter: 'tag',
+        name: 'tag',
         id: this.tag.id
       })
     }

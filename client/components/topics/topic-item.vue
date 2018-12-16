@@ -9,15 +9,17 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   props: ['topic'],
   methods: {
     ...mapActions(['fetchArticleListBy']),
+    ...mapMutations(['assignFilter']),
     updateArticleList (e) {
+      this.assignFilter('topic')
       this.fetchArticleListBy({
-        filter: 'topic',
+        name: 'topic',
         id: this.topic.id
       })
     }

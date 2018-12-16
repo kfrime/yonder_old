@@ -47,7 +47,7 @@ export default {
     ...mapActions(['fetchArticleListBy']),
     updateArticles (e) {
       this.fetchArticleListBy({
-        filter: 'all'
+        name: 'all'
       })
     }
   }
