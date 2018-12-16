@@ -32,3 +32,18 @@ a:hover {
 .f-16 {
   font-size: 16px;
 }
+
+/*
+ * summary card before article list
+ */
+.summary {
+  padding-bottom: 1rem;
+  border: none;
+}
+.summary-header {
+  margin: 0.1rem 0;
+}
+.summary-body {
+  border-bottom: 2px solid #e9ecef;
+  padding: 0.5rem;
+}

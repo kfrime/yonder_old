@@ -1,9 +1,9 @@
 <template>
-  <div class="sidebar-item" @click.prevent="updateArticleList">
-    <a href="#" class="btn round-btn sidebar-btn topic-btn">
+  <div class="sidebar-item">
+    <router-link :to="`/topic/${topic.id}`" class="btn round-btn sidebar-btn topic-btn">
       <span class="f-15">{{topic.name}}</span>
       <span class="badge f-12">{{topic.total}}</span>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -14,15 +14,7 @@ export default {
   props: ['topic'],
   methods: {
     ...mapActions(['fetchArticleListBy']),
-    ...mapMutations(['assignQuery']),
-    updateArticleList (e) {
-      const query = {
-        name: 'topic',
-        id: this.topic.id
-      }
-      this.assignQuery(query)
-      this.fetchArticleListBy(query)
-    }
+    ...mapMutations(['assignArtQuery']),
   }
 }
 </script>

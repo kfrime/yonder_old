@@ -1,6 +1,4 @@
 // 前端页面路由集合
-// import AppMain from '../views/app-main.vue'
-// import ArticleDetail from '../views/article-detail.vue'
 
 export default [
   {
@@ -11,13 +9,13 @@ export default [
     path: '/articles/:id',
     props: true,
     component: () => import('../views/detail.vue')
-  }
-  /*
+  },
   {
     path: '/topic/:id',
     props: true,
-    component: () => import('../views/topic-page.vue')
+    component: () => import('../views/topic.vue')
   },
+  /*
   {
     path: '/tag/:id',
     props: true,
