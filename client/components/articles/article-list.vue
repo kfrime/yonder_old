@@ -26,10 +26,12 @@ export default {
     ])
   },
   mounted () {
-    this.fetchArticleListBy({
-      name: 'all'
-    })
-    console.log('article-list', this.articles)
+    const query = {
+      name: 'all',
+      id: null
+    }
+    this.fetchArticleListBy(query)
+    // console.log('article-list', this.articles)
   }
 }
 </script>
