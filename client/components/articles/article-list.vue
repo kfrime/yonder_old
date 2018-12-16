@@ -27,7 +27,7 @@ export default {
   },
   mounted () {
     this.fetchArticleListBy({
-      filter: 'all'
+      name: 'all'
     })
     console.log('article-list', this.articles)
   }

@@ -15,13 +15,14 @@ export default {
   props: ['topic'],
   methods: {
     ...mapActions(['fetchArticleListBy']),
-    ...mapMutations(['assignFilter']),
+    ...mapMutations(['assignQuery']),
     updateArticleList (e) {
-      this.assignFilter('topic')
-      this.fetchArticleListBy({
+      const query = {
         name: 'topic',
         id: this.topic.id
-      })
+      }
+      this.assignQuery(query)
+      this.fetchArticleListBy(query)
     }
   }
 }

@@ -40,15 +40,19 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   methods: {
     ...mapActions(['fetchArticleListBy']),
+    ...mapMutations(['assignQuery']),
     updateArticles (e) {
-      this.fetchArticleListBy({
-        name: 'all'
-      })
+      const query = {
+        name: 'all',
+        id: null
+      }
+      this.assignQuery(query)
+      this.fetchArticleListBy(query)
     }
   }
 }

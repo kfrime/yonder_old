@@ -8,17 +8,20 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 export default {
   props: ['tag'],
   methods: {
     ...mapActions(['fetchArticleListBy']),
+    ...mapMutations(['assignQuery']),
     updateArticles (e) {
-      this.fetchArticleListBy({
+      const query = {
         name: 'tag',
         id: this.tag.id
-      })
+      }
+      this.assignQuery(query)
+      this.fetchArticleListBy(query)
     }
   }
 }

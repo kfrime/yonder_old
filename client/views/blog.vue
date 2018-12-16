@@ -2,6 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 main-module">
+        <summary-list></summary-list>
         <!-- 文章列表 -->
         <article-list></article-list>
         <!--<div class="articles-list">-->
@@ -53,9 +54,11 @@
 import ArticleList from '../components/articles/article-list.vue'
 import TopicList from '../components/topics/topic-list.vue'
 import TagList from '../components/tags/tag-list.vue'
+import SummaryList from '../components/summary.vue'
 
 export default {
   components: {
+    SummaryList,
     ArticleList,
     TopicList,
     TagList

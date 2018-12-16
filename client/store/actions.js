@@ -97,9 +97,13 @@ export default {
         handleError(err)
       })
   },
-  fetchArticleListBy ({ commit }, { filter, id }) {
-    // console.log('fetchArticleList, filter:', filter, 'id:', id)
-    api.getArticleList(filter, id)
+  fetchArticleListBy ({ commit }, query) {
+    /* query:
+     *   name: 根据什么来获取文章列表: all, topic, tag
+     *   id:   topic.id / tag.id
+     */
+    // console.log('fetchArticleList, query:', query)
+    api.getArticleList(query.name, query.id)
       .then(data => {
         // console.log('fetchArticleListBy', filter, data)
         commit('fillArticles', data)

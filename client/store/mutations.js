@@ -22,7 +22,7 @@ export default {
   assignTag (state, tag) {
     state.tag = tag
   },
-  assignFilter (state, filter) {
-    state.filter = filter
+  assignQuery (state, query) {
+    state.query = query
   }
 }
