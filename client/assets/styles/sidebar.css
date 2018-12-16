@@ -18,7 +18,7 @@ div .sidebar-item {
   border-color: #ccc;
   color: #6c757d;
 }
-.sidebar-btn:hover {
+.sidebar-btn:hover, .sidebar-btn:active {
   color: #333;
   background-color: #e6e6e6;
   border: 1px solid #ddd;

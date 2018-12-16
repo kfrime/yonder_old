@@ -54,7 +54,7 @@
 import ArticleList from '../components/articles/article-list.vue'
 import TopicList from '../components/topics/topic-list.vue'
 import TagList from '../components/tags/tag-list.vue'
-import SummaryList from '../components/summary.vue'
+import SummaryList from '../components/summary/summary-list.vue'
 
 export default {
   components: {

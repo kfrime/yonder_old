@@ -32,10 +32,10 @@ export default {
   border: none;
   background: #f4f4f4;
 }
-.card:hover {
+.article-card:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.275);
 }
-.card .card-body {
+.article-card .card-body {
   padding: 0.5rem;
 }
 .article-title {
