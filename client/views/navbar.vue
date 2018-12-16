@@ -2,9 +2,7 @@
   <div class="navbar navbar-expand-md navbar-light bg-light py-md-1 navbar-extra" role="navigation">
     <div class="container">
       <router-link to="/" class="navbar-brand d-md-none d-lg-block">
-        <div @click="updateArticles">
           <span class="fa fa-snowflake-o"><span class="ml-1">Blog</span></span>
-        </div>
       </router-link>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
               aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -14,13 +12,10 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item pr-2 active">
-            <div @click="updateArticles">
-              <router-link to="/" class="nav-link">
-                <span>首页</span>
-                <span class="sr-only">(current)</span>
-              </router-link>
-            </div>
-            <!--<a class="nav-link" href="#">首页<span class="sr-only">(current)</span></a>-->
+            <router-link to="/" class="nav-link">
+              <span>首页</span>
+              <span class="sr-only">(current)</span>
+            </router-link>
           </li>
           <li class="nav-item pr-2">
             <a class="nav-link" href="#">归档</a>
@@ -45,15 +40,7 @@ import { mapActions, mapMutations } from 'vuex'
 export default {
   methods: {
     ...mapActions(['fetchArticleListBy']),
-    ...mapMutations(['assignQuery']),
-    updateArticles (e) {
-      const query = {
-        name: 'all',
-        id: null
-      }
-      this.assignQuery(query)
-      this.fetchArticleListBy(query)
-    }
+    ...mapMutations(['assignArtQuery']),
   }
 }
 </script>

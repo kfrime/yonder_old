@@ -17,7 +17,7 @@ export default {
     ArticleItem
   },
   computed: {
-    ...mapState(['artResp']),
+    ...mapState(['artResp', 'query']),
     ...mapGetters(['articles'])
   },
   methods: {
@@ -25,13 +25,12 @@ export default {
       'fetchArticleListBy'
     ])
   },
-  mounted () {
-    const query = {
-      name: 'all',
-      id: null
+  watch: {
+    query: {
+      handler () {
+        this.fetchArticleListBy(this.query)
+      }
     }
-    this.fetchArticleListBy(query)
-    // console.log('article-list', this.articles)
   }
 }
 </script>
