@@ -20,5 +20,9 @@ export default {
 
   topic: {},
   tag: {},
-  article: {}
+  article: {
+    author: {},
+    topic: {},
+    tags: []
+  }
 }
