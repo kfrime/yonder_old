@@ -1,6 +1,6 @@
 <template>
   <div class="sidebar-item">
-    <router-link :to="`/topic/${topic.id}`" class="btn round-btn sidebar-btn topic-btn">
+    <router-link :to="`/topics/${topic.id}`" class="btn round-btn sidebar-btn topic-btn">
       <span class="f-15">{{topic.name}}</span>
       <span class="badge f-12">{{topic.total}}</span>
     </router-link>
@@ -8,14 +8,8 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
-
 export default {
   props: ['topic'],
-  methods: {
-    ...mapActions(['fetchArticleListBy']),
-    ...mapMutations(['assignArtQuery']),
-  }
 }
 </script>
 

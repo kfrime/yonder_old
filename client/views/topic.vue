@@ -12,7 +12,6 @@
             <p class="f-15 mb-1">{{topic.desc}}</p>
           </div>
         </div>
-        <!--<summary-list></summary-list>-->
         <!-- 文章列表 -->
         <article-list></article-list>
       </div>

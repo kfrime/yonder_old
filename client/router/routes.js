@@ -11,15 +11,13 @@ export default [
     component: () => import('../views/detail.vue')
   },
   {
-    path: '/topic/:id',
+    path: '/topics/:id',
     props: true,
     component: () => import('../views/topic.vue')
   },
-  /*
   {
-    path: '/tag/:id',
+    path: '/tags/:id',
     props: true,
-    component: () => import('../views/tag-page.vue')
+    component: () => import('../views/tag.vue')
   }
-  */
 ]

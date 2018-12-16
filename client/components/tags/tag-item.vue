@@ -1,29 +1,15 @@
 <template>
-  <div class="sidebar-item" @click.prevent="updateArticles">
-    <a href="#" class="btn round-btn sidebar-btn tag-btn">
+  <div class="sidebar-item">
+    <router-link :to="`/tags/${tag.id}`" class="btn round-btn sidebar-btn tag-btn">
       <span class="f-15">{{tag.name}}</span>
       <span class="badge f-12">{{tag.total}}</span>
-    </a>
+    </router-link>
   </div>
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
-
 export default {
   props: ['tag'],
-  methods: {
-    ...mapActions(['fetchArticleListBy']),
-    ...mapMutations(['assignQuery']),
-    updateArticles (e) {
-      const query = {
-        name: 'tag',
-        id: this.tag.id
-      }
-      this.assignQuery(query)
-      this.fetchArticleListBy(query)
-    }
-  }
 }
 </script>
 

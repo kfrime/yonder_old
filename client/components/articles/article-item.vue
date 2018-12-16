@@ -10,8 +10,10 @@
           class="card-title card-link f-16 article-title"
         >{{article.title}}</router-link>
         <p class="card-text my-0">{{article.summary}}</p>
-        <div class="text-muted f-12 py-md-0" @click.prevent="updateArticleList">
-          <a href="#" title="主题" class="card-link article-topic">{{article.topic.name}}</a>
+        <div class="text-muted f-12 py-md-0">
+          <router-link :to="`/topics/${article.topic.id}`" title="主题" class="card-link article-topic">
+            {{article.topic.name}}
+          </router-link>
         </div>
       </div>
     </div>
@@ -19,23 +21,8 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
-
 export default {
   props: ['article'],
-  methods: {
-    ...mapActions(['fetchArticleListBy']),
-    ...mapMutations(['assignQuery']),
-    updateArticleList (e) {
-      const query = {
-        name: 'topic',
-        id: this.article.topic.id
-      }
-      this.assignQuery(query)
-      this.fetchArticleListBy(query)
-    }
-  }
-
 }
 </script>
 
