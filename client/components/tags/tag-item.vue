@@ -1,5 +1,5 @@
 <template>
-  <div class="sidebar-item" @click="updateArticles">
+  <div class="sidebar-item" @click.prevent="updateArticles">
     <a href="#" class="btn round-btn sidebar-btn tag-btn">
       <span class="f-15">{{tag.name}}</span>
       <span class="badge f-12">{{tag.total}}</span>
