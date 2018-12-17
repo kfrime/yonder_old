@@ -67,21 +67,12 @@ export default {
         handleError(err)
       })
   },
+  /*
   fetchAllTags ({ commit }) {
     api.getAllTags()
       .then(data => {
         // console.log('fetchAllTopics', data)
         commit('fillTags', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchOneTag ({ commit }, id) {
-    api.getTag(id)
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('assignTag', data)
       })
       .catch(err => {
         handleError(err)
@@ -97,6 +88,18 @@ export default {
         handleError(err)
       })
   },
+  */
+  fetchOneTag ({ commit }, id) {
+    api.getTag(id)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('assignTag', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+
   fetchArticleListBy ({ commit }, query) {
     /* query:
      *   name: 根据什么来获取文章列表: all, topic, tag
@@ -107,6 +110,20 @@ export default {
       .then(data => {
         // console.log('fetchArticleListBy', filter, data)
         commit('fillArticles', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchTagListBy ({ commit }, query) {
+    /* query:
+     *   name: 根据什么来获取标签列表: all, article
+     *   id:   article.id
+     */
+    // console.log('fetchTagListBy, query:', query)
+    api.getTagList(query.name, query.id)
+      .then(data => {
+        commit('fillTags', data)
       })
       .catch(err => {
         handleError(err)

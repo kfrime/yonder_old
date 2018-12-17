@@ -25,6 +25,9 @@
             <div class="text-center py-2 detail-summary">
               <span class="mx-2">{{article.author.name}}</span>创建于：{{article.ctime}}</div>
             <div class="pt-3 detail-text" v-html="article.text"></div>
+            <div class="tag-list">
+
+            </div>
           </div>
         </div>
       </div>

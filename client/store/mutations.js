@@ -9,7 +9,7 @@ export default {
     state.topicResp = resp
   },
   fillTags (state, resp) {
-    // console.log('fillTags', tags)
+    // console.log('fillTags', resp)
     state.tagResp = resp
   },
   assignArticle (state, article) {
@@ -24,5 +24,8 @@ export default {
   },
   assignArtQuery (state, query) {
     state.query = query
+  },
+  assignTagQuery (state, query) {
+    state.tagQuery = query
   }
 }

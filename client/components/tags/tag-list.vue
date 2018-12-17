@@ -21,14 +21,18 @@ export default {
     TagItem
   },
   computed: {
-    ...mapState(['tagResp']),
+    ...mapState(['tagResp', 'tagQuery']),
     ...mapGetters(['tags'])
   },
   methods: {
-    ...mapActions(['fetchAllTags'])
+    ...mapActions(['fetchTagListBy'])
   },
-  mounted () {
-    this.fetchAllTags()
+  watch: {
+    tagQuery: {
+      handler () {
+        this.fetchTagListBy(this.tagQuery)
+      }
+    }
   }
 }
 </script>

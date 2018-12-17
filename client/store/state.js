@@ -6,6 +6,10 @@ export default {
     name: '',
     id: null
   },
+  tagQuery: {
+    name: '',
+    id: null
+  },
   /*
   resp: {
     count: 0,         // results count

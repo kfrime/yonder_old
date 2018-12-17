@@ -80,5 +80,27 @@ export default {
     url = baseUrl + query
     const resp = handleRequest(request.get(url))
     return resp
+  },
+  getTagList (filter, id) {
+    /* filter:
+     *  all - 获取所有标签列表
+     *  article - 根据 article id 筛选标签列表
+     */
+    // console.log('getArticleList, filter:', filter, 'id:', id)
+    let baseUrl = '/api/tags/'
+    let url = ''
+    let query = ''
+
+    if (filter === 'all') {
+      query = ''              // `/api/tags/`
+    } else if (filter === 'article') {
+      query = `?topic=${id}`  // `/api/tags/?article=${id}`
+    } else {
+      // todo: thrown error
+      console.log(`unknown filter type: ${filter}`)
+    }
+    url = baseUrl + query
+    const resp = handleRequest(request.get(url))
+    return resp
   }
 }
