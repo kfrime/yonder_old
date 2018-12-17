@@ -36,6 +36,26 @@ export default {
         handleError(err)
       })
   },
+  fetchAllTags ({ commit }) {
+    api.getAllTags()
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillTags', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchTagByArticleId ({ commit }, articleId) {
+    api.getTagByArticleId(articleId)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillTags', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
   */
   fetchOneArticle ({ commit }, id) {
     api.getOneArticle(id)
@@ -67,28 +87,6 @@ export default {
         handleError(err)
       })
   },
-  /*
-  fetchAllTags ({ commit }) {
-    api.getAllTags()
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillTags', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchTagByArticleId ({ commit }, articleId) {
-    api.getTagByArticleId(articleId)
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillTags', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  */
   fetchOneTag ({ commit }, id) {
     api.getTag(id)
       .then(data => {

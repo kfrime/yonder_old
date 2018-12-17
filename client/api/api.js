@@ -37,6 +37,12 @@ export default {
   getArticleByTopic (topicId) {
     return handleRequest(request.get(`/api/articles/?topic=${topicId}`))
   },
+  getAllTags () {
+    return handleRequest(request.get('/api/tags/'))
+  },
+  getTagByArticleId (id) {
+    return handleRequest(request.get(`/api/tags/?article=${id}`))
+  },
   */
   getOneArticle (id) {
     return handleRequest(request.get(`/api/articles/${id}/`))
@@ -47,14 +53,8 @@ export default {
   getTopic (id) {
     return handleRequest(request.get(`/api/topics/${id}/`))
   },
-  getAllTags () {
-    return handleRequest(request.get('/api/tags/'))
-  },
   getTag (id) {
     return handleRequest(request.get(`/api/tags/${id}/`))
-  },
-  getTagByArticleId (id) {
-    return handleRequest(request.get(`/api/tags/?article=${id}`))
   },
   getArticleList (filter, id) {
     /* filter:
