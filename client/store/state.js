@@ -2,7 +2,7 @@
 
 export default {
   // 根据这个来判断文章列表页是否展示topic或者tag的信息
-  query: {
+  artQuery: {
     name: '',
     id: null
   },

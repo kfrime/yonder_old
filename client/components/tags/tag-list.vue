@@ -1,3 +1,7 @@
+/* tag list
+ * the only one methods to update tag list:
+ *   - update store.state.tagQuery
+ */
 <template>
   <!--<div class="col-md-offset-2 col-md-10">-->
     <div class="tag-list">

@@ -23,7 +23,7 @@ export default {
     state.tag = tag
   },
   assignArtQuery (state, query) {
-    state.query = query
+    state.artQuery = query
   },
   assignTagQuery (state, query) {
     state.tagQuery = query

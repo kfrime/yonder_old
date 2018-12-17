@@ -1,3 +1,7 @@
+/* article list
+ * the only one methods to update article list:
+ *   - update store.state.query
+ */
 <template>
   <div class="article-list">
     <article-item
@@ -17,7 +21,7 @@ export default {
     ArticleItem
   },
   computed: {
-    ...mapState(['artResp', 'query']),
+    ...mapState(['artResp', 'artQuery']),
     ...mapGetters(['articles'])
   },
   methods: {
@@ -26,9 +30,9 @@ export default {
     ])
   },
   watch: {
-    query: {
+    artQuery: {
       handler () {
-        this.fetchArticleListBy(this.query)
+        this.fetchArticleListBy(this.artQuery)
       }
     }
   }
