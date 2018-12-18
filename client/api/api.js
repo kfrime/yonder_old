@@ -47,9 +47,6 @@ export default {
   getOneArticle (id) {
     return handleRequest(request.get(`/api/articles/${id}/`))
   },
-  getAllTopics () {
-    return handleRequest(request.get('/api/topics/'))
-  },
   getTopic (id) {
     return handleRequest(request.get(`/api/topics/${id}/`))
   },
@@ -73,6 +70,25 @@ export default {
       query = `?topic=${id}`  // `/api/articles/?topic=${id}`
     } else if (filter === 'tag') {
       query = `?tag=${id}`    // `/api/articles/?tag=${id}`
+    } else {
+      // todo: thrown error
+      console.log(`unknown filter type: ${filter}`)
+    }
+    url = baseUrl + query
+    const resp = handleRequest(request.get(url))
+    return resp
+  },
+  getTopicList (filter, id) {
+    /* filter:
+     *  all - 获取所有主题列表
+     */
+    // console.log('getArticleList, filter:', filter, 'id:', id)
+    let baseUrl = '/api/topics/'
+    let url = ''
+    let query = ''
+
+    if (filter === 'all') {
+      query = ''
     } else {
       // todo: thrown error
       console.log(`unknown filter type: ${filter}`)

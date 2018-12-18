@@ -26,6 +26,16 @@ export default {
         handleError(err)
       })
   },
+  fetchAllTopics ({ commit }) {
+    api.getAllTopics()
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillTopics', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
   fetchArticlesByTag ({ commit }, tagId) {
     api.getArticleByTag(tagId)
       .then(data => {
@@ -67,16 +77,6 @@ export default {
         handleError(err)
       })
   },
-  fetchAllTopics ({ commit }) {
-    api.getAllTopics()
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillTopics', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
   fetchOneTopic ({ commit }, id) {
     api.getTopic(id)
       .then(data => {
@@ -97,7 +97,6 @@ export default {
         handleError(err)
       })
   },
-
   fetchArticleListBy ({ commit }, query) {
     /* query:
      *   name: 根据什么来获取文章列表: all, topic, tag
@@ -108,6 +107,19 @@ export default {
       .then(data => {
         // console.log('fetchArticleListBy', filter, data)
         commit('fillArticles', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
+  fetchTopicListBy ({ commit }, query) {
+    /* query:
+     *   name: 根据什么来获取标签列表: all
+     */
+    // console.log('fetchTagListBy, query:', query)
+    api.getTopicList(query.name, query.id)
+      .then(data => {
+        commit('fillTopics', data)
       })
       .catch(err => {
         handleError(err)

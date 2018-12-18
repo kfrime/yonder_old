@@ -9,6 +9,7 @@
       v-for="article in articles"
       :key="article.id"
     ></article-item>
+    <!-- pagination -->
   </div>
 </template>
 

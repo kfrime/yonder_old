@@ -35,7 +35,7 @@ export default {
     TagList
   },
   methods: {
-    ...mapMutations(['assignArtQuery', 'assignTagQuery'])
+    ...mapMutations(['assignArtQuery', 'assignTopicQuery', 'assignTagQuery'])
   },
   mounted () {
     const query = {
@@ -43,6 +43,7 @@ export default {
       id: null
     }
     this.assignArtQuery(query)
+    this.assignTopicQuery(query)
     this.assignTagQuery(query)
   }
 }

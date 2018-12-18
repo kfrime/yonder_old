@@ -25,6 +25,9 @@ export default {
   assignArtQuery (state, query) {
     state.artQuery = query
   },
+  assignTopicQuery (state, query) {
+    state.topicQuery = query
+  },
   assignTagQuery (state, query) {
     state.tagQuery = query
   }

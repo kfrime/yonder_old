@@ -22,14 +22,18 @@ export default {
     TopicItem
   },
   computed: {
-    ...mapState(['topicResp']),
+    ...mapState(['topicResp', 'topicQuery']),
     ...mapGetters(['topics'])
   },
   methods: {
-    ...mapActions(['fetchAllTopics'])
+    ...mapActions(['fetchTopicListBy'])
   },
-  mounted () {
-    this.fetchAllTopics()
+  watch: {
+    topicQuery: {
+      handler () {
+        this.fetchTopicListBy(this.topicQuery)
+      }
+    }
   }
 }
 </script>

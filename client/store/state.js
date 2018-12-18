@@ -2,14 +2,9 @@
 
 export default {
   // 根据这个来判断文章列表页是否展示topic或者tag的信息
-  artQuery: {
-    name: '',
-    id: null
-  },
-  tagQuery: {
-    name: '',
-    id: null
-  },
+  artQuery: {},
+  topicQuery: {},
+  tagQuery: {},
   /*
   resp: {
     count: 0,         // results count

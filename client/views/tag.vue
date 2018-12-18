@@ -48,7 +48,7 @@
     },
     methods: {
       ...mapActions(['fetchOneTag']),
-      ...mapMutations(['assignArtQuery'])
+      ...mapMutations(['assignArtQuery', 'assignTopicQuery', 'assignTagQuery'])
     },
     beforeRouteUpdate (to, from, next) {
       // vue-router 复用同一组件，但是路由不一样时，这个会被触发，如： '/api/tags/:id'
@@ -66,6 +66,14 @@
       this.assignArtQuery({
         name: 'tag',
         id: this.id
+      })
+      this.assignTopicQuery({
+        name: 'all',
+        id: null
+      })
+      this.assignTagQuery({
+        name: 'all',
+        id: null
       })
     }
   }
