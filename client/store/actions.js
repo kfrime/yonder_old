@@ -103,7 +103,7 @@ export default {
      *   id:   topic.id / tag.id
      */
     // console.log('fetchArticleList, query:', query)
-    api.getArticleList(query.name, query.id)
+    api.getArticleList(query.name, query.id, query.page)
       .then(data => {
         // console.log('fetchArticleListBy', filter, data)
         commit('fillArticles', data)

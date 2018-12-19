@@ -53,14 +53,14 @@ export default {
   getTag (id) {
     return handleRequest(request.get(`/api/tags/${id}/`))
   },
-  getArticleList (filter, id) {
+  getArticleList (filter, id, page=1) {
     /* filter:
      *  all - 获取所有文章列表
      *  topic - 根据 topic id 筛选文章列表
      *  tag - 根据 tag id 筛选文章列表
      */
     // console.log('getArticleList, filter:', filter, 'id:', id)
-    let baseUrl = '/api/articles/'
+    let baseUrl = `/api/articles/`
     let url = ''
     let query = ''
 
@@ -73,8 +73,13 @@ export default {
     } else {
       // todo: thrown error
       console.log(`unknown filter type: ${filter}`)
+      return
     }
+
     url = baseUrl + query
+    if (query !== '' && typeof query.page !== "undefined") {
+      baseUrl += `&page=${page}`
+    }
     const resp = handleRequest(request.get(url))
     return resp
   },
@@ -82,7 +87,6 @@ export default {
     /* filter:
      *  all - 获取所有主题列表
      */
-    // console.log('getArticleList, filter:', filter, 'id:', id)
     let baseUrl = '/api/topics/'
     let url = ''
     let query = ''
@@ -102,7 +106,6 @@ export default {
      *  all - 获取所有标签列表
      *  article - 根据 article id 筛选标签列表
      */
-    // console.log('getArticleList, filter:', filter, 'id:', id)
     let baseUrl = '/api/tags/'
     let url = ''
     let query = ''
@@ -110,7 +113,7 @@ export default {
     if (filter === 'all') {
       query = ''              // `/api/tags/`
     } else if (filter === 'article') {
-      query = `?topic=${id}`  // `/api/tags/?article=${id}`
+      query = `?article=${id}`  // `/api/tags/?article=${id}`
     } else {
       // todo: thrown error
       console.log(`unknown filter type: ${filter}`)

@@ -9,9 +9,5 @@ export default {
   },
   tags (state) {
     return state.tagResp.results
-  },
-  artPages (state) {
-    const resp = state.artResp
-    return resp.count / resp.results.length
   }
 }
