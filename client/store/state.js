@@ -13,7 +13,13 @@ export default {
     results: [],      // article results
   },
   */
-  artResp: {},
+  artResp: {
+    page: {
+      pre: null,
+      next: null,
+      pages: 0
+    }
+  },
   topicResp: {},
   tagResp: {},
 

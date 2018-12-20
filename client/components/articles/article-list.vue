@@ -10,16 +10,19 @@
       :key="article.id"
     ></article-item>
     <!-- pagination -->
+    <pagination></pagination>
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import ArticleItem from './article-item.vue'
+import Pagination from '../pagination.vue'
 
 export default {
   components: {
-    ArticleItem
+    ArticleItem,
+    Pagination
   },
   computed: {
     ...mapState(['artResp', 'artQuery']),

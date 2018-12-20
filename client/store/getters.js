@@ -9,5 +9,16 @@ export default {
   },
   tags (state) {
     return state.tagResp.results
+  },
+  page (state) {
+    const page = state.artResp.page
+    if (page === undefined) {
+      return {
+        pages: 0,
+        pre: null,
+        next: null
+      }
+    }
+    return page
   }
 }

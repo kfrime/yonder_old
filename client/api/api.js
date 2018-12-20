@@ -53,33 +53,41 @@ export default {
   getTag (id) {
     return handleRequest(request.get(`/api/tags/${id}/`))
   },
-  getArticleList (filter, id, page=1) {
+  getArticleList(filter, id, page=1) {
     /* filter:
      *  all - 获取所有文章列表
      *  topic - 根据 topic id 筛选文章列表
      *  tag - 根据 tag id 筛选文章列表
      */
-    // console.log('getArticleList, filter:', filter, 'id:', id)
-    let baseUrl = `/api/articles/`
-    let url = ''
-    let query = ''
+    // console.log('getArticleList, filter:', filter, 'id:', id, 'page:', page)
+    let url = `/api/articles/`
+    let params = []
 
     if (filter === 'all') {
-      query = ''              // `/api/articles/`
+      /* do nothing */              // `/api/articles/`
     } else if (filter === 'topic') {
-      query = `?topic=${id}`  // `/api/articles/?topic=${id}`
+      params.push(`topic=${id}`)    // `/api/articles/?topic=${id}`
     } else if (filter === 'tag') {
-      query = `?tag=${id}`    // `/api/articles/?tag=${id}`
+      params.push(`tag=${id}`)      // `/api/articles/?tag=${id}`
     } else {
       // todo: thrown error
       console.log(`unknown filter type: ${filter}`)
       return
     }
 
-    url = baseUrl + query
-    if (query !== '' && typeof query.page !== "undefined") {
-      baseUrl += `&page=${page}`
+    if (page !== 1 && typeof page !== "undefined") {
+      params.push(`page=${page}`)
     }
+
+    // console.log('params:', params)
+    if (params.length > 0) {
+      url = url + '?' + params.shift()
+      for (var p of params) {
+        url = url + '&' + p
+      }
+    }
+
+    // console.log('url:', url)
     const resp = handleRequest(request.get(url))
     return resp
   },
