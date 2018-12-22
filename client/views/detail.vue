@@ -16,6 +16,7 @@
             <li class="breadcrumb-item active" aria-current="page">{{article.title}}</li>
           </div>
         </div>
+
         <!-- 文章详情 -->
         <div class="card detail-card">
           <div class="card-body py-2">
@@ -24,11 +25,31 @@
             </div>
             <div class="text-center py-2 detail-summary">
               <span class="mx-2">{{article.author.name}}</span>创建于：{{article.ctime}}</div>
+            <!-- 文章内容 -->
             <div class="pt-3 detail-text" v-html="article.text"></div>
-            <div class="tag-list">
-
-            </div>
+            <!-- tag list -->
+            <div class="tag-list"></div>
           </div>
+        </div>
+
+        <!-- pre and next article -->
+        <div class="neighbor-articles mt-1">
+          <div v-if="article.pre" class="float-left">
+            <router-link
+              :to="`/articles/${article.pre.id}`"
+              class="f-16 article-title"
+            ><i class="fa fa-chevron-left mx-1 text-secondary"></i>{{article.pre.title}}
+            </router-link>
+          </div>
+
+          <div v-if="article.next" class="float-right">
+            <router-link
+              :to="`/articles/${article.next.id}`"
+              class="f-16 article-title d-md-block"
+            >{{article.next.title}}<i class="fa fa-chevron-right mx-1 text-secondary"></i>
+            </router-link>
+          </div>
+
         </div>
       </div>
     </div>
@@ -49,7 +70,14 @@ export default {
   mounted () {
     console.log('article detail:', this.article)
     this.fetchOneArticle(this.id)
+  },
+  beforeRouteUpdate (to, from, next) {
+    // vue-router 复用同一组件，但是路由不一样时，这个会被触发
+    const id = to.params.id
+    this.fetchOneArticle(id)
+    next()
   }
+
 }
 </script>
 
@@ -72,5 +100,29 @@ export default {
 }
 .detail-text {
 
+}
+
+/* fix float-right not work well */
+.neighbor-articles:before,
+.neighbor-articles:after {
+  content: "";
+  display: table;
+}
+.neighbor-articles:after {
+  clear: both;
+}
+.neighbor-articles {
+  display: -ms-flexbox;
+  /*display: flex;*/
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  list-style: none;
+  background-color: #f8f9fa;
+  border-radius: 0.25rem;
+}
+.article-title {
+  color: #00a1d6;
 }
 </style>

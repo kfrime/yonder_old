@@ -13,6 +13,7 @@ export default {
     results: [],      // article results
   },
   */
+  /* 列表 */
   artResp: {
     page: {
       pre: null,
@@ -23,6 +24,7 @@ export default {
   topicResp: {},
   tagResp: {},
 
+  /* 详情 */
   topic: {},
   tag: {},
   article: {

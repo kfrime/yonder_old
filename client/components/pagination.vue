@@ -32,6 +32,7 @@
           >{{p}}</button>
         </li>
 
+        <!-- 页码表的最后一项跟 最后一页 不相邻时 -->
         <strong v-if="page.pageArr[page.pageArr.length-1] < page.pages-1" class="mr-2"> ... </strong>
         <!-- 最后一页 -->
         <li class="page-item">
@@ -42,7 +43,7 @@
           >{{page.pages}}</button>
         </li>
         <!-- 下一页 -->
-        <li class="page-item" >
+        <li class="page-item">
           <button
             class="btn page-btn"
             :class="{'disabled': page.next === null}"
