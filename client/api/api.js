@@ -83,7 +83,7 @@ export default {
     if (params.length > 0) {
       url = url + '?' + params.shift()
       for (var p of params) {
-        url = url + '&' + p
+        url = url + '&' + p     // eg: `/api/articles/?topic=1&page=2`
       }
     }
 

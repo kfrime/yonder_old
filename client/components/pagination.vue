@@ -13,9 +13,18 @@
             <span class="sr-only">Previous</span>
           </button>
         </li>
+        <!-- 第一页-->
+        <li class="page-item">
+          <button
+            class="btn page-btn"
+            :class="{'item-active': 1 === page.current}"
+            @click.prevent="updateArtList(1)"
+          >1</button>
+        </li>
+        <strong v-if="page.pageArr[0] > 2" class="mr-2"> ... </strong>
 
-        <!-- 页码 -->
-        <li v-for="p in page.pages" class="page-item">
+        <!-- 中间的页码（保持7个） -->
+        <li v-for="p in page.pageArr" class="page-item">
           <button
             class="btn page-btn"
             :class="{'item-active': p === page.current}"
@@ -23,6 +32,15 @@
           >{{p}}</button>
         </li>
 
+        <strong v-if="page.pageArr[page.pageArr.length-1] < page.pages-1" class="mr-2"> ... </strong>
+        <!-- 最后一页 -->
+        <li class="page-item">
+          <button
+            class="btn page-btn"
+            :class="{'item-active': page.pages === page.current}"
+            @click.prevent="updateArtList(page.pages)"
+          >{{page.pages}}</button>
+        </li>
         <!-- 下一页 -->
         <li class="page-item" >
           <button
@@ -51,10 +69,41 @@ export default {
       if (page === undefined) {
         return {
           pages: 0,
+          pageArr: pageArr,
           pre: null,
           next: null
         }
       }
+
+      let pageArr = []    // 要显示的页码列表
+      let start = 2
+      let end = page.pages - 1
+      // 控制中间所显示页码的范围，page.current 左右各3个
+      if (page.current > 5) {
+        start = page.current - 3
+      }
+      if (page.current < page.pages - 4) {
+        end = page.current + 3
+      }
+
+      // 中间不够7个页码时，填充满7个
+      if (end - start < 7) {
+        if (page.current < 5) {
+          // 左边满了，填充右边
+          end = start + 6
+        }
+        if (page.current > page.pages - 4) {
+          // 右边满了，填充左边
+          start = end - 6
+        }
+      }
+
+      for (var p=start; p <= end; p++) {
+        pageArr.push(p)
+      }
+
+      console.log('cur:', page.current, 'pageArr', pageArr)
+      page.pageArr = pageArr
       return page
     }
   },
@@ -84,14 +133,12 @@ export default {
 }
 .page-wrap .page-item {
   margin-right: 0.5rem;
-  /*margin: 0 auto;*/
 }
 .page-btn {
   color: #222;
   background-color: #fff;
   border: 1px solid #ddd;
 }
-.page-btn:not(.disabled):focus,
 .page-btn:not(.disabled):active,
 .page-btn:not(.disabled):hover,
 .item-active {
@@ -99,5 +146,8 @@ export default {
   color: #e9ecef;
   background-color: #00a1d6;
   border: 1px solid #00a1d6;
+}
+.page-btn:focus {
+  box-shadow: none;
 }
 </style>
