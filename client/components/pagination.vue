@@ -1,28 +1,42 @@
 <template>
-  <div aria-label="Page navigation example">
-    <ul class="pagination">
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Previous" :disabled="page.pre === null">
-          <span aria-hidden="true">&laquo;</span>
-          <span class="sr-only">Previous</span>
-        </a>
-      </li>
-      <!-- 页码 -->
-      <li
-        v-for="p in page.pages"
-        class="page-item"
-        :disabled="p === page.current"
-      >
-        <a class="page-link" href="#" @click.prevent="updateArtList(p)">{{p}}</a>
-      </li>
+  <div v-if="page.pages > 1" class="page-module">
+    <div class="page-wrap my-2">
+      <ul class="pagination">
+        <!-- 上一页 -->
+        <li class="page-item">
+          <button
+            class="btn page-btn"
+            :class="{'disabled': page.pre === null}"
+            @click.prevent="updateArtList(page.current - 1)"
+          >
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
+          </button>
+        </li>
 
-      <li class="page-item">
-        <a class="page-link" href="#" aria-label="Next" :disabled="page.next === null">
-          <span aria-hidden="true">&raquo;</span>
-          <span class="sr-only">Next</span>
-        </a>
-      </li>
-    </ul>
+        <!-- 页码 -->
+        <li v-for="p in page.pages" class="page-item">
+          <button
+            class="btn page-btn"
+            :class="{'item-active': p === page.current}"
+            @click.prevent="updateArtList(p)"
+          >{{p}}</button>
+        </li>
+
+        <!-- 下一页 -->
+        <li class="page-item" >
+          <button
+            class="btn page-btn"
+            :class="{'disabled': page.next === null}"
+            @click.prevent="updateArtList(page.current + 1)"
+          >
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
+          </button>
+        </li>
+
+      </ul>
+    </div>
   </div>
 </template>
 
@@ -32,16 +46,24 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 export default {
   computed: {
     ...mapState(['artResp', 'artQuery']),
-    ...mapGetters(['page'])
-    // page () {
-    //   return this.artResp.page
-    // }
+    page () {
+      const page = this.artResp.page
+      if (page === undefined) {
+        return {
+          pages: 0,
+          pre: null,
+          next: null
+        }
+      }
+      return page
+    }
   },
   methods: {
     ...mapMutations(['assignArtQuery']),
     updateArtList (page) {
-      // const query = Object.assign({}, this.artQuery)
-      // query.page = page
+      if (page < 1 || page > this.page.pages || page === this.page.current) {
+        return
+      }
       this.assignArtQuery({
         name: this.artQuery.name,
         id: this.artQuery.id,
@@ -51,3 +73,31 @@ export default {
   }
 }
 </script>
+
+<style>
+.page-module {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+}
+.page-wrap .page-item {
+  margin-right: 0.5rem;
+  /*margin: 0 auto;*/
+}
+.page-btn {
+  color: #222;
+  background-color: #fff;
+  border: 1px solid #ddd;
+}
+.page-btn:not(.disabled):focus,
+.page-btn:not(.disabled):active,
+.page-btn:not(.disabled):hover,
+.item-active {
+  box-shadow: none;
+  color: #e9ecef;
+  background-color: #00a1d6;
+  border: 1px solid #00a1d6;
+}
+</style>
