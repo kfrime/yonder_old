@@ -22,6 +22,8 @@ class TopicSerializer(serializers.ModelSerializer):
 
 
 class TagSerializer(serializers.ModelSerializer):
+    total = serializers.IntegerField()
+
     class Meta:
         model = Tag
         fields = '__all__'

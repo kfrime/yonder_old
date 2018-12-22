@@ -1,6 +1,7 @@
 # -*- coding:utf-8 -*-
 
 import os
+from collections import OrderedDict
 
 from django.shortcuts import render, get_object_or_404
 from django.views import generic
@@ -115,21 +116,47 @@ def tag(request, id):
 
 
 class CustomPagination(PageNumberPagination):
-    page_size = 10
-    # page_size_query_param = 'page_size'
+    page_size = 8
+
+    def get_paginated_response(self, data):
+        _next = self.page.next_page_number() if self.page.has_next() else None
+        _pre = self.page.previous_page_number() if self.page.has_previous() else None
+        _count = self.page.paginator.count
+        _size = self.page_size
+
+        _pages = _count // _size if _count % _size == 0 else _count // _size + 1
+
+        page = OrderedDict([
+            # ('count', _count),
+            # ('last', self.page.paginator.count),
+            # ('offset', _size),
+            ('pages', _pages),
+            ('pre', _pre),
+            ('current', self.page.number),
+            ('next', _next),
+            # ('nextLink', self.get_next_link()),
+            # ('preLink', self.get_previous_link())
+        ])
+
+        return Response({
+            'page': page,
+            'results': data
+        })
 
 
 class TopicAPIView(viewsets.ReadOnlyModelViewSet):
     queryset = Topic.objects.all()
     serializer_class = TopicSerializer
+    pagination_class = CustomPagination
 
     def get_queryset(self):
         return Topic.objects.annotate(total=Count('article')).filter(total__gt=0)
 
 
 class TagAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Tag.objects.exclude(article__isnull=True)
+    queryset = Tag.objects.exclude(article__isnull=True).annotate(total=Count('article'))
     serializer_class = TagSerializer
+    pagination_class = CustomPagination
 
     def get_queryset(self):
         article_id = self.request.query_params.get('article', None)
@@ -155,7 +182,7 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
         qs = self.queryset
         if topic_id:
             topic_id = int(topic_id)
-            qs = self.queryset.filter(topic__id=topic_id)
+            qs = self.queryset.filter(topic=topic_id)
 
         if tag_id:
             tag_id = int(tag_id)
