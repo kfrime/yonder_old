@@ -78,23 +78,26 @@ export default {
       let pageArr = []    // 要显示的页码列表
       let start = 2
       let end = page.pages - 1
-      // 控制中间所显示页码的范围，page.current 左右各3个
-      if (page.current > 5) {
-        start = page.current - 3
-      }
-      if (page.current < page.pages - 4) {
-        end = page.current + 3
-      }
 
-      // 中间不够7个页码时，填充满7个
-      if (end - start < 7) {
-        if (page.current < 5) {
-          // 左边满了，填充右边
-          end = start + 6
+      // 控制中间所显示页码的范围，page.current 左右各3个
+      if (page.pages > 9) {
+        if (page.current > 5) {
+          start = page.current - 3
         }
-        if (page.current > page.pages - 4) {
-          // 右边满了，填充左边
-          start = end - 6
+        if (page.current < page.pages - 4) {
+          end = page.current + 3
+        }
+
+        // 中间不够7个页码时，填充满7个
+        if (end - start < 7) {
+          if (page.current < 5) {
+            // 左边满了，填充右边
+            end = start + 6
+          }
+          if (page.current > page.pages - 4) {
+            // 右边满了，填充左边
+            start = end - 6
+          }
         }
       }
 
