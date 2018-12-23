@@ -103,7 +103,7 @@ export default {
      *   id:   topic.id / tag.id
      */
     // console.log('fetchArticleList, query:', query)
-    api.getArticleList(query.name, query.id, query.page)
+    api.getArticleList(query.name, query.id, query.search, query.page)
       .then(data => {
         // console.log('fetchArticleListBy', filter, data)
         commit('fillArticles', data)
@@ -138,5 +138,15 @@ export default {
       .catch(err => {
         handleError(err)
       })
-  }
+  },
+  fetchArticlesBySearch ({ commit }, query) {
+    api.searchArticles(query.value, query.page)
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('fillArticles', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  },
 }

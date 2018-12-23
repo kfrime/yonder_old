@@ -53,7 +53,7 @@ export default {
   getTag (id) {
     return handleRequest(request.get(`/api/tags/${id}/`))
   },
-  getArticleList(filter, id, page=1) {
+  getArticleList(filter, id, search='', page=1) {
     /* filter:
      *  all - 获取所有文章列表
      *  topic - 根据 topic id 筛选文章列表
@@ -73,6 +73,10 @@ export default {
       // todo: thrown error
       console.log(`unknown filter type: ${filter}`)
       return
+    }
+
+    if (search !== '' && typeof search !== "undefined") {
+      params.push(`search=${search}`)
     }
 
     if (page !== 1 && typeof page !== "undefined") {
@@ -129,5 +133,29 @@ export default {
     url = baseUrl + query
     const resp = handleRequest(request.get(url))
     return resp
-  }
+  },
+  searchArticles (value, page=1) {
+    let url = `/api/articles/search/`
+    let params = []
+
+    if (value !== '' && typeof value !== "undefined") {
+      params.push(`q=${value}`)
+    }
+
+    if (page !== 1 && typeof page !== "undefined") {
+      params.push(`page=${page}`)
+    }
+
+    // console.log('params:', params)
+    if (params.length > 0) {
+      url = url + '?' + params.shift()
+      for (var p of params) {
+        url = url + '&' + p     // eg: `/api/articles/?topic=1&page=2`
+      }
+    }
+
+    // console.log('url:', url)
+    const resp = handleRequest(request.get(url))
+    return resp
+  },
 }

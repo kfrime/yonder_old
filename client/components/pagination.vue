@@ -120,6 +120,7 @@ export default {
       this.assignArtQuery({
         name: this.artQuery.name,
         id: this.artQuery.id,
+        search: this.artQuery.search,
         page: page
       })
     }

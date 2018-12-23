@@ -26,13 +26,43 @@
         </ul>
 
         <!-- 搜索框 -->
-        <form class="navbar-form" role="search">
-          <input type="text" class="form-control py-0 search-bar" placeholder="搜索">
-        </form>
+        <div class="navbar-form" role="search">
+          <input
+            type="text"
+            class="form-control py-0 search-bar"
+            autofocus="autofocus"
+            placeholder="搜索"
+            @keyup.enter.prevent="searchArticles"
+          >
+        </div>
       </div>
     </div>
   </div>
 </template>
+
+<script>
+import { mapActions, mapMutations } from 'vuex'
+
+export default {
+  methods: {
+    ...mapActions(['fetchArticleListBy']),
+    ...mapMutations(['assignArtQuery']),
+    searchArticles (e) {
+      const content = e.target.value.trim()
+      // console.log('search:', content)
+      if (!content) {
+        console.log('input can not be empty')
+        return
+      }
+      this.assignArtQuery({
+        name: 'all',
+        search: content
+      })
+      e.target.value = ''
+    }
+  }
+}
+</script>
 
 <style>
   .navbar-extra {

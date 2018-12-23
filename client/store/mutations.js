@@ -23,6 +23,7 @@ export default {
     state.tag = tag
   },
   assignArtQuery (state, query) {
+    // console.log('art query:', query)
     state.artQuery = query
   },
   assignTopicQuery (state, query) {
