@@ -8,9 +8,9 @@
       <div class="tag-title">文章标签</div>
 
       <tag-item
-      :tag = "tag"
-      v-for="tag in tags"
-      :key="tag.id"
+        :tag = "tag"
+        v-for="tag in tags"
+        :key="tag.id"
       ></tag-item>
     </div>
   <!--</div>-->

@@ -27,54 +27,76 @@
               <span class="mx-2">{{article.author.name}}</span>创建于：{{article.ctime}}</div>
             <!-- 文章内容 -->
             <div class="pt-3 detail-text" v-html="article.text"></div>
-            <!-- tag list -->
-            <div class="tag-list"></div>
           </div>
         </div>
 
-        <!-- pre and next article -->
-        <div class="neighbor-articles mt-1">
-          <div v-if="article.pre" class="float-left">
-            <router-link
-              :to="`/articles/${article.pre.id}`"
-              class="f-16 article-title"
-            ><i class="fa fa-chevron-left mx-1 text-secondary"></i>{{article.pre.title}}
-            </router-link>
+        <div class="article-extend">
+          <!-- tag list -->
+          <div class="simple-tag-list">
+            <simple-tag-item
+              :tag = "tag"
+              v-for="tag in tags"
+              :key="tag.id"
+            ></simple-tag-item>
           </div>
 
-          <div v-if="article.next" class="float-right">
-            <router-link
-              :to="`/articles/${article.next.id}`"
-              class="f-16 article-title d-md-block"
-            >{{article.next.title}}<i class="fa fa-chevron-right mx-1 text-secondary"></i>
-            </router-link>
-          </div>
+          <!-- pre and next article -->
+          <div class="neighbor-articles mt-1">
+            <div v-if="article.pre" class="float-left">
+              <router-link
+                :to="`/articles/${article.pre.id}`"
+                class="f-16 article-title"
+              ><i class="fa fa-chevron-left mx-1 text-secondary"></i>{{article.pre.title}}
+              </router-link>
+            </div>
 
+            <div v-if="article.next" class="float-right">
+              <router-link
+                :to="`/articles/${article.next.id}`"
+                class="f-16 article-title d-md-block"
+              >{{article.next.title}}<i class="fa fa-chevron-right mx-1 text-secondary"></i>
+              </router-link>
+            </div>
+          </div>
         </div>
+
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
+import SimpleTagItem from '../components/tags/simple-tag-item.vue'
 
 export default {
+  components: {
+    SimpleTagItem
+  },
   props: ['id'],
   computed: {
     ...mapState(['article']),
+    ...mapGetters(['tags'])
   },
   methods: {
-    ...mapActions(['fetchOneArticle'])
+    ...mapActions(['fetchOneArticle', 'fetchTagListBy'])
   },
   mounted () {
-    console.log('article detail:', this.article)
+    // console.log('article detail:', this.article)
     this.fetchOneArticle(this.id)
+    this.fetchTagListBy({
+      name: 'article',
+      id: this.id
+    })
   },
   beforeRouteUpdate (to, from, next) {
     // vue-router 复用同一组件，但是路由不一样时，这个会被触发
     const id = to.params.id
     this.fetchOneArticle(id)
+    this.fetchTagListBy({
+      name: 'article',
+      id: id
+    })
     next()
   }
 
@@ -102,6 +124,14 @@ export default {
 
 }
 
+.article-extend {
+  background-color: #f8f9fa;
+  padding-top: 0.5rem;
+}
+.simple-tag-list {
+  padding: 0.25rem 0.5rem;
+}
+
 /* fix float-right not work well */
 .neighbor-articles:before,
 .neighbor-articles:after {
@@ -116,10 +146,11 @@ export default {
   /*display: flex;*/
   -ms-flex-wrap: wrap;
   flex-wrap: wrap;
-  padding: 0.75rem;
-  margin-bottom: 1rem;
+  /*padding: 0.75rem 0;*/
+  padding: 0.5rem 0.5rem;
+  /*margin-bottom: 1rem;*/
   list-style: none;
-  background-color: #f8f9fa;
+  background-color: #e9ecef;
   border-radius: 0.25rem;
 }
 .article-title {

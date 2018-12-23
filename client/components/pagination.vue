@@ -106,7 +106,7 @@ export default {
         pageArr.push(p)
       }
 
-      console.log('cur:', page.current, 'pageArr', pageArr)
+      // console.log('cur:', page.current, 'pageArr', pageArr)
       page.pageArr = pageArr
       return page
     }
