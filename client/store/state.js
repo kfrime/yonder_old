@@ -16,6 +16,8 @@ export default {
   /* 列表 */
   artResp: {
     page: {
+      count: 0,
+      current: 0,
       pre: null,
       next: null,
       pages: 0

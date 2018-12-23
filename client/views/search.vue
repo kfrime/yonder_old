@@ -6,8 +6,8 @@
         <div v-if="searched" class="card summary">
           <div class="card-body summary-body summary-topic">
             <div class="summary-header f-16 pb-1">
-              <!--<span class="float-right mb-0 mr-1">共<span class="text-primary mx-2">{{topic.total}}</span>篇</span>-->
-              <span class="">搜索内容：<span class="text-dark"><strong>{{search}}</strong></span></span>
+              <p class="mb-1">搜索：<span class="text-dark mx-1"><strong>{{search}}</strong></span></p>
+              <p class="mb-0 mt-1">找到<span class="text-primary mx-2">{{artResp.page.count}}</span>篇</p>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default {
     TagList
   },
   computed: {
-    ...mapState(['artQuery']),
+    ...mapState(['artQuery', 'artResp']),
     searched () {
       return typeof this.search !== "undefined" && this.search !== '';
     }
