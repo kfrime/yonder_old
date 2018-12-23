@@ -7,10 +7,11 @@ from django.shortcuts import render, get_object_or_404
 from django.views import generic
 from django.conf import settings
 from django.core.cache import cache
-from django.db.models.aggregates import Count
+from django.db.models.aggregates import (Count, Q)
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
+from rest_framework.decorators import action
 
 from iseek_backend.settings import BASE_DIR
 from .serializers import (TopicSerializer, TagSerializer, ArticleSerializer, SimpleArticleSerializer, )
@@ -127,7 +128,7 @@ class CustomPagination(PageNumberPagination):
         _pages = _count // _size if _count % _size == 0 else _count // _size + 1
 
         page = OrderedDict([
-            # ('count', _count),
+            ('count', _count),
             # ('last', self.page.paginator.count),
             # ('offset', _size),
             ('pages', _pages),
@@ -145,7 +146,7 @@ class CustomPagination(PageNumberPagination):
 
 
 class TopicAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Topic.objects.all()
+    queryset = Topic.objects.all().order_by('id')
     serializer_class = TopicSerializer
     pagination_class = CustomPagination
 
@@ -154,7 +155,7 @@ class TopicAPIView(viewsets.ReadOnlyModelViewSet):
 
 
 class TagAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Tag.objects.exclude(article__isnull=True).annotate(total=Count('article'))
+    queryset = Tag.objects.exclude(article__isnull=True).annotate(total=Count('article')).order_by('id')
     serializer_class = TagSerializer
     pagination_class = CustomPagination
 
@@ -178,6 +179,7 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         topic_id = self.request.query_params.get('topic', None)
         tag_id = self.request.query_params.get('tag', None)
+        search = self.request.query_params.get('search', None)
 
         qs = self.queryset
         if topic_id:
@@ -187,6 +189,9 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
         if tag_id:
             tag_id = int(tag_id)
             qs = self.queryset.filter(tags=tag_id)
+
+        if search:
+            qs = Article.objects.filter(title__icontains=search)
 
         return qs
 
@@ -235,4 +240,19 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
             'title': _pre.title
         } if _pre else None
         return Response(article)
+
+    @action(detail=False, methods=['get'], url_path='search')
+    def search(self, request, *args, **kwargs):
+        q = self.request.query_params.get('q', None)
+        if not q:
+            return Response({})
+
+        qs = Article.objects.filter(Q(title__icontains=q) | Q(slug__icontains=q))
+        page = self.paginate_queryset(qs)
+        if page is not None:
+            serializer = SimpleArticleSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = SimpleArticleSerializer(qs, many=True)
+        return Response(serializer.data)
 
