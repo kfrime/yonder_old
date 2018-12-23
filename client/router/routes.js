@@ -19,5 +19,12 @@ export default [
     path: '/tags/:id',
     props: true,
     component: () => import('../views/tag.vue')
-  }
+  },
+  {
+    name: 'search-articles',
+    path: '/articles/search/:search',
+    props: true,
+    component: () => import('../views/search.vue')
+  },
+
 ]

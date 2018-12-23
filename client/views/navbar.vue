@@ -41,12 +41,9 @@
 </template>
 
 <script>
-import { mapActions, mapMutations } from 'vuex'
 
 export default {
   methods: {
-    ...mapActions(['fetchArticleListBy']),
-    ...mapMutations(['assignArtQuery']),
     searchArticles (e) {
       const content = e.target.value.trim()
       // console.log('search:', content)
@@ -54,11 +51,9 @@ export default {
         console.log('input can not be empty')
         return
       }
-      this.assignArtQuery({
-        name: 'all',
-        search: content
-      })
       e.target.value = ''
+      const route = `/articles/search/${content}`
+      this.$router.push(route)
     }
   }
 }
