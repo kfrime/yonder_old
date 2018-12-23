@@ -37,12 +37,9 @@ class SimpleTopicSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer()
-    # author_name = serializers.CharField(source='author.username')
     topic = SimpleTopicSerializer()
-    # tags = TagSerializer()
     ctime = serializers.DateTimeField(source='create_time', format="%Y-%m-%d %H:%M:%S")
     utime = serializers.DateTimeField(source='update_time', format="%Y-%m-%d %H:%M:%S")
-    # tags = TagSerializer()
 
     class Meta:
         model = Article
@@ -50,6 +47,7 @@ class ArticleSerializer(serializers.ModelSerializer):
 
 
 class SimpleArticleSerializer(ArticleSerializer):
+    """用于展示文章列表，所以不用序列化文章内容"""
     class Meta:
         model = Article
         exclude = ('text', 'create_time', 'update_time')

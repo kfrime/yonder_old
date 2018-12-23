@@ -138,10 +138,10 @@ class CustomPagination(PageNumberPagination):
             # ('preLink', self.get_previous_link())
         ])
 
-        return Response({
-            'page': page,
-            'results': data
-        })
+        return Response(OrderedDict([
+            ('page', page),
+            ('results', data)
+        ]))
 
 
 class TopicAPIView(viewsets.ReadOnlyModelViewSet):
@@ -170,7 +170,7 @@ class TagAPIView(viewsets.ReadOnlyModelViewSet):
 
 
 class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Article.objects.all().order_by('update_time')
+    queryset = Article.objects.all().order_by('create_time')
     serializer_class = ArticleSerializer
     pagination_class = CustomPagination
     # paginate_by = getattr(settings, 'PAGE_LIMIT', 10)
@@ -208,7 +208,7 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
         if not article:
             return Response({})
 
-        utime = article['utime']
+        utime = article['utime'].split(' ')[0]      # date str
         md_key = '{}_md_{}'.format(article['id'], utime)
         cache_md = cache.get(md_key)
         if cache_md:
@@ -224,5 +224,15 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
         article['text'] = md.convert(article['text'])
         article['toc'] = md.toc  # 目录
 
+        _next = instance.get_next()
+        _pre = instance.get_pre()
+        article['next'] = {
+            'id': _next.id,
+            'title': _next.title
+        } if _next else None
+        article['pre'] = {
+            'id': _pre.id,
+            'title': _pre.title
+        } if _pre else None
         return Response(article)
 
