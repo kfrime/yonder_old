@@ -7,7 +7,7 @@
           <div class="card-body summary-body summary-topic">
             <div class="summary-header f-16 pb-1">
               <!--<span class="float-right mb-0 mr-1">共<span class="text-primary mx-2">{{topic.total}}</span>篇</span>-->
-              <span class="">搜索：<span class="text-dark"><strong>{{search}}</strong></span></span>
+              <span class="">搜索内容：<span class="text-dark"><strong>{{search}}</strong></span></span>
             </div>
           </div>
         </div>

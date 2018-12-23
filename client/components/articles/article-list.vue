@@ -3,7 +3,7 @@
  *   - update store.state.query
  */
 <template>
-  <div class="article-list">
+  <div v-if="articles.length !== 0" class="article-list">
     <article-item
       :article="article"
       v-for="article in articles"
@@ -11,6 +11,9 @@
     ></article-item>
     <!-- pagination -->
     <pagination></pagination>
+  </div>
+  <div v-else>
+    <p>没找到对应的文章</p>
   </div>
 </template>
 
