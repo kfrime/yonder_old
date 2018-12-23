@@ -127,6 +127,7 @@ export default {
 .article-extend {
   background-color: #f8f9fa;
   padding-top: 0.5rem;
+  margin-bottom: 1rem;
 }
 .simple-tag-list {
   padding: 0.25rem 0.5rem;

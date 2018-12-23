@@ -3,7 +3,7 @@
  *   - update store.state.query
  */
 <template>
-  <div v-if="articles.length !== 0" class="article-list">
+  <div v-if="hasArticles" class="article-list">
     <article-item
       :article="article"
       v-for="article in articles"
@@ -29,7 +29,10 @@ export default {
   },
   computed: {
     ...mapState(['artResp', 'artQuery']),
-    ...mapGetters(['articles'])
+    ...mapGetters(['articles']),
+    hasArticles () {
+      return typeof this.articles !== "undefined" && this.articles.length !== 0
+    }
   },
   methods: {
     ...mapActions([
