@@ -14,7 +14,10 @@ from rest_framework.response import Response
 from rest_framework.decorators import action
 
 from iseek_backend.settings import BASE_DIR
-from .serializers import (TopicSerializer, TagSerializer, ArticleSerializer, SimpleArticleSerializer, )
+from .serializers import (
+    TopicSerializer, TagSerializer, ArticleSerializer, SimpleArticleSerializer,
+    SmallArticleSerializer
+)
 
 import markdown
 
@@ -256,3 +259,22 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
         serializer = SimpleArticleSerializer(qs, many=True)
         return Response(serializer.data)
 
+
+class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Article.objects.all().order_by('create_time')
+    serializer_class = SmallArticleSerializer
+
+    def get_queryset(self):
+        topic_id = self.request.query_params.get('topic', None)
+        tag_id = self.request.query_params.get('tag', None)
+
+        qs = self.queryset
+        if topic_id:
+            topic_id = int(topic_id)
+            qs = self.queryset.filter(topic=topic_id)
+
+        if tag_id:
+            tag_id = int(tag_id)
+            qs = self.queryset.filter(tags=tag_id)
+
+        return qs

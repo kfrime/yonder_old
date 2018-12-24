@@ -51,3 +51,13 @@ class SimpleArticleSerializer(ArticleSerializer):
     class Meta:
         model = Article
         exclude = ('text', 'create_time', 'update_time')
+
+
+class SmallArticleSerializer(ArticleSerializer):
+    """用于展示文章列表，所以不用序列化文章内容"""
+    ctime = serializers.DateTimeField(source='create_time', format="%Y-%m-%d")
+
+    class Meta:
+        model = Article
+        fields = ('id', 'title', 'ctime')
+
