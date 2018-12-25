@@ -12,6 +12,9 @@ export default {
     // console.log('fillTags', resp)
     state.tagResp = resp
   },
+  fillArchives (state, resp) {
+    state.archiveResp = resp
+  },
   assignArticle (state, article) {
     // 只获取一篇文章
     state.article = article
@@ -31,5 +34,8 @@ export default {
   },
   assignTagQuery (state, query) {
     state.tagQuery = query
+  },
+  assignArchiveQuery (state, query) {
+    state.archiveQuery = query
   }
 }

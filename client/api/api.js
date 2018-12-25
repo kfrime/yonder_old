@@ -158,4 +158,24 @@ export default {
     const resp = handleRequest(request.get(url))
     return resp
   },
+  getArchives (filter, id) {
+    /* filter:
+     *  all - 获取所有主题列表
+     */
+    let baseUrl = '/api/archives/'
+    let url = ''
+    let query = ''
+
+    if (filter === 'all') {
+      query = ''              // `/api/archives/`
+    } else if (filter === 'topic') {
+      query = `?topic=${id}`  // `/api/archives/?topic=${id}`
+    } else {
+      // todo: thrown error
+      console.log(`unknown filter type: ${filter}`)
+    }
+    url = baseUrl + query
+    const resp = handleRequest(request.get(url))
+    return resp
+  },
 }

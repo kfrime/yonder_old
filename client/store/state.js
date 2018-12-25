@@ -5,6 +5,7 @@ export default {
   artQuery: {},
   topicQuery: {},
   tagQuery: {},
+  archiveQuery: {},
   /*
   resp: {
     count: 0,         // results count
@@ -25,6 +26,7 @@ export default {
   },
   topicResp: {},
   tagResp: {},
+  archiveResp: {},
 
   /* 详情 */
   topic: {},

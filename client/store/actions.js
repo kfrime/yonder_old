@@ -149,4 +149,17 @@ export default {
         handleError(err)
       })
   },
+  fetchArchivesBy ({ commit }, query) {
+    /* query:
+     *   name: 根据什么来获取标签列表: all
+     */
+    // console.log('fetchArchivesBy, query:', query)
+    api.getArchives(query.name, query.id)
+      .then(data => {
+        commit('fillArchives', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
+  }
 }
