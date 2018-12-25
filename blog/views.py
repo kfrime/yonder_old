@@ -261,20 +261,46 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
 
 
 class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Article.objects.all().order_by('create_time')
+    queryset = Article.objects.all().order_by('-create_time')
     serializer_class = SmallArticleSerializer
 
     def get_queryset(self):
         topic_id = self.request.query_params.get('topic', None)
-        tag_id = self.request.query_params.get('tag', None)
 
         qs = self.queryset
         if topic_id:
             topic_id = int(topic_id)
             qs = self.queryset.filter(topic=topic_id)
 
-        if tag_id:
-            tag_id = int(tag_id)
-            qs = self.queryset.filter(tags=tag_id)
-
         return qs
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+        sort = dict()
+        for article in queryset:
+            year = str(article.create_time.year)
+            if year not in sort:
+                sort[year] = list()
+
+            sort[year].append(article)
+
+        results = dict()
+        for year, articleList in sort.items():
+            if year not in results:
+                results[year] = {
+                    'total': len(articleList),
+                    'data': SmallArticleSerializer(articleList, many=True).data
+                }
+
+        return Response(results)
+
+        """
+        {
+            '2018': {
+                total: 10,
+                data: [
+                    {1, 'a', '2018-10-20'}, 
+                    {2, 'b', '2018-10-21'}
+                ]
+        }
+        """
