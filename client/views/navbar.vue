@@ -18,7 +18,8 @@
             </router-link>
           </li>
           <li class="nav-item pr-2">
-            <a class="nav-link" href="#">归档</a>
+            <router-link to="/archives/" class="nav-link">归档</router-link>
+            <!--<a class="nav-link" href="#">归档</a>-->
           </li>
           <li class="nav-item pr-2">
             <a class="nav-link" href="#">关于</a>

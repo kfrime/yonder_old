@@ -26,5 +26,9 @@ export default [
     props: true,
     component: () => import('../views/search.vue')
   },
-
+  {
+    name: 'archive-page',
+    path: '/archives/',
+    component: () => import('../views/archive.vue')
+  }
 ]
