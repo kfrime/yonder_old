@@ -2,7 +2,9 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 main-module">
-        <p>total:{{archiveResp.count}}</p>
+        <div class="mb-2">
+          共<span class="text-danger mx-1">{{archiveResp.count}}</span>篇
+        </div>
         <archive-item
           :archive="archive"
           v-for="archive in archiveResp.results"
@@ -37,14 +39,17 @@ export default {
     ...mapState(['archiveResp'])
   },
   methods: {
-    ...mapActions(['fetchArchivesBy'])
+    ...mapActions(['fetchArchivesBy']),
+    ...mapMutations(['assignTopicQuery'])
   },
   mounted () {
-    this.fetchArchivesBy({
+    const query = {
       name: 'all',
       id: null
-    })
-    console.log('archives:', this.archiveResp)
+    }
+    this.fetchArchivesBy(query)
+    this.assignTopicQuery(query)
+    // console.log('archives:', this.archiveResp)
   }
 }
 </script>
