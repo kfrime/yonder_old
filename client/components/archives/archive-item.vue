@@ -1,12 +1,12 @@
 <template>
   <div class="archive-item mb-2">
-    <div class="text-center archive-item-header mb-2">
-      <div class="my-1 text-dark">
+    <div class="text-center archive-item-header py-1 mb-1">
+      <codiv class="text-dark">
         {{archive.year}}年（共<span class="text-danger mx-1">{{archive.total}}</span>篇)
-      </div>
+      </codiv>
     </div>
     <ul>
-      <li v-for="art in archive.articles" class="archive-article-link">
+      <li v-for="art in archive.articles" class="archive-article-link py-1">
         <span class="text-secondary">{{art.date}}&nbsp;</span>
         <router-link
           :to="`/articles/${art.id}`"
@@ -36,6 +36,7 @@ export default {
 }
 .archive-item ul {
   list-style: none;
+  margin-bottom: 0.5rem;
 }
 
 .archive-item ul li::before {
