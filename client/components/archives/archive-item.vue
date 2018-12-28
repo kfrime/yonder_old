@@ -1,9 +1,9 @@
 <template>
   <div class="archive-item mb-2">
     <div class="text-center archive-item-header py-1 mb-1">
-      <codiv class="text-dark">
+      <div class="text-dark">
         {{archive.year}}年（共<span class="text-danger mx-1">{{archive.total}}</span>篇)
-      </codiv>
+      </div>
     </div>
     <ul>
       <li v-for="art in archive.articles" class="archive-article-link py-1">

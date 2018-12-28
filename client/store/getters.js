@@ -2,12 +2,12 @@
 
 export default {
   articles (state) {
-    return state.artResp.results
+    return state.artList.data
   },
   topics (state) {
-    return state.topicResp.results
+    return state.topicList.data
   },
   tags (state) {
-    return state.tagResp.results
+    return state.tagList.data
   }
 }

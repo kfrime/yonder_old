@@ -3,11 +3,11 @@
     <div class="row">
       <div class="col-lg-8 main-module">
         <div class="archive-header">
-          共<span class="text-danger mx-1">{{archiveResp.count}}</span>篇
+          共<span class="text-danger mx-1">{{archiveList.count}}</span>篇
         </div>
         <archive-item
           :archive="archive"
-          v-for="archive in archiveResp.results"
+          v-for="archive in archiveList.data"
           :key="archive.year"
         >
         </archive-item>
@@ -36,7 +36,7 @@ export default {
     TopicList
   },
   computed: {
-    ...mapState(['archiveResp'])
+    ...mapState(['archiveList'])
   },
   methods: {
     ...mapActions(['fetchArchivesBy']),
@@ -49,7 +49,7 @@ export default {
     }
     this.fetchArchivesBy(query)
     this.assignTopicQuery(query)
-    // console.log('archives:', this.archiveResp)
+    // console.log('archives:', this.archiveList)
   }
 }
 </script>

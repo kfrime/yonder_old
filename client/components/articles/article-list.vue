@@ -28,7 +28,7 @@ export default {
     Pagination
   },
   computed: {
-    ...mapState(['artResp', 'artQuery']),
+    ...mapState(['artList', 'artQuery']),
     ...mapGetters(['articles']),
     hasArticles () {
       return typeof this.articles !== "undefined" && this.articles.length !== 0

@@ -64,9 +64,9 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 
 export default {
   computed: {
-    ...mapState(['artResp', 'artQuery']),
+    ...mapState(['artList', 'artQuery']),
     page () {
-      const page = this.artResp.page
+      const page = this.artList.page
       if (page === undefined) {
         return {
           pages: 0,

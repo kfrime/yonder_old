@@ -7,7 +7,7 @@
           <div class="card-body summary-body summary-topic">
             <div class="summary-header f-16 pb-1">
               <p class="mb-1">搜索：<span class="text-dark mx-1"><strong>{{search}}</strong></span></p>
-              <p class="mb-0 mt-1">找到<span class="text-primary mx-2">{{artResp.page.count}}</span>篇</p>
+              <p class="mb-0 mt-1">找到<span class="text-primary mx-2">{{artList.page.count}}</span>篇</p>
             </div>
           </div>
         </div>
@@ -43,7 +43,7 @@ export default {
     TagList
   },
   computed: {
-    ...mapState(['artQuery', 'artResp']),
+    ...mapState(['artQuery', 'artList']),
     searched () {
       return typeof this.search !== "undefined" && this.search !== '';
     }

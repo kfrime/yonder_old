@@ -22,7 +22,7 @@ export default {
     TopicItem
   },
   computed: {
-    ...mapState(['topicResp', 'topicQuery']),
+    ...mapState(['topicList', 'topicQuery']),
     ...mapGetters(['topics'])
   },
   methods: {

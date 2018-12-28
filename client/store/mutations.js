@@ -2,18 +2,18 @@
 
 export default {
   fillArticles (state, resp) {
-    state.artResp = resp
+    state.artList = resp
     // console.log('fillArticles', resp)
   },
   fillTopics (state, resp) {
-    state.topicResp = resp
+    state.topicList = resp
   },
   fillTags (state, resp) {
     // console.log('fillTags', resp)
-    state.tagResp = resp
+    state.tagList = resp
   },
   fillArchives (state, resp) {
-    state.archiveResp = resp
+    state.archiveList = resp
   },
   assignArticle (state, article) {
     // 只获取一篇文章

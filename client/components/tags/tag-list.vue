@@ -25,7 +25,7 @@ export default {
     TagItem
   },
   computed: {
-    ...mapState(['tagResp', 'tagQuery']),
+    ...mapState(['tagList', 'tagQuery']),
     ...mapGetters(['tags'])
   },
   methods: {
