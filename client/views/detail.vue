@@ -46,7 +46,7 @@
               <router-link
                 :to="`/articles/${article.pre.id}`"
                 class="f-16 article-title"
-              ><i class="fa fa-chevron-left mx-1 text-secondary"></i>{{article.pre.title}}
+              ><i class="fa fa-arrow-circle-left mx-1 text-secondary"></i>{{article.pre.title}}
               </router-link>
             </div>
 
@@ -54,7 +54,7 @@
               <router-link
                 :to="`/articles/${article.next.id}`"
                 class="f-16 article-title d-md-block"
-              >{{article.next.title}}<i class="fa fa-chevron-right mx-1 text-secondary"></i>
+              >{{article.next.title}}<i class="fa fa-arrow-circle-right mx-1 text-secondary"></i>
               </router-link>
             </div>
           </div>

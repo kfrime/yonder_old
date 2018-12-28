@@ -2,7 +2,7 @@
   <div class="container">
     <div class="row">
       <div class="col-lg-8 main-module">
-        <div class="mb-2">
+        <div class="archive-header">
           共<span class="text-danger mx-1">{{archiveResp.count}}</span>篇
         </div>
         <archive-item
@@ -54,4 +54,11 @@ export default {
 }
 </script>
 
-
+<style>
+.archive-header {
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+}
+</style>
