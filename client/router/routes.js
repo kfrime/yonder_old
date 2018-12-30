@@ -30,5 +30,10 @@ export default [
     name: 'archive-page',
     path: '/archives/',
     component: () => import('../views/archive.vue')
+  },
+  {
+    name: 'about-blog',
+    path: '/about/',
+    component: () => import('../views/about.vue')
   }
 ]

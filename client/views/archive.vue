@@ -17,7 +17,7 @@
       <div class="col-lg-4 sidebar-module">
         <div class="col-md-offset-2 col-md-10">
           <!-- 主题列表 -->
-          <topic-list></topic-list>
+          <!--<topic-list></topic-list>-->
         </div>
       </div>
       <!-- end sidebar -->

@@ -22,7 +22,7 @@
             <!--<a class="nav-link" href="#">归档</a>-->
           </li>
           <li class="nav-item pr-2">
-            <a class="nav-link" href="#">关于</a>
+            <router-link to="/about/" class="nav-link">关于</router-link>
           </li>
         </ul>
 

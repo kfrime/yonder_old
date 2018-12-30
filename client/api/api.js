@@ -178,4 +178,9 @@ export default {
     const resp = handleRequest(request.get(url))
     return resp
   },
+  getBlogAbout () {
+    const url = '/api/about/'
+    const resp = handleRequest(request.get(url))
+    return resp
+  }
 }

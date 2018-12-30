@@ -161,5 +161,15 @@ export default {
       .catch(err => {
         handleError(err)
       })
+  },
+  fetchBlogAbout ({ commit }) {
+    api.getBlogAbout()
+      .then(data => {
+        // console.log('fetchAllTopics', data)
+        commit('assignArticle', data)
+      })
+      .catch(err => {
+        handleError(err)
+      })
   }
 }
