@@ -1,3 +1,7 @@
+# private config
+blog_server_django/conf/base.py
+logs/
+
 # pycharm
 .idea/
 
