@@ -19,7 +19,6 @@ LOGGING = {
             '()': 'django.utils.log.RequireDebugTrue',
         }
     },
-
     'handlers': {
         'console': {
             'level': 'DEBUG',
