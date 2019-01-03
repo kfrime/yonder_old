@@ -13,12 +13,11 @@ class LogMiddleware(MiddlewareMixin):
         visible_types = {'application/json', 'text/plain', 'text/html', 'text/xml'}
 
         ct = request.content_type
-        body = request.body
         try:
             if ct in visible_types:
-                body = body.decode('utf-8')
+                body = request.body.decode('utf-8')
             else:
-                body = body[:20] if body else 'None'
+                body = request.body[:20]
         except Exception as e:
             body = str(e)
 
