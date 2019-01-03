@@ -1,23 +1,24 @@
 # -*- coding:utf-8 -*-
 
-import hashlib
 from django.db import models
 from django.contrib.auth.models import User
 from mptt.models import MPTTModel, TreeForeignKey
+
+from utils.const import c_visible as v
 
 
 class Tag(models.Model):
     """
     文章的标签
     """
-    VISIBLE = (
-        (0, '不可见'),
-        (1, '可见'),
+    _VISIBLE = (
+        (v.NOT_VISIBLE, '不可见'),
+        (v.IS_VISIBLE, '可见'),
     )
     name = models.CharField('文章标签', max_length=20)
     slug = models.SlugField(unique=True)
     desc = models.TextField('描述', max_length=255, default='')
-    visible = models.SmallIntegerField('博客列表中是否可见', default=0, choices=VISIBLE)
+    visible = models.SmallIntegerField('博客列表中是否可见', default=v.NOT_VISIBLE, choices=_VISIBLE)
 
     class Meta:
         verbose_name = '标签'
@@ -30,14 +31,14 @@ class Topic(MPTTModel):
     """
     文章分类、主题
     """
-    VISIBLE = (
-        (0, '不可见'),
-        (1, '可见'),
+    _VISIBLE = (
+        (v.NOT_VISIBLE, '不可见'),
+        (v.IS_VISIBLE, '可见'),
     )
     name = models.CharField('文章分类', max_length=20)
     slug = models.SlugField(unique=True)
     desc = models.TextField('此分类的描述', max_length=256, default='')
-    visible = models.SmallIntegerField('博客列表中是否可见', default=0, choices=VISIBLE)
+    visible = models.SmallIntegerField('博客列表中是否可见', default=v.NOT_VISIBLE, choices=_VISIBLE)
 
     # 用于构建多级分类树
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children',
@@ -54,9 +55,9 @@ class Article(models.Model):
     """
     文章内容
     """
-    VISIBLE = (
-        (0, '不可见'),
-        (1, '可见'),
+    _VISIBLE = (
+        (v.NOT_VISIBLE, '不可见'),
+        (v.IS_VISIBLE, '可见'),
     )
     author = models.ForeignKey(User, on_delete=models.DO_NOTHING, verbose_name='作者')
     title = models.CharField(max_length=150, verbose_name='文章标题')
@@ -66,7 +67,7 @@ class Article(models.Model):
     text = models.TextField(verbose_name='文章内容')
     ctime = models.DateTimeField(verbose_name='创建时间', auto_now_add=True)
     utime = models.DateTimeField(verbose_name='更新时间', auto_now=True)
-    visible = models.SmallIntegerField('博客列表中是否可见', default=0, choices=VISIBLE)
+    visible = models.SmallIntegerField('博客列表中是否可见', default=v.NOT_VISIBLE, choices=_VISIBLE)
 
     # 文章和主题是多对一的关系
     topic = models.ForeignKey(Topic, on_delete=models.DO_NOTHING,  verbose_name='文章分类')
