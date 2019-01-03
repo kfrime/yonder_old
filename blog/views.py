@@ -62,3 +62,21 @@ class TopicAPIView(viewsets.ReadOnlyModelViewSet):
     def get_queryset(self):
         return Topic.objects.annotate(total=Count('article')).filter(total__gt=0)
 
+
+class TagAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Tag.objects.exclude(article__isnull=True).annotate(total=Count('article')).order_by('id')
+    serializer_class = TagSerializer
+    pagination_class = BigPagination
+
+    def get_queryset(self):
+        article_id = self.request.query_params.get('article', None)
+
+        qs = self.queryset
+        if article_id:
+            article_id = int(article_id)
+            qs = self.queryset.filter(article=article_id)
+
+        return qs
+
+
+
