@@ -21,10 +21,43 @@ from .serializers import (
 )
 
 
+class SmallPagination(PageNumberPagination):
+    page_size = 8
+
+    def get_paginated_response(self, data):
+        _next = self.page.next_page_number() if self.page.has_next() else None
+        _pre = self.page.previous_page_number() if self.page.has_previous() else None
+        _count = self.page.paginator.count
+        _size = self.page_size
+
+        _pages = _count // _size if _count % _size == 0 else _count // _size + 1
+
+        page = OrderedDict([
+            ('count', _count),
+            # ('last', self.page.paginator.count),
+            # ('offset', _size),
+            ('pages', _pages),
+            ('pre', _pre),
+            ('current', self.page.number),
+            ('next', _next),
+            # ('nextLink', self.get_next_link()),
+            # ('preLink', self.get_previous_link())
+        ])
+
+        return Response(OrderedDict([
+            ('page', page),
+            ('data', data)
+        ]))
+
+
+class BigPagination(SmallPagination):
+    page_size = 200
+
+
 class TopicAPIView(viewsets.ReadOnlyModelViewSet):
     queryset = Topic.objects.exclude(visible=v.NOT_VISIBLE).order_by('id')
     serializer_class = TopicSerializer
-    # pagination_class = BigPagination
+    pagination_class = BigPagination
 
     def get_queryset(self):
         return Topic.objects.annotate(total=Count('article')).filter(total__gt=0)
