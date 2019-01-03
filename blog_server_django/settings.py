@@ -36,6 +36,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
+    # 其他组件
+    'mptt',     # 树形层次结构
+    'rest_framework',
+
     'blog',
 ]
 
