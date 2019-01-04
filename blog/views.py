@@ -50,31 +50,35 @@ class BigPagination(SmallPagination):
     page_size = 200
 
 
+# 如果某主题/标签不可见，则其下的文章也不可见
+# 某主题/标签下的可见文章总数大于0，该主题才会被展示出来
+# 要结合某篇文章的主题和标签是否可见来决定该文章是否可见
+# 文章可显示：其本身，其主题，其关联的标签都要是可见的
+
 class TopicAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Topic.objects.exclude(
-        visible=v.NOT_VISIBLE
-    ).exclude(
-        article__visible=v.NOT_VISIBLE
+    # 只统计可显示的文章总数，某主题下有可显示的文章时，该主题才会展示出来
+    queryset = Topic.objects.filter(
+        visible=v.IS_VISIBLE,
+        article__visible=v.IS_VISIBLE,
+        article__tags__visible=v.IS_VISIBLE
     ).annotate(
         total=Count('article')
-    ).filter(
-        total__gt=0
-    ).order_by('id')
+    ).filter(total__gt=0).order_by('id')
 
     serializer_class = TopicSerializer
     pagination_class = BigPagination
 
 
 class TagAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Tag.objects.exclude(
-        visible=v.NOT_VISIBLE
-    ).exclude(
-        article__visible=v.NOT_VISIBLE
+    # 只统计可显示的文章总数，某标签下有可显示的文章时，该标签才会展示出来
+    queryset = Tag.objects.filter(
+        visible=v.IS_VISIBLE,
+        article__visible=v.IS_VISIBLE,
+        article__topic__visible=v.IS_VISIBLE
     ).annotate(
         total=Count('article')
-    ).filter(
-        total__gt=0
-    ).order_by('id')
+    ).filter(total__gt=0).order_by('id')
+
     serializer_class = TagSerializer
     pagination_class = BigPagination
 
