@@ -40,8 +40,8 @@ class TagSerializer(serializers.ModelSerializer):
 class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer()
     topic = SimpleTopicSerializer()
-    ctime = serializers.DateTimeField(source='ctime', format="%Y-%m-%d %H:%M:%S")
-    utime = serializers.DateTimeField(source='utime', format="%Y-%m-%d %H:%M:%S")
+    ctime = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
+    utime = serializers.DateTimeField(format="%Y-%m-%d %H:%M:%S")
 
     class Meta:
         model = Article
