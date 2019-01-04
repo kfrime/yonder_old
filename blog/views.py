@@ -150,14 +150,8 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
 
         _next = instance.get_next()
         _pre = instance.get_pre()
-        article['next'] = {
-            'id': _next.id,
-            'title': _next.title
-        } if _next else None
-        article['pre'] = {
-            'id': _pre.id,
-            'title': _pre.title
-        } if _pre else None
+        article['next'] = SmallArticleSerializer(_next).data if _next else None
+        article['pre'] = SmallArticleSerializer(_pre).data if _pre else None
         return Response(article)
 
     @action(detail=False, methods=['get'], url_path='search')

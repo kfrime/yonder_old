@@ -57,7 +57,7 @@ class SimpleArticleSerializer(ArticleSerializer):
 
 class SmallArticleSerializer(ArticleSerializer):
     """用于展示文章列表，所以不用序列化文章内容"""
-    date = serializers.DateTimeField(source='create_time', format="%m-%d")
+    date = serializers.DateTimeField(source='ctime', format="%m-%d")
 
     class Meta:
         model = Article
