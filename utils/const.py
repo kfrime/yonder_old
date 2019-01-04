@@ -2,7 +2,7 @@
 
 
 class c_visible(object):
-    NOT_VISIBLE = 0
-    IS_VISIBLE = 1
-
+    """内容是否可以在博客列表中显示出来"""
+    NOT_VISIBLE = 0     # 不可见
+    IS_VISIBLE = 1      # 可见
 

@@ -2,11 +2,7 @@
 
 import os
 from collections import OrderedDict
-
-from django.shortcuts import render, get_object_or_404
-from django.views import generic
-from django.conf import settings
-from django.core.cache import cache
+import markdown
 from django.db.models.aggregates import (Count, Q)
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
@@ -55,16 +51,30 @@ class BigPagination(SmallPagination):
 
 
 class TopicAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Topic.objects.exclude(visible=v.NOT_VISIBLE).order_by('id')
+    queryset = Topic.objects.exclude(
+        visible=v.NOT_VISIBLE
+    ).exclude(
+        article__visible=v.NOT_VISIBLE
+    ).annotate(
+        total=Count('article')
+    ).filter(
+        total__gt=0
+    ).order_by('id')
+
     serializer_class = TopicSerializer
     pagination_class = BigPagination
 
-    def get_queryset(self):
-        return Topic.objects.annotate(total=Count('article')).filter(total__gt=0)
-
 
 class TagAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Tag.objects.exclude(article__isnull=True).annotate(total=Count('article')).order_by('id')
+    queryset = Tag.objects.exclude(
+        visible=v.NOT_VISIBLE
+    ).exclude(
+        article__visible=v.NOT_VISIBLE
+    ).annotate(
+        total=Count('article')
+    ).filter(
+        total__gt=0
+    ).order_by('id')
     serializer_class = TagSerializer
     pagination_class = BigPagination
 
@@ -77,6 +87,89 @@ class TagAPIView(viewsets.ReadOnlyModelViewSet):
             qs = self.queryset.filter(article=article_id)
 
         return qs
+
+
+class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Article.objects.exclude(
+        topic__visible=v.NOT_VISIBLE
+    ).exclude(
+        tags__visible=v.NOT_VISIBLE
+    ).order_by('-id')
+    serializer_class = ArticleSerializer
+    pagination_class = SmallPagination
+
+    def get_queryset(self):
+        topic_id = self.request.query_params.get('topic', None)
+        tag_id = self.request.query_params.get('tag', None)
+        search = self.request.query_params.get('search', None)
+
+        qs = self.queryset
+        if topic_id:
+            topic_id = int(topic_id)
+            qs = self.queryset.filter(topic=topic_id)
+
+        if tag_id:
+            tag_id = int(tag_id)
+            qs = self.queryset.filter(tags=tag_id)
+
+        if search:
+            qs = Article.objects.filter(title__icontains=search)
+
+        return qs
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(self.get_queryset())
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = SimpleArticleSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = SimpleArticleSerializer(queryset, many=True)
+        return Response(serializer.data)
+
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        serializer = self.get_serializer(instance)
+        article = serializer.data
+        if not article:
+            return Response({})
+
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+            # TocExtension(slugify=slugify),
+        ])
+        article['text'] = md.convert(article['text'])
+        article['toc'] = md.toc  # 目录
+
+        _next = instance.get_next()
+        _pre = instance.get_pre()
+        article['next'] = {
+            'id': _next.id,
+            'title': _next.title
+        } if _next else None
+        article['pre'] = {
+            'id': _pre.id,
+            'title': _pre.title
+        } if _pre else None
+        return Response(article)
+
+    @action(detail=False, methods=['get'], url_path='search')
+    def search(self, request, *args, **kwargs):
+        q = self.request.query_params.get('q', None)
+        if not q:
+            return Response({})
+
+        qs = Article.objects.filter(Q(title__icontains=q) | Q(slug__icontains=q))
+        page = self.paginate_queryset(qs)
+        if page is not None:
+            serializer = SimpleArticleSerializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = SimpleArticleSerializer(qs, many=True)
+        return Response(serializer.data)
 
 
 

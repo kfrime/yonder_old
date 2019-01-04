@@ -7,6 +7,7 @@ from . import views
 api_router = routers.DefaultRouter()
 api_router.register(r'topics', views.TopicAPIView, base_name='api_topics')
 api_router.register(r'tags', views.TagAPIView, base_name='api_tags')
+api_router.register(r'articles', views.ArticleAPIView, base_name='api_articles')
 
 urlpatterns = [
     path('api/', include(api_router.urls)),
