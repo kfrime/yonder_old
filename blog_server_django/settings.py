@@ -119,3 +119,24 @@ STATIC_URL = '/static/'
 
 from .conf import *
 
+
+# enable CORS
+# https://stackoverflow.com/questions/35760943/how-can-i-enable-cors-on-django-rest-framework
+if DEBUG:
+    INSTALLED_APPS += [
+        'corsheaders'
+    ]
+    MIDDLEWARE += [
+        # enable cors
+        'corsheaders.middleware.CorsMiddleware',
+        'django.middleware.common.CommonMiddleware',
+    ]
+    CORS_ORIGIN_ALLOW_ALL = True
+    CORS_ALLOW_CREDENTIALS = True
+    CORS_ORIGIN_WHITELIST = (
+        'localhost:8000',
+    )
+    CORS_ORIGIN_REGEX_WHITELIST = (
+        'localhost:8000',
+    )
+
