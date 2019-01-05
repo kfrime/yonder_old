@@ -9,7 +9,12 @@
               <h1 class="f-17 my-2 text-dark">{{article.title}}</h1>
             </div>
             <div class="text-center py-2 detail-summary">
-              <span class="mx-2">{{article.author.name}}</span>创建于：{{article.ctime}}</div>
+              <span>
+                <i class="fas fa-user mx-1"></i>{{article.author.name}}<i class="mr-1"></i>
+                <i class="far fa-calendar-check mx-1"></i>{{article.utime}}
+              </span>
+            </div>
+              <!--<span class="mx-2">{{article.author.name}}</span>创建于：{{article.ctime}}</div>-->
             <!-- 文章内容 -->
             <div class="pt-3 detail-text" v-html="article.text"></div>
           </div>

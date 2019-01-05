@@ -16,8 +16,9 @@
       <!-- sidebar -->
       <div class="col-lg-4 sidebar-module">
         <div class="col-md-offset-2 col-md-10">
-          <!-- 主题列表 -->
-          <!--<topic-list></topic-list>-->
+           <!--主题列表-->
+          <topic-list></topic-list>
+          <tag-list></tag-list>
         </div>
       </div>
       <!-- end sidebar -->
@@ -29,9 +30,11 @@
 import { mapState, mapMutations, mapActions } from 'vuex'
 import TopicList from '../components/topics/topic-list.vue'
 import ArchiveItem from '../components/archives/archive-item.vue'
+import TagList from '../components/tags/tag-list.vue'
 
 export default {
   components: {
+    TagList,
     ArchiveItem,
     TopicList
   },
@@ -40,7 +43,7 @@ export default {
   },
   methods: {
     ...mapActions(['fetchArchivesBy']),
-    ...mapMutations(['assignTopicQuery'])
+    ...mapMutations(['assignTopicQuery', 'assignTagQuery'])
   },
   mounted () {
     const query = {
@@ -49,6 +52,7 @@ export default {
     }
     this.fetchArchivesBy(query)
     this.assignTopicQuery(query)
+    this.assignTagQuery(query)
     // console.log('archives:', this.archiveList)
   }
 }
