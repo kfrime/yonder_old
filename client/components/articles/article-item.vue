@@ -3,7 +3,10 @@
     <div class="card article-card">
       <div class="card-body">
         <div class="text-muted f-12">
-          <span>{{article.author.name}} 创建于：{{article.ctime}}</span>
+          <span>
+            <i class="fas fa-user mx-1"></i>{{article.author.name}}<i class="mr-1"></i>
+            <i class="far fa-calendar-check mx-1"></i>{{article.ctime}}
+          </span>
         </div>
         <router-link
           :to="`/articles/${article.id}`"

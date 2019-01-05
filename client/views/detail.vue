@@ -24,7 +24,11 @@
               <h1 class="f-17 my-2 text-dark">{{article.title}}</h1>
             </div>
             <div class="text-center py-2 detail-summary">
-              <span class="mx-2">{{article.author.name}}</span>创建于：{{article.ctime}}</div>
+              <span>
+                <i class="fas fa-user mx-1"></i>{{article.author.name}}<i class="mr-1"></i>
+                <i class="far fa-calendar-check mx-1"></i>{{article.ctime}}
+              </span>
+            </div>
             <!-- 文章内容 -->
             <div class="pt-3 detail-text" v-html="article.text"></div>
           </div>
@@ -47,7 +51,7 @@
               <router-link
                 :to="`/articles/${article.pre.id}`"
                 class="f-16 article-title"
-              ><i class="fa fa-arrow-circle-left mx-1 text-secondary"></i>{{article.pre.title}}
+              ><i class="fas fa-angle-double-left mx-1 text-secondary"></i>{{article.pre.title}}
               </router-link>
             </div>
 
@@ -55,7 +59,7 @@
               <router-link
                 :to="`/articles/${article.next.id}`"
                 class="f-16 article-title d-md-block"
-              >{{article.next.title}}<i class="fa fa-arrow-circle-right mx-1 text-secondary"></i>
+              >{{article.next.title}}<i class="fas fa-angle-double-right mx-1 text-secondary"></i>
               </router-link>
             </div>
           </div>
