@@ -11,7 +11,8 @@
         >{{article.title}}</router-link>
         <p class="card-text my-0">{{article.summary}}</p>
         <div class="text-muted f-12 py-md-0">
-          <router-link :to="`/topics/${article.topic.id}`" title="主题" class="card-link article-topic">
+          <i class="text-danger fas fa-book"></i>
+          <router-link :to="`/topics/${article.topic.id}/${article.topic.slug}`" title="主题" class="card-link text-danger">
             {{article.topic.name}}
           </router-link>
         </div>
