@@ -173,4 +173,61 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
         return Response(serializer.data)
 
 
+class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Article.objects.filter(
+        topic__visible=v.IS_VISIBLE
+    ).exclude(
+        tags__visible=v.NOT_VISIBLE
+    ).order_by('-id')
 
+    # queryset = Article.objects.all().order_by('-id')
+    serializer_class = SmallArticleSerializer
+
+    def get_queryset(self):
+        topic_id = self.request.query_params.get('topic', None)
+
+        qs = self.queryset
+        if topic_id:
+            topic_id = int(topic_id)
+            qs = self.queryset.filter(topic=topic_id)
+
+        return qs
+
+    def list(self, request, *args, **kwargs):
+        """
+        [
+            {
+                year: 2018,
+                total: 10,
+                data: [
+                    {1, 'a', '2018-10-20'},
+                    {2, 'b', '2018-10-21'}
+                ]
+            },
+        ]
+        """
+        queryset = self.filter_queryset(self.get_queryset())
+        archives = dict()
+        for article in queryset:
+            year = str(article.ctime.year)
+            if year not in archives:
+                archives[year] = list()
+
+            archives[year].append(article)
+
+        sort = OrderedDict(sorted(archives.items(), key=lambda t: t[0], reverse=True))
+        results = list()
+        for year, articleList in sort.items():
+            # if year not in results:
+            articles = {
+                'year': year,
+                'total': len(articleList),
+                'articles': SmallArticleSerializer(articleList, many=True).data
+            }
+            results.append(articles)
+
+        resp = {
+            'count': len(queryset),
+            'data': results
+        }
+        return Response(resp)
