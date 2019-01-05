@@ -30,12 +30,12 @@ class SmallPagination(PageNumberPagination):
 
         page = OrderedDict([
             ('count', _count),
-            # ('last', self.page.paginator.count),
-            # ('offset', _size),
             ('pages', _pages),
             ('pre', _pre),
             ('current', self.page.number),
             ('next', _next),
+            # ('last', self.page.paginator.count),
+            # ('offset', _size),
             # ('nextLink', self.get_next_link()),
             # ('preLink', self.get_previous_link())
         ])
@@ -60,7 +60,9 @@ class TopicAPIView(viewsets.ReadOnlyModelViewSet):
     queryset = Topic.objects.filter(
         visible=v.IS_VISIBLE,
         article__visible=v.IS_VISIBLE,
-        article__tags__visible=v.IS_VISIBLE
+        # article__tags__visible=v.IS_VISIBLE      # 多对多关系的数据会有重复　
+    ).exclude(
+        article__tags__visible=v.NOT_VISIBLE
     ).annotate(
         total=Count('article')
     ).filter(total__gt=0).order_by('id')
@@ -94,8 +96,9 @@ class TagAPIView(viewsets.ReadOnlyModelViewSet):
 
 
 class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Article.objects.exclude(
-        topic__visible=v.NOT_VISIBLE
+    queryset = Article.objects.filter(
+        topic__visible=v.IS_VISIBLE
+        # tags__visible=v.IS_VISIBLE      # 多对多关系的数据会有重复　
     ).exclude(
         tags__visible=v.NOT_VISIBLE
     ).order_by('-id')
