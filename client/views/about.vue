@@ -64,12 +64,6 @@ export default {
 </script>
 
 <style>
-.article-location {
-  background: #f4f4f4;
-}
-.location-item {
-  color: #00a1d6;
-}
 .detail-card {
   background: #f4f4f4;
   border: none;
@@ -82,39 +76,5 @@ export default {
 }
 .detail-text {
 
-}
-
-.article-extend {
-  background-color: #f8f9fa;
-  padding-top: 0.5rem;
-  margin-bottom: 1rem;
-}
-.simple-tag-list {
-  padding: 0.25rem 0.5rem;
-}
-
-/* fix float-right not work well */
-.neighbor-articles:before,
-.neighbor-articles:after {
-  content: "";
-  display: table;
-}
-.neighbor-articles:after {
-  clear: both;
-}
-.neighbor-articles {
-  display: -ms-flexbox;
-  /*display: flex;*/
-  -ms-flex-wrap: wrap;
-  flex-wrap: wrap;
-  /*padding: 0.75rem 0;*/
-  padding: 0.5rem 0.5rem;
-  /*margin-bottom: 1rem;*/
-  list-style: none;
-  background-color: #e9ecef;
-  border-radius: 0.25rem;
-}
-.article-title {
-  color: #00a1d6;
 }
 </style>

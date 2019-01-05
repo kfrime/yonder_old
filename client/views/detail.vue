@@ -9,7 +9,7 @@
               <router-link to="/" class="location-item">首页</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link :to="`/topics/${article.topic.id}`" class="location-item">
+              <router-link :to="`/topics/${article.topic.id}/${article.topic.slug}`" class="location-item">
                 {{article.topic.name}}
               </router-link>
             </li>

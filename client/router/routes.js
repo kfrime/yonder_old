@@ -11,7 +11,7 @@ export default [
     component: () => import('../views/detail.vue')
   },
   {
-    path: '/topics/:id',
+    path: '/topics/:id/:slug',
     props: true,
     component: () => import('../views/topic.vue')
   },

@@ -37,7 +37,7 @@ import TopicList from '../components/topics/topic-list.vue'
 import TagList from '../components/tags/tag-list.vue'
 
 export default {
-  props: ['id'],
+  props: ['id', 'slug'],
   components: {
     ArticleList,
     TopicList,
