@@ -13,16 +13,15 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item pr-2 active">
             <router-link to="/" class="nav-link">
-              <span>首页</span>
+              <span><i class="fas fa-home mr-1"></i>首页</span>
               <span class="sr-only">(current)</span>
             </router-link>
           </li>
           <li class="nav-item pr-2">
-            <router-link to="/archives/" class="nav-link">归档</router-link>
-            <!--<a class="nav-link" href="#">归档</a>-->
+            <router-link to="/archives/" class="nav-link"><i class="fas fa-folder-open mr-1"></i>归档</router-link>
           </li>
           <li class="nav-item pr-2">
-            <router-link to="/about/" class="nav-link">关于</router-link>
+            <router-link to="/about/" class="nav-link"><i class="fas fa-paw mr-1"></i>关于</router-link>
           </li>
         </ul>
 

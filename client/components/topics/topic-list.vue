@@ -2,7 +2,7 @@
   <!--<div class="col-md-offset-2 col-md-10">-->
     <!-- 主题列表 -->
     <div class="topic-list">
-      <div class="topic-title"><i class="fas fa-book mx-1"></i>文章主题</div>
+      <div class="topic-title"><i class="fas fa-book mx-1 text-secondary"></i>文章主题</div>
 
       <topic-item
         :topic = "topic"

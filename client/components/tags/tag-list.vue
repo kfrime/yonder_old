@@ -5,7 +5,7 @@
 <template>
   <!--<div class="col-md-offset-2 col-md-10">-->
     <div class="tag-list">
-      <div class="tag-title"><i class="fas fa-tags mx-1"></i>文章标签</div>
+      <div class="tag-title"><i class="fas fa-tags mx-1 text-secondary"></i>文章标签</div>
 
       <tag-item
         :tag = "tag"

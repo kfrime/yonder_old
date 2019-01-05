@@ -37,7 +37,7 @@
         <div class="article-extend">
           <!-- tag list -->
           <div class="simple-tag-list">
-            <i class="fas fa-tags mx-1"></i>
+            <i class="fas fa-tags mx-1 text-secondary"></i>
             <simple-tag-item
               :tag = "tag"
               v-for="tag in tags"
