@@ -194,18 +194,6 @@ class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
         return qs
 
     def list(self, request, *args, **kwargs):
-        """
-        [
-            {
-                year: 2018,
-                total: 10,
-                data: [
-                    {1, 'a', '2018-10-20'},
-                    {2, 'b', '2018-10-21'}
-                ]
-            },
-        ]
-        """
         queryset = self.filter_queryset(self.get_queryset())
         archives = dict()
         for article in queryset:
@@ -218,7 +206,6 @@ class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
         sort = OrderedDict(sorted(archives.items(), key=lambda t: t[0], reverse=True))
         results = list()
         for year, articleList in sort.items():
-            # if year not in results:
             articles = {
                 'year': year,
                 'total': len(articleList),
@@ -231,3 +218,25 @@ class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
             'data': results
         }
         return Response(resp)
+
+
+class AboutAPIView(viewsets.ReadOnlyModelViewSet):
+    queryset = Article.objects.filter(slug='about-this-blog')
+    serializer_class = ArticleSerializer
+
+    def list(self, request, *args, **kwargs):
+        instance = self.queryset[0] if self.queryset else None
+        serializer = self.get_serializer(instance)
+        article = serializer.data
+        if not article:
+            return Response({})
+
+        md = markdown.Markdown(extensions=[
+            'markdown.extensions.extra',
+            'markdown.extensions.codehilite',
+            'markdown.extensions.toc',
+            # TocExtension(slugify=slugify),
+        ])
+        article['text'] = md.convert(article['text'])
+        article['toc'] = md.toc  # 目录
+        return Response(article)
