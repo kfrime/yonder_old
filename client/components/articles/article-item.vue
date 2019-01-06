@@ -8,14 +8,18 @@
             <i class="far fa-calendar-check mx-1"></i>{{article.ctime}}
           </span>
         </div>
+        <!--:to="`/articles/${article.id}/${article.slug}`"-->
         <router-link
-          :to="`/articles/${article.id}/${article.slug}`"
+          :to="{name: 'detail', params: { id: article.id, slug: article.slug }}"
           class="card-title card-link f-16 article-title"
         >{{article.title}}</router-link>
         <p class="card-text my-0">{{article.summary}}</p>
         <div class="text-muted f-12 py-md-0">
           <i class="text-danger fas fa-book"></i>
-          <router-link :to="`/topics/${article.topic.id}/${article.topic.slug}`" title="主题" class="card-link text-danger">
+          <!--<router-link :to="`/topics/${article.topic.id}/${article.topic.slug}`" -->
+          <router-link
+            :to="{name: 'topic', params: { id: article.topic.id, slug: article.topic.slug }}"
+            title="主题" class="card-link text-danger">
             {{article.topic.name}}
           </router-link>
         </div>

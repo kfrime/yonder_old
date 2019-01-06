@@ -1,6 +1,9 @@
 <template>
   <div class="sidebar-item">
-    <router-link :to="`/topics/${topic.id}/${topic.slug}`" class="btn round-btn sidebar-btn topic-btn">
+    <!--:to="`/topics/${topic.id}/${topic.slug}`" -->
+    <router-link
+      :to="{name: 'topic', params: { id: topic.id, slug: topic.slug }}"
+      class="btn round-btn sidebar-btn topic-btn">
       <span class="f-15">{{topic.name}}</span>
       <span class="badge f-12">{{topic.total}}</span>
     </router-link>

@@ -8,8 +8,9 @@
     <ul>
       <li v-for="art in archive.articles" class="archive-article-link py-1">
         <span class="text-secondary">{{art.date}}&nbsp;</span>
+        <!--:to="`/articles/${art.id}/${art.slug}`"-->
         <router-link
-          :to="`/articles/${art.id}/${art.slug}`"
+          :to="{ name: 'detail', params: { id: art.id, slug: art.slug }}"
           class="card-title card-link f-16 article-title"
         >{{art.title}}</router-link>
       </li>
