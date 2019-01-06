@@ -16,7 +16,7 @@ export default [
     component: () => import('../views/topic.vue')
   },
   {
-    path: '/tags/:id',
+    path: '/tags/:id/:slug',
     props: true,
     component: () => import('../views/tag.vue')
   },

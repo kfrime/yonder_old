@@ -31,50 +31,50 @@
 </template>
 
 <script>
-  import { mapState, mapActions, mapMutations } from 'vuex'
-  import ArticleList from '../components/articles/article-list.vue'
-  import TopicList from '../components/topics/topic-list.vue'
-  import TagList from '../components/tags/tag-list.vue'
+import { mapState, mapActions, mapMutations } from 'vuex'
+import ArticleList from '../components/articles/article-list.vue'
+import TopicList from '../components/topics/topic-list.vue'
+import TagList from '../components/tags/tag-list.vue'
 
-  export default {
-    props: ['id'],
-    components: {
-      ArticleList,
-      TopicList,
-      TagList
-    },
-    computed: {
-      ...mapState(['tag'])
-    },
-    methods: {
-      ...mapActions(['fetchOneTag']),
-      ...mapMutations(['assignArtQuery', 'assignTopicQuery', 'assignTagQuery'])
-    },
-    beforeRouteUpdate (to, from, next) {
-      // vue-router 复用同一组件，但是路由不一样时，这个会被触发，如： '/api/tags/:id'
-      const id = to.params.id
-      this.fetchOneTag(id)
-      this.assignArtQuery({
-        name: 'tag',
-        id: id
-      })
-      // console.log('beforeRouteUpdate, query:', id)
-      next()
-    },
-    mounted () {
-      this.fetchOneTag(this.id)
-      this.assignArtQuery({
-        name: 'tag',
-        id: this.id
-      })
-      this.assignTopicQuery({
-        name: 'all',
-        id: null
-      })
-      this.assignTagQuery({
-        name: 'all',
-        id: null
-      })
-    }
+export default {
+  props: ['id', 'slug'],
+  components: {
+    ArticleList,
+    TopicList,
+    TagList
+  },
+  computed: {
+    ...mapState(['tag'])
+  },
+  methods: {
+    ...mapActions(['fetchOneTag']),
+    ...mapMutations(['assignArtQuery', 'assignTopicQuery', 'assignTagQuery'])
+  },
+  beforeRouteUpdate (to, from, next) {
+    // vue-router 复用同一组件，但是路由不一样时，这个会被触发，如： '/api/tags/:id'
+    const id = to.params.id
+    this.fetchOneTag(id)
+    this.assignArtQuery({
+      name: 'tag',
+      id: id
+    })
+    // console.log('beforeRouteUpdate, query:', id)
+    next()
+  },
+  mounted () {
+    this.fetchOneTag(this.id)
+    this.assignArtQuery({
+      name: 'tag',
+      id: this.id
+    })
+    this.assignTopicQuery({
+      name: 'all',
+      id: null
+    })
+    this.assignTagQuery({
+      name: 'all',
+      id: null
+    })
   }
+}
 </script>
