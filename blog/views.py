@@ -19,7 +19,7 @@ from .serializers import (
 
 
 class SmallPagination(PageNumberPagination):
-    page_size = 2
+    page_size = 8
 
     def get_paginated_response(self, data):
         _next = self.page.next_page_number() if self.page.has_next() else None
