@@ -7,6 +7,24 @@ from mptt.models import MPTTModel, TreeForeignKey
 from utils.const import c_visible as v
 
 
+class ArticleVisibleManager(models.Manager):
+    """Adding extra Manager methods"""
+
+    def visible(self):
+        """
+        如果某主题/标签不可见，则其下的文章也不可见
+        文章可显示：其本身，其主题，其关联的标签都要是可见的
+        """
+        qs = super().get_queryset().filter(
+            visible=v.IS_VISIBLE,
+            topic__visible=v.IS_VISIBLE
+        ).exclude(
+            tags__visible=v.NOT_VISIBLE     # 多对多关系的数据会有重复
+        )
+
+        return qs
+
+
 class Tag(models.Model):
     """
     文章的标签
@@ -75,6 +93,9 @@ class Article(models.Model):
     # 文章和标签是多对多的关系
     tags = models.ManyToManyField(Tag, verbose_name='文章标签')
 
+    # 替换原来的objects
+    objects = ArticleVisibleManager()
+
     class Meta:
         verbose_name = '文章'
         ordering = ['-ctime']
@@ -88,9 +109,11 @@ class Article(models.Model):
         return s
 
     def get_pre(self):
-        return Article.objects.filter(id__lt=self.id).order_by('-id').first()
+        _pre = Article.objects.visible().filter(id__lt=self.id).order_by('-id').first()
+        return _pre
 
     def get_next(self):
-        return Article.objects.filter(id__gt=self.id).order_by('id').first()
+        _next = Article.objects.visible().filter(id__gt=self.id).order_by('id').first()
+        return _next
 
 

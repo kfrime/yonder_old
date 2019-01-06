@@ -3,7 +3,8 @@
 import os
 from collections import OrderedDict
 import markdown
-from django.db.models.aggregates import (Count, Q)
+from django.db.models.aggregates import (Count, )
+from django.db.models import Q
 from rest_framework import viewsets
 from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
@@ -96,12 +97,7 @@ class TagAPIView(viewsets.ReadOnlyModelViewSet):
 
 
 class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Article.objects.filter(
-        topic__visible=v.IS_VISIBLE
-        # tags__visible=v.IS_VISIBLE      # 多对多关系的数据会有重复　
-    ).exclude(
-        tags__visible=v.NOT_VISIBLE
-    ).order_by('-id')
+    queryset = Article.objects.visible().order_by('-id')
     serializer_class = ArticleSerializer
     pagination_class = SmallPagination
 
@@ -126,7 +122,6 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
-
         page = self.paginate_queryset(queryset)
         if page is not None:
             serializer = SimpleArticleSerializer(page, many=True)
@@ -173,13 +168,7 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
 
 
 class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
-    queryset = Article.objects.filter(
-        topic__visible=v.IS_VISIBLE
-    ).exclude(
-        tags__visible=v.NOT_VISIBLE
-    ).order_by('-id')
-
-    # queryset = Article.objects.all().order_by('-id')
+    queryset = Article.objects.visible().order_by('-id')
     serializer_class = SmallArticleSerializer
 
     def get_queryset(self):
