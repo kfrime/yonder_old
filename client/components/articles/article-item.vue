@@ -9,7 +9,7 @@
           </span>
         </div>
         <router-link
-          :to="`/articles/${article.id}`"
+          :to="`/articles/${article.id}/${article.slug}`"
           class="card-title card-link f-16 article-title"
         >{{article.title}}</router-link>
         <p class="card-text my-0">{{article.summary}}</p>

@@ -6,7 +6,7 @@ export default [
     component: () => import('../views/blog.vue')
   },
   {
-    path: '/articles/:id',
+    path: '/articles/:id/:slug',
     props: true,
     component: () => import('../views/detail.vue')
   },

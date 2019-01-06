@@ -49,7 +49,7 @@
           <div class="neighbor-articles mt-1">
             <div v-if="article.pre" class="float-left">
               <router-link
-                :to="`/articles/${article.pre.id}`"
+                :to="`/articles/${article.pre.id}/${article.pre.slug}`"
                 class="f-16 article-title"
               ><i class="fas fa-angle-double-left mx-1 text-secondary"></i>{{article.pre.title}}
               </router-link>
@@ -57,7 +57,7 @@
 
             <div v-if="article.next" class="float-right">
               <router-link
-                :to="`/articles/${article.next.id}`"
+                :to="`/articles/${article.next.id}/${article.next.slug}`"
                 class="f-16 article-title d-md-block"
               >{{article.next.title}}<i class="fas fa-angle-double-right mx-1 text-secondary"></i>
               </router-link>
