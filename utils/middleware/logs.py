@@ -23,11 +23,11 @@ class LogMiddleware(MiddlewareMixin):
 
         try:
             content = response.content.decode('utf-8')
-            content = content[:20] if content else 'None'
+            # content = content[:20] if content else 'None'
         except Exception as e:
             content = str(e)
 
-        info = '<request> "{method} {url}" "{content_type}" {status} \nbody: {body} \n{content}'.format(
+        info = '"{method} {url}" "{content_type}" {status} \nbody: {body} \nresp: {content}'.format(
             method=request.method, url=request.get_full_path(), content_type=ct, status=response.status_code,
             body=body, content=content
         )
