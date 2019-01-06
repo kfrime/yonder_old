@@ -6,10 +6,15 @@
         <div aria-label="breadcrumb" class="article-location">
           <div class="breadcrumb">
             <li class="breadcrumb-item">
-              <router-link to="/" class="location-item">首页</router-link>
+              <router-link :to="{ name: 'home' }" class="location-item">首页</router-link>
             </li>
             <li class="breadcrumb-item">
-              <router-link :to="`/topics/${article.topic.id}/${article.topic.slug}`" class="location-item">
+              <!--:to="`/topics/${article.topic.id}/${article.topic.slug}`"-->
+              <!--:to="{ name: 'topic', params: { id: article.topic.id, slug: article.topic.slug }}"-->
+              <router-link
+                :to="`/topics/${article.topic.id}/${article.topic.slug}`"
+                class="location-item"
+              >
                 {{article.topic.name}}
               </router-link>
             </li>
@@ -48,16 +53,18 @@
           <!-- pre and next article -->
           <div class="neighbor-articles mt-1">
             <div v-if="article.pre" class="float-left">
+              <!--:to="`/articles/${article.pre.id}/${article.pre.slug}`"-->
               <router-link
-                :to="`/articles/${article.pre.id}/${article.pre.slug}`"
+                :to="{ name: 'detail', params: { id: article.pre.id, slug: article.pre.slug }}"
                 class="f-16 article-title"
               ><i class="fas fa-angle-double-left mx-1 text-secondary"></i>{{article.pre.title}}
               </router-link>
             </div>
 
             <div v-if="article.next" class="float-right">
+              <!--:to="`/articles/${article.next.id}/${article.next.slug}`"-->
               <router-link
-                :to="`/articles/${article.next.id}/${article.next.slug}`"
+                :to="{ name: 'detail', params: { id: article.next.id, slug: article.next.slug }}"
                 class="f-16 article-title d-md-block"
               >{{article.next.title}}<i class="fas fa-angle-double-right mx-1 text-secondary"></i>
               </router-link>
@@ -87,12 +94,12 @@ export default {
     ...mapActions(['fetchOneArticle', 'fetchTagListBy'])
   },
   mounted () {
-    // console.log('article detail:', this.article)
     this.fetchOneArticle(this.id)
     this.fetchTagListBy({
       name: 'article',
       id: this.id
     })
+    // console.log('article detail:', this.article)
   },
   beforeRouteUpdate (to, from, next) {
     // vue-router 复用同一组件，但是路由不一样时，这个会被触发
