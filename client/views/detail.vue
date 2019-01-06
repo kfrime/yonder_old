@@ -4,7 +4,7 @@
       <div class="col-lg-9">
         <!-- 显示文章路径 -->
         <div aria-label="breadcrumb" class="article-location">
-          <div class="breadcrumb">
+          <ul class="breadcrumb">
             <li class="breadcrumb-item">
               <router-link :to="{ name: 'home' }" class="location-item">首页</router-link>
             </li>
@@ -19,7 +19,7 @@
               </router-link>
             </li>
             <li class="breadcrumb-item active" aria-current="page">{{article.title}}</li>
-          </div>
+          </ul>
         </div>
 
         <!-- 文章详情 -->
