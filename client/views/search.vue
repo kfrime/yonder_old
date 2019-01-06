@@ -52,6 +52,7 @@ export default {
     ...mapMutations(['assignArtQuery', 'assignTopicQuery', 'assignTagQuery'])
   },
   mounted () {
+    // console.log('search:', this.search)
     const query = {
       name: 'all',
       search: this.search

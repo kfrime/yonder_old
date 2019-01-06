@@ -78,7 +78,7 @@ export default {
   components: {
     SimpleTagItem
   },
-  props: ['id'],
+  props: ['id', 'slug'],
   computed: {
     ...mapState(['article']),
     ...mapGetters(['tags'])
