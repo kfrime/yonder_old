@@ -14,13 +14,12 @@
           class="card-title card-link f-16 article-title"
         >{{article.title}}</router-link>
         <p class="card-text my-0">{{article.summary}}</p>
-        <div class="text-muted f-12 py-md-0">
-          <i class="text-danger fas fa-book"></i>
+        <div class="article-topic text-muted f-12 py-md-0">
           <!--<router-link :to="`/topics/${article.topic.id}/${article.topic.slug}`" -->
           <router-link
             :to="{name: 'topic', params: { id: article.topic.id, slug: article.topic.slug }}"
-            title="主题" class="card-link text-danger">
-            {{article.topic.name}}
+            title="主题" class="card-link article-topic">
+            <i class="fas fa-book mx-1"></i>{{article.topic.name}}
           </router-link>
         </div>
       </div>
@@ -52,6 +51,6 @@ export default {
   color: #00a1d6;
 }
 .article-topic {
-  color: #a22b16;
+  color: #5788a2;
 }
 </style>
