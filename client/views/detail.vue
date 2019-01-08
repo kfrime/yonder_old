@@ -29,7 +29,7 @@
               <h1 class="f-17 my-2 text-dark">{{article.title}}</h1>
             </div>
             <div class="text-center py-2 detail-summary">
-              <span>
+              <span class="text-secondary">
                 <i class="fas fa-user mx-1"></i>{{article.author.name}}<i class="mr-1"></i>
                 <i class="far fa-calendar-check mx-1"></i>{{article.ctime}}
               </span>

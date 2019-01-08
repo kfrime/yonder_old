@@ -51,6 +51,7 @@ export default {
   color: #00a1d6;
 }
 .article-topic {
-  color: #5788a2;
+  color: #00928e;
+  /*color: #3ea943db;*/
 }
 </style>

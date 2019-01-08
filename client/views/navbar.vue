@@ -28,12 +28,13 @@
         <!-- 搜索框 -->
         <div class="navbar-form" role="search">
           <input
+            v-model="search"
             type="text"
             class="form-control py-0 search-bar"
             autofocus="autofocus"
             placeholder="搜索"
-            @keyup.enter.prevent="searchArticles"
           >
+          <!--@keyup.enter="searchArticles"-->
         </div>
       </div>
     </div>
@@ -43,6 +44,11 @@
 <script>
 
 export default {
+  data () {
+    return {
+      search: ''
+    }
+  },
   methods: {
     searchArticles (e) {
       const content = e.target.value.trim()
@@ -54,6 +60,26 @@ export default {
       e.target.value = ''
       const route = { name: 'search', params: { search: content }}
       this.$router.push(route)
+    },
+    sleep (ms) {
+      console.log('sleep', ms)
+      return new Promise(resolve => setTimeout(resolve, ms))
+    }
+  },
+  watch: {
+    search: {
+      handler () {
+        if (this.search === '') {
+          console.log('input can not be empty')
+          // const route = { name: 'home' }
+          // this.$router.push(route)
+          return
+        }
+        console.log(this.search)
+        const route = { name: 'search', params: { search: this.search }}
+        this.$router.push(route)
+        // this.sleep(500)    // 防止输入过快
+      }
     }
   }
 }
