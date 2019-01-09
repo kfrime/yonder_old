@@ -88,27 +88,21 @@ export default {
   props: ['id', 'slug'],
   computed: {
     ...mapState(['article']),
-    ...mapGetters(['tags'])
+    tags () {
+      return this.article.tags
+    }
   },
   methods: {
     ...mapActions(['fetchOneArticle', 'fetchTagListBy'])
   },
   mounted () {
     this.fetchOneArticle(this.id)
-    this.fetchTagListBy({
-      name: 'article',
-      id: this.id
-    })
     // console.log('article detail:', this.article)
   },
   beforeRouteUpdate (to, from, next) {
     // vue-router 复用同一组件，但是路由不一样时，这个会被触发
     const id = to.params.id
     this.fetchOneArticle(id)
-    this.fetchTagListBy({
-      name: 'article',
-      id: id
-    })
     next()
   }
 
