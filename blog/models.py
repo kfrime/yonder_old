@@ -7,6 +7,39 @@ from mptt.models import MPTTModel, TreeForeignKey
 from utils.const import c_visible as v
 
 
+class TopicVisibleManager(models.Manager):
+
+    def has_articles(self):
+        """
+        某主题下有可显示的文章时，该主题才会展示出来
+        文章可显示：其本身，其主题，其关联的标签都要是可见的
+        """
+        qs = super().get_queryset().filter(
+            visible=v.IS_VISIBLE,
+            article__visible=v.IS_VISIBLE,
+        ).exclude(
+            article__tags__visible=v.NOT_VISIBLE        # 多对多关系的数据会有重复　
+        )
+
+        return qs
+
+
+class TagVisibleManager(models.Manager):
+
+    def has_articles(self):
+        """
+        某标签下有可显示的文章时，该标签才会展示出来
+        文章可显示：其本身，其主题，其关联的标签都要是可见的
+        """
+        qs = super().get_queryset().filter(
+            visible=v.IS_VISIBLE,
+            article__visible=v.IS_VISIBLE,
+            article__topic__visible=v.IS_VISIBLE
+        )
+
+        return qs
+
+
 class ArticleVisibleManager(models.Manager):
     """Adding extra Manager methods"""
 
@@ -38,6 +71,8 @@ class Tag(models.Model):
     desc = models.TextField('描述', max_length=255, default='')
     visible = models.SmallIntegerField('博客列表中是否可见', default=v.NOT_VISIBLE, choices=_VISIBLE)
 
+    objects = TagVisibleManager()
+
     class Meta:
         verbose_name = '标签'
 
@@ -61,6 +96,8 @@ class Topic(MPTTModel):
     # 用于构建多级分类树
     parent = TreeForeignKey('self', null=True, blank=True, related_name='children',
                             on_delete=models.CASCADE, db_index=True)
+
+    objects = TopicVisibleManager()
 
     class Meta:
         verbose_name = '分类'

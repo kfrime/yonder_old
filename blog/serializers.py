@@ -37,6 +37,12 @@ class TagSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 
+class SimpleTagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ('id', 'name', )
+
+
 class ArticleSerializer(serializers.ModelSerializer):
     author = UserSerializer()
     topic = SimpleTopicSerializer()

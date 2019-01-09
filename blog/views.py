@@ -14,7 +14,7 @@ from utils.const import c_visible as v
 from .models import (Tag, Topic, Article)
 from .serializers import (
     TopicSerializer, TagSerializer, ArticleSerializer, SimpleArticleSerializer,
-    SmallArticleSerializer
+    SmallArticleSerializer, SimpleTagSerializer,
 )
 
 
@@ -58,13 +58,7 @@ class BigPagination(SmallPagination):
 
 class TopicAPIView(viewsets.ReadOnlyModelViewSet):
     # 只统计可显示的文章总数，某主题下有可显示的文章时，该主题才会展示出来
-    queryset = Topic.objects.filter(
-        visible=v.IS_VISIBLE,
-        article__visible=v.IS_VISIBLE,
-        # article__tags__visible=v.IS_VISIBLE      # 多对多关系的数据会有重复　
-    ).exclude(
-        article__tags__visible=v.NOT_VISIBLE
-    ).annotate(
+    queryset = Topic.objects.has_articles().annotate(
         total=Count('article')
     ).filter(total__gt=0).order_by('id')
 
@@ -74,11 +68,7 @@ class TopicAPIView(viewsets.ReadOnlyModelViewSet):
 
 class TagAPIView(viewsets.ReadOnlyModelViewSet):
     # 只统计可显示的文章总数，某标签下有可显示的文章时，该标签才会展示出来
-    queryset = Tag.objects.filter(
-        visible=v.IS_VISIBLE,
-        article__visible=v.IS_VISIBLE,
-        article__topic__visible=v.IS_VISIBLE
-    ).annotate(
+    queryset = Tag.objects.has_articles().annotate(
         total=Count('article')
     ).filter(total__gt=0).order_by('id')
 
@@ -145,6 +135,8 @@ class ArticleAPIView(viewsets.ReadOnlyModelViewSet):
         article['text'] = md.convert(article['text'])
         article['toc'] = md.toc  # 目录
 
+        tags = Tag.objects.filter(article=instance)
+        article['tags'] = SimpleTagSerializer(tags, many=True).data
         _next = instance.get_next()
         _pre = instance.get_pre()
         article['next'] = SmallArticleSerializer(_next).data if _next else None
@@ -182,7 +174,7 @@ class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
         return qs
 
     def list(self, request, *args, **kwargs):
-        queryset = self.filter_queryset(self.get_queryset())
+        queryset = self.get_queryset()
         archives = dict()
         for article in queryset:
             year = str(article.ctime.year)
