@@ -174,7 +174,7 @@ class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
         return qs
 
     def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
+        queryset = self.filter_queryset(self.get_queryset())
         archives = dict()
         for article in queryset:
             year = str(article.ctime.year)
@@ -183,6 +183,7 @@ class ArchiveAPIView(viewsets.ReadOnlyModelViewSet):
 
             archives[year].append(article)
 
+        # 按年份重新倒序排列
         sort = OrderedDict(sorted(archives.items(), key=lambda t: t[0], reverse=True))
         results = list()
         for year, articleList in sort.items():
