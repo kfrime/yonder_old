@@ -3,7 +3,9 @@
     <navbar></navbar>
     <!--<blog></blog>-->
     <router-link to="/"></router-link>
-    <router-view />
+    <transition name="fade">
+      <router-view />
+    </transition>
     <!--<div class="footer">footer</div>-->
   </div>
 </template>
