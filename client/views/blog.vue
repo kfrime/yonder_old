@@ -3,6 +3,7 @@
     <div class="row">
       <div class="col-lg-8 main-module">
         <!-- 文章列表 -->
+        <notification content="test notify "/>
         <article-list></article-list>
       </div>
 

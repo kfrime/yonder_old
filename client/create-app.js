@@ -9,6 +9,9 @@ import './assets/styles/sidebar.css'
 
 import createStore from './store/store'
 import createRouter from './router/router'
+import Notification from './components/notify'
+
+Vue.use(Notification)
 
 export default () => {
   const store = createStore()
