@@ -1,6 +1,10 @@
 <template>
   <transition name="fade">
-    <div class="bg-secondary text-white notification">
+    <div
+      class="bg-secondary text-white notification"
+      :style="style"
+      v-show="visible"
+    >
       <span class="content">{{content}}</span>
     </div>
   </transition>
@@ -13,6 +17,16 @@ export default {
     content: {
       type: String,
       required: true
+    }
+  },
+  computed: {
+    style () {
+      return {}
+    }
+  },
+  data () {
+    return {
+      visible: true
     }
   }
 }

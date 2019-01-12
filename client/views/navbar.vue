@@ -54,7 +54,10 @@ export default {
       const content = e.target.value.trim()
       // console.log('search:', content)
       if (!content) {
-        console.log('input can not be empty')
+        const msg = 'input can not be empty'
+        this.$notify({
+          content: msg
+        })
         return
       }
       e.target.value = ''
