@@ -14,13 +14,12 @@ const createError = (code, resp) => {
 const handleRequest = (request) => {
   return new Promise((resolve, reject) => {
     request.then(resp => {
-      // console.log('resp', resp)
-      if (!resp.data) {
-        return reject(createError(400, 'no data'))
-      }
+      // if (!resp.data) {
+      //   return reject(createError(400, 'no data'))
+      // }
       resolve(resp.data)
     }).catch(err => {
-      console.log('resp err', err)
+      console.log('[resp err]::', err)
       reject(err)
     })
   })

@@ -57,9 +57,8 @@ export default {
       const content = e.target.value.trim()
       // console.log('search:', content)
       if (!content) {
-        const msg = 'input can not be empty'
         this.$notify({
-          content: msg
+          msg: '搜索不能为空'
         })
         return
       }

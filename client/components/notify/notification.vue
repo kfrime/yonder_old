@@ -7,7 +7,7 @@
       @mouseenter="clearTimer"
       @mouseleave="createTimer"
     >
-      <span class="content">{{content}}</span>
+      <span class="message">{{msg}}</span>
       <a class="ml-auto pl-2 text-warning" @click="handleClose">
         <i class="fas fa-times"></i>
       </a>
@@ -19,7 +19,7 @@
 export default {
   name: 'Notification',
   props: {
-    content: {
+    msg: {
       type: String,
       required: true
     }
@@ -61,7 +61,7 @@ export default {
   flex-wrap: wrap;
   transition: all .3s;
 }
-.content {
+.message {
   padding: 0
 }
 </style>

@@ -1,7 +1,16 @@
 import api from '../api/api'
+import notify from '../components/notify/notify'
 
 const handleError = (err) => {
-  console.log('err', err)
+  const msg = err.code !== 200 ? '请求错误' : err.message
+  notify({
+    msg: msg
+  })
+
+  // todo: 跳转错误页面
+  // console.log('[handleError]::', err)
+  // todo: 日记记录？
+  // console.log('err', err)
 }
 
 export default {
