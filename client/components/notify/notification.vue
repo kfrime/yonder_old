@@ -1,11 +1,12 @@
 <template>
-  <transition name="fade">
+  <transition name="fade" @after-leave="afterLeave" @after-enter="afterEnter">
     <div
-      class="bg-secondary text-white notification"
+      class="text-dark notification px-2 row"
       :style="style"
       v-show="visible"
     >
       <span class="content">{{content}}</span>
+      <a class="ml-auto pl-2 text-warning" @click="handleClose">关闭</a>
     </div>
   </transition>
 </template>
@@ -28,17 +29,25 @@ export default {
     return {
       visible: true
     }
+  },
+  methods: {
+    handleClose () {
+      this.$emit('close')
+    },
+    afterLeave () {
+      this.$emit('closed') // notification已经关闭，动画消失
+    },
   }
 }
 </script>
 
 <style scoped>
 .notification {
+  background-color: #e9ecef;
   display: inline-flex;
   align-items: center;
-  padding: 0.4rem;
-  min-width: 280px;
-  box-shadow: 0px 3px 5px;
+  padding: 0.3rem;
+  width: 20rem;
   flex-wrap: wrap;
   transition: all .3s;
 }

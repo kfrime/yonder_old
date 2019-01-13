@@ -6,8 +6,10 @@ export default {
     style () {
       return {
         position: 'fixed',
-        right: '20px',
-        bottom: `${this.verticalOffset}px`
+        // right: '20px',
+        right: '2rem',
+        /* 如果放到右下角，设为 bottom */
+        top: `${this.verticalOffset}px`
       }
     }
   },
@@ -15,6 +17,8 @@ export default {
     return {
       verticalOffset: 0,
       autoClose: 3000,
+      visible: false,
+      height: 0
     }
   },
   mounted () {
@@ -32,10 +36,13 @@ export default {
       if (this.timer) {
         clearTimeout(this.timer)
       }
+    },
+    afterEnter () {
+      // 获取实际高度，用于调整其他notification组件的高度
+      this.height = this.$el.offsetHeight
     }
   },
   beforeDestroy () {
     this.clearTimer()
   }
 }
-
