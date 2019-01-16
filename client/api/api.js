@@ -26,23 +26,6 @@ const handleRequest = (request) => {
 }
 
 export default {
-  /*
-  getAllArticles () {
-    return handleRequest(request.get('/api/articles/'))
-  },
-  getArticleByTag (tagId) {
-    return handleRequest(request.get(`/api/articles/?tag=${tagId}`))
-  },
-  getArticleByTopic (topicId) {
-    return handleRequest(request.get(`/api/articles/?topic=${topicId}`))
-  },
-  getAllTags () {
-    return handleRequest(request.get('/api/tags/'))
-  },
-  getTagByArticleId (id) {
-    return handleRequest(request.get(`/api/tags/?article=${id}`))
-  },
-  */
   getOneArticle (id) {
     return handleRequest(request.get(`/api/articles/${id}/`))
   },

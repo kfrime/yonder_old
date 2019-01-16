@@ -14,68 +14,6 @@ const handleError = (err) => {
 }
 
 export default {
-  /*
-  fetchAllArticles ({ commit }) {
-    api.getAllArticles()
-      .then(data => {
-        // console.log('fetchAllArticles', data)
-        commit('fillArticles', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchArticlesByTopic ({ commit }, topicId) {
-    api.getArticleByTopic(topicId)
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillArticles', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchAllTopics ({ commit }) {
-    api.getAllTopics()
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillTopics', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchArticlesByTag ({ commit }, tagId) {
-    api.getArticleByTag(tagId)
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillArticles', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchAllTags ({ commit }) {
-    api.getAllTags()
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillTags', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  fetchTagByArticleId ({ commit }, articleId) {
-    api.getTagByArticleId(articleId)
-      .then(data => {
-        // console.log('fetchAllTopics', data)
-        commit('fillTags', data)
-      })
-      .catch(err => {
-        handleError(err)
-      })
-  },
-  */
   fetchOneArticle ({ commit }, id) {
     api.getOneArticle(id)
       .then(data => {
