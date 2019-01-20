@@ -1,8 +1,9 @@
 // import { request, createError, handleRequest } from './util'
+import config from '../../config'
 const axios = require('axios')
 
 const request = axios.create({
-  baseURL: 'http://localhost:8000/'
+  baseURL: config.serverUrl
 })
 
 const createError = (code, resp) => {
