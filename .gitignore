@@ -1,6 +1,7 @@
 # private config
 blog_server_django/conf/base.py
 logs/
+/blog/migrations/00*
 
 # pycharm
 .idea/
