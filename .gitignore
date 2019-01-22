@@ -2,6 +2,7 @@
 blog_server_django/conf/base.py
 logs/
 /blog/migrations/00*
+static/
 
 # pycharm
 .idea/
