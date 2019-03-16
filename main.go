@@ -5,14 +5,19 @@ package main
 import (
 	"net/http"
 	"fmt"
-	"log"
 )
 
-func index(w http.ResponseWriter, r *http.Request)  {
-	fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
+func serverStart(mux *http.ServeMux)  {
+	srv := &http.Server{
+		Addr: "localhost:8080",
+		Handler: mux,
+	}
+
+	fmt.Println("server start at: ", srv.Addr)
+	srv.ListenAndServe()
 }
 
 func main()  {
-	http.HandleFunc("/", index)
-	log.Fatal(http.ListenAndServe("localhost:8000", nil))
+	mux := initRoutes()
+	serverStart(mux)
 }
