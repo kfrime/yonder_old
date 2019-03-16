@@ -5,9 +5,10 @@ package main
 import (
 	"net/http"
 	"fmt"
+	"github.com/julienschmidt/httprouter"
 )
 
-func serverStart(mux *http.ServeMux)  {
+func serverStart(mux *httprouter.Router)  {
 	srv := &http.Server{
 		Addr: "localhost:8080",
 		Handler: mux,
