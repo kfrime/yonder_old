@@ -3,9 +3,9 @@
 package main
 
 import (
-	"net/http"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
+	"net/http"
 )
 
 func serverStart(mux *httprouter.Router)  {
