@@ -1,41 +1,42 @@
 package main
 
 import (
+	"database/sql"
+	"encoding/json"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
 )
 
-func index(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
-	fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
+type Topic struct {
+	Id 		int 	`json:"id"`
+	Title 	string 	`json:"title"`
 }
 
-func hello(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	fmt.Fprintf(w, "hello, %s!\n", p.ByName("name"))
+var Db *sql.DB
+
+func addTopic(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
+	len := r.ContentLength
+	body := make([]byte, len)
+	r.Body.Read(body)
+	defer r.Body.Close()
+
+	var topic Topic
+	json.Unmarshal(body, &topic)
+
+	//fmt.Fprintf(w, "URL.Path = %q\n", r.URL.Path)
+	fmt.Fprintf(w, "%q", topic)
 }
 
-func redirect(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	w.Header().Set("Location", "http://www.google.com")
-	w.WriteHeader(302)
-}
+func getTopicList(w http.ResponseWriter, r *http.Request, p httprouter.Params)  {
 
-func setCookie(w http.ResponseWriter, r *http.Request, p httprouter.Params) {
-	c := http.Cookie{
-		Name: "first",
-		Value: "hello world",
-		HttpOnly: true,
-	}
-	w.Header().Add("Set-Cookie", c.String())
-	fmt.Fprintf(w, "hello cookie")
 }
 
 func initRoutes() *httprouter.Router {
 	mux := httprouter.New()
 
-	mux.GET("/", index)
-	mux.GET("/hello/:name", hello)
-	mux.GET("/redirect", redirect)
-	mux.GET("/cookie", setCookie)
+	mux.GET("/topic", getTopicList)
+	mux.POST("/topic", addTopic)
 
 	return mux
 }
