@@ -1,0 +1,10 @@
+{
+  "database": {
+    "Host": "localhost",
+    "Port": 3306,
+    "User": "",
+    "Password": "",
+    "DbName": "blog",
+    "Charset": "utf8mb4"
+  }
+}

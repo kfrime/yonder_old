@@ -3,10 +3,10 @@
 package main
 
 import (
+	"backend/config"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
-	"route"
 )
 
 func serverStart(mux *httprouter.Router)  {
@@ -20,6 +20,7 @@ func serverStart(mux *httprouter.Router)  {
 }
 
 func main()  {
-	mux := route.InitRoutes()
-	serverStart(mux)
+	config.InitJson()
+	//mux := route.InitRoutes()
+	//serverStart(mux)
 }
