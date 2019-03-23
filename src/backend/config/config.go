@@ -1,9 +1,11 @@
 package config
 
 import (
+	"backend/debug"
 	"database/sql"
 	"encoding/json"
 	"fmt"
+	_ "github.com/go-sql-driver/mysql"
 	"io/ioutil"
 )
 
@@ -35,7 +37,7 @@ func loadConf(cfgFile string) {
 	if err := json.Unmarshal(data, &AllConfig); err != nil {
 		panic(err.Error())
 	}
-	fmt.Println(AllConfig)
+	dbg.Dbg("AllConfig:", AllConfig)
 }
 
 
@@ -50,7 +52,13 @@ func initDB() {
 	mysqlUrl := fmt.Sprintf("%s:%s@%s:%d/%s?charset=%s",
 		dc.User, dc.Password, dc.Host, dc.Port, dc.DbName, dc.Charset)
 		//DBConfig.User, DBConfig.Password, DBConfig.Host, DBConfig.Port, DBConfig.DbName, DBConfig.Charset)
-	fmt.Println(mysqlUrl)
+	DB, err := sql.Open("mysql", mysqlUrl)
+	if err != nil {
+		panic(err.Error())
+	}
+
+	dbg.Dbg("mysqlUrl:", mysqlUrl)
+	dbg.Dbg("DB:", DB)
 }
 
 func InitJson()  {
