@@ -4,6 +4,7 @@ package main
 
 import (
 	"backend/config"
+	"backend/model"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
@@ -20,7 +21,8 @@ func serverStart(mux *httprouter.Router)  {
 }
 
 func main()  {
-	config.InitJson()
+	config.InitConf()
+	model.MigrateModels()
 	//mux := route.InitRoutes()
 	//serverStart(mux)
 }
