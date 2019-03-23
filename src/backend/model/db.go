@@ -20,12 +20,13 @@ func ConnectDB() *sql.DB {
 	mysqlUrl := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s",
 		dc.User, dc.Password, dc.Host, dc.Port, dc.DbName, dc.Charset)
 	//DBConfig.User, DBConfig.Password, DBConfig.Host, DBConfig.Port, DBConfig.DbName, DBConfig.Charset)
+
+	// 连接数据库
 	DB, err := sql.Open("mysql", mysqlUrl)
 	if err != nil {
 		panic(err.Error())
 	}
 
 	dbg.Dbg("mysqlUrl:", mysqlUrl)
-	dbg.Dbg("DB:", DB)
 	return DB
 }
