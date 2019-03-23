@@ -1,4 +1,4 @@
-package main
+package route
 
 import (
 	"database/sql"
@@ -32,7 +32,7 @@ func getTopicList(w http.ResponseWriter, r *http.Request, p httprouter.Params)  
 
 }
 
-func initRoutes() *httprouter.Router {
+func InitRoutes() *httprouter.Router {
 	mux := httprouter.New()
 
 	mux.GET("/topic", getTopicList)

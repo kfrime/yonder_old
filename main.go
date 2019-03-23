@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"net/http"
+	"route"
 )
 
 func serverStart(mux *httprouter.Router)  {
@@ -19,6 +20,6 @@ func serverStart(mux *httprouter.Router)  {
 }
 
 func main()  {
-	mux := initRoutes()
+	mux := route.InitRoutes()
 	serverStart(mux)
 }
