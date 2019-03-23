@@ -12,5 +12,6 @@ func MigrateModels() {
 	defer db.Close()
 
 	tableCreateArticle(db)
+	tableCreateUser(db)
 }
 
