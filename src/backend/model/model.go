@@ -13,5 +13,6 @@ func MigrateModels() {
 
 	tableCreateArticle(db)
 	tableCreateUser(db)
+	tableCreateCategory(db)
 }
 
