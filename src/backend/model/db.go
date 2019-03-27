@@ -2,7 +2,6 @@ package model
 
 import (
 	"backend/config"
-	"backend/debug"
 	"database/sql"
 	"fmt"
 )
@@ -27,6 +26,6 @@ func ConnectDB() *sql.DB {
 		panic(err.Error())
 	}
 
-	dbg.Dbg("mysqlUrl:", mysqlUrl)
+	//dbg.Dbg("mysqlUrl:", mysqlUrl)
 	return DB
 }

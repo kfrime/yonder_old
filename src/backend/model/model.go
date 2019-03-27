@@ -16,3 +16,6 @@ func MigrateModels() {
 	tableCreateCategory(db)
 }
 
+func TestModelData()  {
+	TestUser()
+}

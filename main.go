@@ -23,6 +23,7 @@ func serverStart(mux *httprouter.Router)  {
 func main()  {
 	config.InitConf()
 	model.MigrateModels()
+	model.TestModelData()
 	//mux := route.InitRoutes()
 	//serverStart(mux)
 }
