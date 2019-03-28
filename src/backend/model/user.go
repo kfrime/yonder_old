@@ -9,8 +9,8 @@ import (
 type User struct {
 	Id 			uint32
 	Name 		string
-	created 	time.Duration
-	updated 	time.Duration
+	Created 	time.Time
+	Updated 	time.Time
 }
 
 func (user *User) create() (err error) {
@@ -25,14 +25,31 @@ func (user *User) create() (err error) {
 	return err
 }
 
+func retrieve(id int) (user User, err error) {
+	db := ConnectDB()
+	defer db.Close()
+
+	user = User{}
+	err = db.QueryRow("select id, username, created, updated from t_user where id = ?", id).Scan(
+		&user.Id, &user.Name, &user.Created, &user.Updated)
+	return
+}
+
 func TestUser()  {
-	user := &User{
-		Name: "adminuser",
-	}
-	err := user.create()
+	//u1 := &User{
+	//	Name: "feng",
+	//}
+	//err := u1.create()
+	//if err != nil {
+	//	fmt.Print(err.Error())
+	//}
+
+	u2, err := retrieve(1)
 	if err != nil {
 		fmt.Print(err.Error())
 	}
+	fmt.Print(u2)
+
 }
 
 func tableCreateUser(db *sql.DB) {

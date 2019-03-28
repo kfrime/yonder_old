@@ -16,7 +16,7 @@ func ConnectDB() *sql.DB {
 	//	panic(err.Error())
 	//}
 
-	mysqlUrl := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s",
+	mysqlUrl := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=true&loc=Local",
 		dc.User, dc.Password, dc.Host, dc.Port, dc.DbName, dc.Charset)
 	//DBConfig.User, DBConfig.Password, DBConfig.Host, DBConfig.Port, DBConfig.DbName, DBConfig.Charset)
 
