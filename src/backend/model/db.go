@@ -10,12 +10,14 @@ func ConnectDB() *sql.DB {
 	// 数据库相关配置
 	var DB *sql.DB
 
-	var dc config.DbConfig = config.AllConfig.Database
+	var dc = config.AllConfig.Database
 
 	//if err := json.Unmarshal(["database"], &DBConfig); err != nil {
 	//	panic(err.Error())
 	//}
 
+	// Add Scan() support for time.Time
+	// https://github.com/go-sql-driver/mysql/issues/9
 	mysqlUrl := fmt.Sprintf("%s:%s@tcp(%s:%d)/%s?charset=%s&parseTime=true&loc=Local",
 		dc.User, dc.Password, dc.Host, dc.Port, dc.DbName, dc.Charset)
 	//DBConfig.User, DBConfig.Password, DBConfig.Host, DBConfig.Port, DBConfig.DbName, DBConfig.Charset)

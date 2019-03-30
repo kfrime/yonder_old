@@ -7,10 +7,10 @@ import (
 )
 
 type User struct {
-	Id 			uint32
-	Name 		string
-	Created 	time.Time
-	Updated 	time.Time
+	Id 			uint32		`json:"id"`
+	Name 		string		`json:"name"`
+	Created 	time.Time	`json:"created"`
+	Updated 	time.Time	`json:"updated"`
 }
 
 func (user *User) create() (err error) {
@@ -25,7 +25,7 @@ func (user *User) create() (err error) {
 	return err
 }
 
-func retrieve(id int) (user User, err error) {
+func Retrieve(id int) (user User, err error) {
 	db := ConnectDB()
 	defer db.Close()
 
@@ -44,7 +44,7 @@ func TestUser()  {
 	//	fmt.Print(err.Error())
 	//}
 
-	u2, err := retrieve(1)
+	u2, err := Retrieve(1)
 	if err != nil {
 		fmt.Print(err.Error())
 	}
