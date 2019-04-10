@@ -4,7 +4,6 @@ package main
 
 import (
 	"backend/config"
-	"backend/debug"
 	"backend/model"
 	"backend/route"
 	"fmt"
@@ -22,20 +21,28 @@ func serverStart(mux *httprouter.Router)  {
 	srv.ListenAndServe()
 }
 
-func testCreateModel()  {
-	model.DB.AutoMigrate(&model.User{})
-}
+func testUser()  {
+	db := model.DB
 
-func testOptModel()  {
-	user := model.User{Name:"jack"}
-	dbg.Dbg(user)
-	model.DB.Create(&user)
-	dbg.Dbg(user)
+	db.AutoMigrate(&model.User{})
+
+	// 创建
+	db.Create(&model.User{Name: "jack"})
+
+	// 读取
+	var user model.User
+	db.First(&user, 1)
+	db.First(&user, "name = ?", "jack")
+
+	// 更新
+	db.Model(&user).Update("Name", "bingo")
+
+	// 删除
+	db.Delete(&user)
 }
 
 func main() {
-	//testCreateModel()
-	testOptModel()
+	testUser()
 }
 
 func _main()  {
