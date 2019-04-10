@@ -40,3 +40,7 @@ func InitConf()  {
 	confFile := "config.json"
 	loadConf(confFile)
 }
+
+func init() {
+	InitConf()
+}

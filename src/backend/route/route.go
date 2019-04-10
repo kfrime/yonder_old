@@ -1,7 +1,6 @@
 package route
 
 import (
-	"backend/api"
 	"database/sql"
 	"encoding/json"
 	"fmt"
@@ -36,7 +35,7 @@ func getTopicList(w http.ResponseWriter, r *http.Request, p httprouter.Params)  
 func InitRoutes() *httprouter.Router {
 	mux := httprouter.New()
 
-	mux.GET("/user/:id", api.GetUser)
+	//mux.GET("/user/:id", api.GetUser)
 	//mux.POST("/topic", addTopic)
 
 	return mux

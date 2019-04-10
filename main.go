@@ -4,6 +4,8 @@ package main
 
 import (
 	"backend/config"
+	"backend/debug"
+	"backend/model"
 	"backend/route"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
@@ -20,8 +22,23 @@ func serverStart(mux *httprouter.Router)  {
 	srv.ListenAndServe()
 }
 
+func testCreateModel()  {
+	model.DB.AutoMigrate(&model.User{})
+}
 
-func main()  {
+func testOptModel()  {
+	user := model.User{Name:"jack"}
+	dbg.Dbg(user)
+	model.DB.Create(&user)
+	dbg.Dbg(user)
+}
+
+func main() {
+	//testCreateModel()
+	testOptModel()
+}
+
+func _main()  {
 	config.InitConf()
 	//model.MigrateModels()
 	//model.TestModelData()
