@@ -25,7 +25,7 @@ func testUser()  {
 	db.Model(&user).Update("Name", "bingo")
 
 	// 删除
-	db.Delete(&user)
+	//db.Delete(&user)
 }
 
 func main() {
