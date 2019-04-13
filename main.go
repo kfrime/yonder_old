@@ -3,23 +3,10 @@
 package main
 
 import (
-	"backend/config"
 	"backend/model"
-	"backend/route"
-	"fmt"
-	"github.com/julienschmidt/httprouter"
-	"net/http"
+	"backend/router"
+	"github.com/gin-gonic/gin"
 )
-
-func serverStart(mux *httprouter.Router)  {
-	srv := &http.Server{
-		Addr: "localhost:8080",
-		Handler: mux,
-	}
-
-	fmt.Println("\nserver start at: ", srv.Addr)
-	srv.ListenAndServe()
-}
 
 func testUser()  {
 	db := model.DB
@@ -42,13 +29,21 @@ func testUser()  {
 }
 
 func main() {
-	testUser()
+	//testUser()
+
+	// Creates a router without any middleware by default
+	app := gin.New()
+
+	// Global middleware
+	// Logger middleware will write the logs to gin.DefaultWriter even if you set with GIN_MODE=release.
+	// By default gin.DefaultWriter = os.Stdout
+	app.Use(gin.Logger())
+
+	// Recovery middleware recovers from any panics and writes a 500 if there was one.
+	app.Use(gin.Recovery())
+
+	router.Route(app)
+
+	app.Run(":6060")
 }
 
-func _main()  {
-	config.InitConf()
-	//model.MigrateModels()
-	//model.TestModelData()
-	mux := route.InitRoutes()
-	serverStart(mux)
-}

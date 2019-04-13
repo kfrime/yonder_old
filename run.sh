@@ -1,7 +1,8 @@
 
 cur=`pwd`
 
-export GOPATH=$GOPATH:${cur}
+# export GOPATH=$GOPATH:${cur}
+export GOPATH=~/go:${cur}
 
 echo $GOPATH
 
