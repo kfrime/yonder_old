@@ -7,6 +7,15 @@ import (
 	"net/http"
 )
 
+func Signup()  {
+	
+}
+
+func Singin()  {
+	
+}
+
+
 func UserList(c *gin.Context)  {
 	var users []model.User
 	if err := model.DB.Order("id asc").Find(&users).Error; err != nil {

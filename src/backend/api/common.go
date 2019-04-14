@@ -2,6 +2,7 @@ package api
 
 import (
 	"github.com/gin-gonic/gin"
+	"github.com/microcosm-cc/bluemonday"
 
 	"net/http"
 )
@@ -35,4 +36,9 @@ func SendErrResp(c *gin.Context, msg string, args ...interface{})  {
 	})
 
 	c.Abort()
+}
+
+// It protects sites from XSS attacks
+func preventXSS(input string) string {
+	return bluemonday.UGCPolicy().Sanitize(input)
 }
