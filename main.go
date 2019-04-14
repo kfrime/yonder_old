@@ -3,8 +3,10 @@
 package main
 
 import (
+	"backend/debug"
 	"backend/model"
 	"backend/router"
+	"github.com/garyburd/redigo/redis"
 	"github.com/gin-gonic/gin"
 )
 
@@ -28,8 +30,24 @@ func testUser()  {
 	//db.Delete(&user)
 }
 
+func testRedis()  {
+	rds := model.RedisPool.Get()
+	defer rds.Close()
+
+	if _, err := rds.Do("SET", "hello", "world"); err != nil {
+		dbg.Dbg(err)
+	}
+
+	s, err := redis.String(rds.Do("GET", "hello"))
+	if err != nil {
+		dbg.Dbg(err)
+	}
+	dbg.Dbg(s)
+}
+
 func main() {
 	//testUser()
+	testRedis()
 
 	// Creates a router without any middleware by default
 	app := gin.New()

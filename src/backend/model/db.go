@@ -3,11 +3,15 @@ package model
 import (
 	"backend/config"
 	"fmt"
+	"github.com/garyburd/redigo/redis"
 	"github.com/jinzhu/gorm"
 	"time"
 )
 
 var DB *gorm.DB
+
+var RedisPool *redis.Pool
+
 
 func initDB()  {
 	var dc = config.AllConfig.Database
@@ -29,6 +33,31 @@ func initDB()  {
 	DB = db
 }
 
+func initRedisPool()  {
+	var rc = config.AllConfig.Redis
+	rdsUrl := fmt.Sprintf("%s:%d", rc.Host, rc.Port)
+	RedisPool = &redis.Pool{
+		// Maximum number of idle connections in the pool.
+		MaxIdle: rc.MaxIdle,
+
+		// max number of connections
+		MaxActive: rc.MaxActive,
+
+		IdleTimeout: 3 * 60 * time.Second,
+
+		// Dial is an application supplied function for creating and
+		// configuring a connection.
+		Dial: func() (redis.Conn, error) {
+			c, err := redis.Dial("tcp", rdsUrl)
+			if err != nil {
+				return nil, err
+			}
+			return c, err
+		},
+	}
+}
+
 func init()  {
 	initDB()
+	initRedisPool()
 }

@@ -16,8 +16,21 @@ type DbConfig struct {
 	Charset		string
 }
 
+type RedisConfig struct {
+	Host 		string
+	Port 		int
+	MaxIdle		int
+	MaxActive	int
+}
+
+type ServerConfig struct {
+	Salt	string
+}
+
 type allConfig struct {
-	Database 	DbConfig	`json:"database"`
+	Database 	DbConfig		`json:"database"`
+	Redis		RedisConfig		`json:"redis"`
+	Server 		ServerConfig 	`json:"server"`
 }
 
 // 加载json配置
