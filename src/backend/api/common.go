@@ -17,7 +17,16 @@ var ErrCode = errCode{
 	ERROR: 	 1,
 }
 
+func SendResp(c *gin.Context, data gin.H) {
+	c.JSON(http.StatusOK, gin.H{
+		"errNo": ErrCode.SUCCESS,
+		"msg": "success",
+		"data": data,
+	})
+}
 
+
+// args: errNo, ...
 func SendErrResp(c *gin.Context, msg string, args ...interface{})  {
 
 	var errNo = ErrCode.ERROR

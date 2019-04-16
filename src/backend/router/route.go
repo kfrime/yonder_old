@@ -7,5 +7,5 @@ import (
 
 func Route(router *gin.Engine)  {
 	apiGrp := router.Group("/api")
-	apiGrp.GET("/user/", api.UserList)
+	apiGrp.POST("/user/signup", api.Signup)
 }

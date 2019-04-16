@@ -7,11 +7,27 @@ import (
 	"net/http"
 )
 
-func Signup()  {
-	
+// user register
+func Signup(c *gin.Context)  {
+	type UserSignupData struct {
+		Name 		string 	`json:"name" binding:"required,min=4,max=20"`
+		Password 	string 	`json:"password" binding:"required,min=3,max=20"`
+	}
+
+	var userInput UserSignupData
+	if err := c.ShouldBindJSON(&userInput); err != nil {
+		log.Println(err)
+		SendErrResp(c, "输入有误，请检查")
+		return
+	}
+
+	SendResp(c, gin.H{
+		"user": userInput,
+	})
 }
 
-func Singin()  {
+// user login in
+func Signin()  {
 	
 }
 
