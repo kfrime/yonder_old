@@ -5,6 +5,7 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
+	"strings"
 )
 
 // user register
@@ -18,6 +19,19 @@ func Signup(c *gin.Context)  {
 	if err := c.ShouldBindJSON(&userInput); err != nil {
 		log.Println(err)
 		SendErrResp(c, "输入有误，请检查")
+		return
+	}
+
+	var validInput UserSignupData
+	if err := Deepcopy(&userInput, validInput); err != nil {
+		SendErrResp(c, "内部错误")
+		return
+	}
+
+	validInput.Name = preventXSS(userInput.Name)
+	validInput.Name = strings.TrimSpace(userInput.Name)
+	if validInput.Name != userInput.Name {
+		SendErrResp(c, "名称中包含空格")
 		return
 	}
 
