@@ -35,3 +35,8 @@ func (user User) EncryptPasswd(passwd string) (hashPasswd string) {
 }
 
 // user info to redis
+
+const (
+	UserRoleAdmin = 1
+	UserRoleNormal = 2
+)

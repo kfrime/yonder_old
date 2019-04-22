@@ -23,7 +23,7 @@ func Signup(c *gin.Context)  {
 	}
 
 	var validInput UserSignupData
-	if err := Deepcopy(&userInput, validInput); err != nil {
+	if err := Deepcopy(&userInput, &validInput); err != nil {
 		SendErrResp(c, "内部错误")
 		return
 	}
@@ -34,6 +34,24 @@ func Signup(c *gin.Context)  {
 		SendErrResp(c, "名称中包含空格")
 		return
 	}
+
+	var user model.User
+	err := model.DB.Where("name = ?", validInput.Name).Find(&user).Error
+	if err != nil {
+		log.Print(err)
+		SendErrResp(c, "内部错误")
+		return
+	}
+
+	if user.Name == validInput.Name {
+		SendErrResp(c, "username {" + user.Name + "} has been existed.")
+		return
+	}
+
+	var newUser model.User
+	newUser.Name = validInput.Name
+	newUser.Passwd = newUser.EncryptPasswd(newUser.Passwd)
+	newUser.Role = model.UserRoleNormal
 
 	SendResp(c, gin.H{
 		"user": userInput,
