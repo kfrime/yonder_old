@@ -15,6 +15,10 @@ type User struct {
 	Role		int			`gorm:"not null"`
 }
 
+func (user User) CheckPasswd(passwd string) bool {
+	return user.Passwd == user.EncryptPasswd(passwd)
+}
+
 func (user User) validPasswd(passswd string) bool {
 	if passswd == "" {
 		return false

@@ -2,12 +2,12 @@ package api
 
 import (
 	"backend/model"
-	"encoding/json"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strings"
+	"time"
 )
 
 const (
@@ -53,7 +53,7 @@ func Signup(c *gin.Context)  {
 
 	var newUser model.User
 	newUser.Name = validInput.Name
-	newUser.Passwd = newUser.EncryptPasswd(newUser.Passwd)
+	newUser.Passwd = newUser.EncryptPasswd(validInput.Password)
 	newUser.Role = model.UserRoleNormal
 
 	if err := model.DB.Create(&newUser).Error; err != nil {
@@ -62,17 +62,17 @@ func Signup(c *gin.Context)  {
 		return
 	}
 
-	//curTime := time.Now().Unix()
+	curTime := time.Now().Unix()
 	userKey := fmt.Sprintf("user_%s", newUser.Name)
-	userJson, err := json.Marshal(&newUser)
-	if err != nil {
-		log.Println(err)
-	}
+	//userJson, err := json.Marshal(&newUser)
+	//if err != nil {
+	//	log.Println(err)
+	//}
 
 	rds := model.RedisPool.Get()
 	defer rds.Close()
 
-	if _, err := rds.Do("SET", userKey, userJson, "EX", UserActiveDuration); err != nil {
+	if _, err := rds.Do("SET", userKey, curTime, "EX", UserActiveDuration); err != nil {
 		log.Println("save user to redis error", err)
 	}
 
@@ -82,7 +82,39 @@ func Signup(c *gin.Context)  {
 }
 
 // user login in
-func Signin()  {
+func Login(c *gin.Context)  {
+	type UserLogin struct {
+		Name 		string 	`json:"name" binding:"required,min=4,max=20"`
+		Password 	string 	`json:"password" binding:"required,min=3,max=20"`
+	}
+
+	var userInput UserLogin
+	if err := c.ShouldBindJSON(&userInput); err != nil {
+		log.Println(err)
+		SendErrResp(c, "输入有误，请检查")
+		return
+	}
+
+	var user model.User
+	err := model.DB.Where("name = ?", userInput.Name).Find(&user).Error
+	if err != nil {
+		SendErrResp(c, "user not found")
+		return
+	}
+
+	// 检查密码是否错误
+	if !user.CheckPasswd(userInput.Password) {
+		SendErrResp(c, "password is not correct")
+		return
+	}
+
+	// 检查用户是否已删除
+
+	// 设置 cookie token
+
+	SendResp(c, gin.H{
+		"user": user,
+	})
 	
 }
 
