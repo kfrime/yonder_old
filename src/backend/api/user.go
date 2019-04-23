@@ -2,17 +2,12 @@ package api
 
 import (
 	"backend/model"
-	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strings"
-	"time"
 )
 
-const (
-	UserActiveDuration = 24 * 60 * 60
-)
 
 // user register
 func Signup(c *gin.Context)  {
@@ -62,20 +57,6 @@ func Signup(c *gin.Context)  {
 		return
 	}
 
-	curTime := time.Now().Unix()
-	userKey := fmt.Sprintf("user_%s", newUser.Name)
-	//userJson, err := json.Marshal(&newUser)
-	//if err != nil {
-	//	log.Println(err)
-	//}
-
-	rds := model.RedisPool.Get()
-	defer rds.Close()
-
-	if _, err := rds.Do("SET", userKey, curTime, "EX", UserActiveDuration); err != nil {
-		log.Println("save user to redis error", err)
-	}
-
 	SendResp(c, gin.H{
 		"user": userInput,
 	})
@@ -115,6 +96,10 @@ func Login(c *gin.Context)  {
 	SendResp(c, gin.H{
 		"user": user,
 	})
+	
+}
+
+func ResetPasswd()  {
 	
 }
 
