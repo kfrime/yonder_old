@@ -7,18 +7,21 @@ import (
 	"testing"
 )
 
-func testUser()  {
+func TestUser(t *testing.T)  {
 	db := model.DB
 
 	db.AutoMigrate(&model.User{})
 
 	// 创建
-	db.Create(&model.User{Name: "jack"})
+	db.Create(&model.User{Name: "jack", Role: model.UserRoleNormal})
 
 	// 读取
 	var user model.User
 	db.First(&user, 1)
 	db.First(&user, "name = ?", "jack")
+	if user.Name != "jack" {
+		t.Errorf(`[Create] user name ="%s"; want "jack"`, user.Name)
+	}
 
 	// 更新
 	db.Model(&user).Update("Name", "bingo")

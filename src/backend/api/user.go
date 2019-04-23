@@ -2,10 +2,16 @@ package api
 
 import (
 	"backend/model"
+	"encoding/json"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strings"
+)
+
+const (
+	UserActiveDuration = 24 * 60 * 60
 )
 
 // user register
@@ -37,21 +43,38 @@ func Signup(c *gin.Context)  {
 
 	var user model.User
 	err := model.DB.Where("name = ?", validInput.Name).Find(&user).Error
-	if err != nil {
-		log.Print(err)
-		SendErrResp(c, "内部错误")
-		return
-	}
-
-	if user.Name == validInput.Name {
-		SendErrResp(c, "username {" + user.Name + "} has been existed.")
-		return
+	if err == nil {
+		// 说明该用户名已经存在
+		if user.Name == validInput.Name {
+			SendErrResp(c, "username {" + user.Name + "} has been existed.")
+			return
+		}
 	}
 
 	var newUser model.User
 	newUser.Name = validInput.Name
 	newUser.Passwd = newUser.EncryptPasswd(newUser.Passwd)
 	newUser.Role = model.UserRoleNormal
+
+	if err := model.DB.Create(&newUser).Error; err != nil {
+		log.Print(err)
+		SendErrResp(c, "can not create user")
+		return
+	}
+
+	//curTime := time.Now().Unix()
+	userKey := fmt.Sprintf("user_%s", newUser.Name)
+	userJson, err := json.Marshal(&newUser)
+	if err != nil {
+		log.Println(err)
+	}
+
+	rds := model.RedisPool.Get()
+	defer rds.Close()
+
+	if _, err := rds.Do("SET", userKey, userJson, "EX", UserActiveDuration); err != nil {
+		log.Println("save user to redis error", err)
+	}
 
 	SendResp(c, gin.H{
 		"user": userInput,
