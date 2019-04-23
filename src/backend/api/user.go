@@ -50,6 +50,7 @@ func Signup(c *gin.Context)  {
 	newUser.Name = validInput.Name
 	newUser.Passwd = newUser.EncryptPasswd(validInput.Password)
 	newUser.Role = model.UserRoleNormal
+	newUser.Status = model.UserStatusActive
 
 	if err := model.DB.Create(&newUser).Error; err != nil {
 		log.Print(err)
@@ -90,13 +91,35 @@ func Login(c *gin.Context)  {
 	}
 
 	// 检查用户是否已删除
+	if user.Status != model.UserStatusActive {
+		SendErrResp(c, "user not found")
+		return
+	}
 
 	// 设置 cookie token
+	token, err := user.GetSessionToken()
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "internal err")
+		return
+	}
+
+	if err := model.SaveTokenToRedis(token, user.ID); err != nil {
+		log.Println(err)
+		SendErrResp(c, "internal err")
+		return
+	}
+
+	if err := model.SaveUserToRedis(user); err != nil {
+		log.Println(err)
+		SendErrResp(c, "internal err")
+		return
+	}
 
 	SendResp(c, gin.H{
+		"token": token,
 		"user": user,
 	})
-	
 }
 
 func ResetPasswd()  {

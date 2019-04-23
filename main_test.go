@@ -13,7 +13,11 @@ func TestUser(t *testing.T)  {
 	db.AutoMigrate(&model.User{})
 
 	// 创建
-	db.Create(&model.User{Name: "jack", Role: model.UserRoleNormal})
+	db.Create(&model.User{
+		Name: "jack",
+		Role: model.UserRoleNormal,
+		Status: model.UserStatusActive,
+	})
 
 	// 读取
 	var user model.User
