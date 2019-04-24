@@ -122,8 +122,13 @@ func Login(c *gin.Context)  {
 	})
 }
 
-func ResetPasswd()  {
-	
+func ResetPasswd(c *gin.Context) {
+	userInfo, _ := c.Get("user")
+	user := userInfo.(model.User)
+
+	SendResp(c, gin.H{
+		"user": user,
+	})
 }
 
 
