@@ -69,19 +69,19 @@ func SaveTokenToRedis(token string, userId uint) error {
 }
 
 // token: userId from redis
-func getUserIdByToken(token string) (string, error) {
+func GetUserIdByToken(token string) (uint, error) {
 	key := fmt.Sprintf("token:%s", token)
 
 	rds := RedisPool.Get()
 	defer rds.Close()
 
-	token, err := redis.String(rds.Do("GET", key))
+	userId, err := redis.Uint64(rds.Do("GET", key))
 	if err != nil {
 		log.Println(err)
-		return "", err
+		return 0, err
 	}
 
-	return token, nil
+	return uint(userId), nil
 }
 
 
@@ -138,5 +138,5 @@ const (
 
 const (
 	//UserActiveDuration = 24 * 60 * 60
-	UserActiveDuration = 60
+	UserActiveDuration = 10 * 60
 )
