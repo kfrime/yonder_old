@@ -59,7 +59,7 @@ func Signup(c *gin.Context)  {
 	}
 
 	SendResp(c, gin.H{
-		"user": userInput,
+		"user": newUser,
 	})
 }
 
@@ -123,6 +123,7 @@ func Login(c *gin.Context)  {
 }
 
 func ResetPasswd(c *gin.Context) {
+	// todo: not done yet
 	userInfo, _ := c.Get("user")
 	user := userInfo.(model.User)
 

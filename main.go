@@ -3,11 +3,23 @@
 package main
 
 import (
+	"backend/model"
 	"backend/router"
 	"github.com/gin-gonic/gin"
 )
 
+func migrate()  {
+	db := model.DB
+
+	db.AutoMigrate(&model.User{})
+
+	db.AutoMigrate(&model.Category{})
+}
+
 func main() {
+	// create table
+	migrate()
+
 	// Creates a router without any middleware by default
 	app := gin.New()
 

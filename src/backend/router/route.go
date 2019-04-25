@@ -12,4 +12,6 @@ func Route(router *gin.Engine)  {
 	apiGrp.POST("/user/login", api.Login)
 	apiGrp.POST("/user/password/update", middleware.LoginRequired,
 		api.ResetPasswd)
+
+	apiGrp.POST("/category", api.CateCreate)
 }
