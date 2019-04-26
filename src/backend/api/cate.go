@@ -4,15 +4,20 @@ import (
 	"backend/model"
 	"github.com/gin-gonic/gin"
 	"log"
+	"strconv"
 	"strings"
 )
 
-func CateList()  {
+func CateList(c *gin.Context)  {
 	
 }
 
-func CateRetrieve()  {
+func CateRetrieve(c *gin.Context)  {
 	
+}
+
+func saveCate(c *gin.Context) {
+
 }
 
 func CateCreate(c *gin.Context)  {
@@ -63,10 +68,28 @@ func CateCreate(c *gin.Context)  {
 
 }
 
-func CateUpdate()  {
-	
+func CateUpdate(c *gin.Context)  {
+	cateId, err := strconv.Atoi(c.Param("cateId"))
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "invalid category id")
+		return
+	}
+
+	var cate model.Category
+	err = model.DB.Where("id = ?", cateId).Find(&cate).Error
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "category not existed")
+		return
+	}
+
+	SendResp(c, gin.H{
+		"cate": cate,
+	})
+
 }
 
-func CateDestroy()  {
+func CateDestroy(c *gin.Context)  {
 	
 }

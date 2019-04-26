@@ -14,4 +14,7 @@ func Route(router *gin.Engine)  {
 		api.ResetPasswd)
 
 	apiGrp.POST("/category", api.CateCreate)
+	apiGrp.PUT("/category/:cateId", api.CateUpdate)
+	apiGrp.GET("/category/:cateId", api.CateRetrieve)
+	apiGrp.GET("/category", api.CateList)
 }
