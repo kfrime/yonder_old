@@ -28,7 +28,7 @@ func (cate *Category) checkCate() error {
 	return nil
 }
 
-func (cate *Category) Save() error {
+func (cate *Category) Create() error {
 	if err := cate.checkCate(); err != nil {
 		return err
 	}

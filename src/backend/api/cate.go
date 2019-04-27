@@ -50,7 +50,7 @@ func CateCreate(c *gin.Context)  {
 		return
 	}
 
-	if err := cate.Save(); err != nil {
+	if err := cate.Create(); err != nil {
 		SendErrResp(c, err.Error())
 		return
 	}
