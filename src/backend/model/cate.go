@@ -9,7 +9,7 @@ import (
 
 type Category struct {
 	gorm.Model
-	Name   string `gorm:"unique;not null;index" json:"name" binding:"required,min=3,max=20"`
+	Name   string `gorm:"not null;index" json:"name" binding:"required,min=3,max=20"`
 }
 
 func (cate *Category) checkCate() error {

@@ -42,10 +42,6 @@ func CateRetrieve(c *gin.Context)  {
 	})
 }
 
-func saveCate(c *gin.Context) {
-
-}
-
 func CateCreate(c *gin.Context)  {
 	var cate model.Category
 	if err := c.ShouldBindJSON(&cate); err != nil {
@@ -92,9 +88,27 @@ func CateUpdate(c *gin.Context)  {
 }
 
 func CateDestroy(c *gin.Context)  {
-	
-}
+	// todo: 该分类下的文章是否还可见？
+	cateId, err := strconv.Atoi(c.Param("cateId"))
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "invalid category id")
+		return
+	}
 
-func getValidCateInput(c *gin.Context)  {
+	var cate model.Category
+	err = model.DB.First(&cate, "id = ?", cateId).Error
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "category not existed")
+		return
+	}
 
+	if err := model.DB.Delete(&cate).Error; err != nil {
+		log.Println(err)
+		SendErrResp(c, "delele category error")
+		return
+	}
+
+	SendResp(c, gin.H{})
 }

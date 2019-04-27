@@ -11,6 +11,7 @@ func TestUser(t *testing.T)  {
 	db := model.DB
 
 	db.AutoMigrate(&model.User{})
+	db.AutoMigrate(&model.Category{})
 
 	// 创建
 	db.Create(&model.User{

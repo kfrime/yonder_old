@@ -15,6 +15,7 @@ func Route(router *gin.Engine)  {
 
 	apiGrp.POST("/category", api.CateCreate)
 	apiGrp.PUT("/category/:cateId", api.CateUpdate)
+	apiGrp.DELETE("/category/:cateId", api.CateDestroy)
 	apiGrp.GET("/category/:cateId", api.CateRetrieve)
 	apiGrp.GET("/category", api.CateList)
 }
