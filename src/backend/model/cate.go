@@ -2,10 +2,9 @@ package model
 
 import (
 	"errors"
+	"github.com/jinzhu/gorm"
 	"log"
 	"regexp"
-
-	"github.com/jinzhu/gorm"
 )
 
 type Category struct {
@@ -13,7 +12,7 @@ type Category struct {
 	Name   string `gorm:"unique;not null;index" json:"name" binding:"required,min=3,max=20"`
 }
 
-func (cate *Category) Save() error {
+func (cate *Category) checkCate() error {
 	// 正则判断名称是否正确
 	pat := `^[_0-9a-zA-Z]+$`
 	if ok, _ := regexp.MatchString(pat, cate.Name); !ok {
@@ -26,11 +25,39 @@ func (cate *Category) Save() error {
 		//说明该分类已经存在
 		return errors.New("category has been existed")
 	}
+	return nil
+}
+
+func (cate *Category) Save() error {
+	if err := cate.checkCate(); err != nil {
+		return err
+	}
 
 	// create
 	if err := DB.Create(&cate).Error; err != nil {
 		log.Println(err)
 		return errors.New("create category error")
+	}
+
+	return nil
+}
+
+func (cate *Category) Update(id int) error {
+	if err := cate.checkCate(); err != nil {
+		return err
+	}
+
+	upd := make(map[string]interface{})
+	upd["name"] = cate.Name
+
+	if err := DB.Where("id = ?", id).First(&cate).Error; err != nil {
+		log.Println(err)
+		return errors.New("category not existed")
+	}
+
+	if err := DB.Model(&cate).Updates(upd).Error; err != nil {
+		log.Println(err)
+		return errors.New("update category error")
 	}
 
 	return nil

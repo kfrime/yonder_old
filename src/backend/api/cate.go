@@ -74,14 +74,16 @@ func CateUpdate(c *gin.Context)  {
 	}
 
 	var cate model.Category
-	err = model.DB.Where("id = ?", cateId).Find(&cate).Error
-	if err != nil {
+	if err := c.ShouldBindJSON(&cate); err != nil {
 		log.Println(err)
-		SendErrResp(c, "category not existed")
+		SendErrResp(c, "输入有误，请检查")
 		return
 	}
 
-	// todo: not finish yet
+	if err := cate.Update(cateId); err != nil {
+		SendErrResp(c, err.Error())
+		return
+	}
 
 	SendResp(c, gin.H{
 		"cate": cate,
