@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"encoding/gob"
 	"github.com/gin-gonic/gin"
-	"github.com/microcosm-cc/bluemonday"
 	"log"
 
 	"net/http"
@@ -48,11 +47,6 @@ func SendErrResp(c *gin.Context, msg string, args ...interface{})  {
 	})
 
 	c.Abort()
-}
-
-// It protects sites from XSS attacks
-func preventXSS(input string) string {
-	return bluemonday.UGCPolicy().Sanitize(input)
 }
 
 // Clone deep-copies src to dst

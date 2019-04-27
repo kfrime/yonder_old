@@ -29,7 +29,7 @@ func Signup(c *gin.Context)  {
 		return
 	}
 
-	validInput.Name = preventXSS(userInput.Name)
+	validInput.Name = model.PreventXSS(userInput.Name)
 	validInput.Name = strings.TrimSpace(userInput.Name)
 	if validInput.Name != userInput.Name {
 		SendErrResp(c, "名称中包含空格")
