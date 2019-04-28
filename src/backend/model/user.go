@@ -18,6 +18,7 @@ type User struct {
 	Passwd string `gorm:"not null" json:"-"`
 	Role   int    `gorm:"not null"`
 	Status int 	  `gorm:"not null"`
+	Articles []Article	`gorm:"foreignkey:ID"`
 }
 
 func (user User) CheckPasswd(passwd string) bool {

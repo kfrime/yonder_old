@@ -12,8 +12,8 @@ func migrate()  {
 	db := model.DB
 
 	db.AutoMigrate(&model.User{})
-
 	db.AutoMigrate(&model.Category{})
+	db.AutoMigrate(&model.Article{})
 }
 
 func main() {

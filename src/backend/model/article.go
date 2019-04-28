@@ -1,15 +1,14 @@
 package model
 
 import (
-	"time"
+	"github.com/jinzhu/gorm"
 )
 
 type Article struct {
-	Id 			uint32
-	AuthorId 	uint32
-	CateId 		uint32
-	Title 		string
-	created 	time.Duration
-	updated 	time.Duration
+	gorm.Model
+	UserId 		uint	`gorm:"not null;index" json:"userId"`
+	User 		User
+	//CateId 		uint 	`gorm:"not null;index" json:"userId" binding:"required"`
+	//Category 	Category
+	Title 		string	`gorm:"not null;index" json:"title" binding:"required,min=3,max=20"`
 }
-
