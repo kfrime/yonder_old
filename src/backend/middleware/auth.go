@@ -31,7 +31,7 @@ func getUser(c *gin.Context) (model.User, error)  {
 	return user, nil
 }
 
-func LoginRequired(c *gin.Context)  {
+func LoginRequired(c *gin.Context) {
 	// todo: 后续可以通过 jwt 验证
 	user, err := getUser(c)
 	if err != nil {
@@ -40,5 +40,22 @@ func LoginRequired(c *gin.Context)  {
 	}
 
 	c.Set("user", user)
+	c.Next()
+}
+
+func AdminRequired(c *gin.Context) {
+	user, err := getUser(c)
+	if err != nil {
+		api.SendErrResp(c, "not login")
+		return
+	}
+
+	if user.Role != model.UserRoleAdmin {
+		api.SendErrResp(c, "permission denied")
+		return
+	}
+
+	c.Set("user", user)
+	c.Set("admin", user)
 	c.Next()
 }
