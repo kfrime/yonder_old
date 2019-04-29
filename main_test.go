@@ -7,7 +7,7 @@ import (
 	"testing"
 )
 
-func TestUser(t *testing.T)  {
+func TestUser(t *testing.T) {
 	db := model.DB
 
 	db.AutoMigrate(&model.User{})
@@ -15,8 +15,8 @@ func TestUser(t *testing.T)  {
 
 	// 创建
 	db.Create(&model.User{
-		Name: "jack",
-		Role: model.UserRoleNormal,
+		Name:   "jack",
+		Role:   model.UserRoleNormal,
 		Status: model.UserStatusActive,
 	})
 
@@ -35,7 +35,7 @@ func TestUser(t *testing.T)  {
 	//db.Delete(&user)
 }
 
-func TestRedis(t *testing.T)  {
+func TestRedis(t *testing.T) {
 	rds := model.RedisPool.Get()
 	defer rds.Close()
 

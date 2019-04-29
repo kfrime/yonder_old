@@ -1,4 +1,4 @@
-// blog server main 
+// blog server main
 
 package main
 
@@ -8,7 +8,7 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func migrate()  {
+func migrate() {
 	db := model.DB
 
 	db.AutoMigrate(&model.User{})
@@ -35,4 +35,3 @@ func main() {
 
 	app.Run(":6060")
 }
-
