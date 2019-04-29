@@ -65,6 +65,8 @@ func Signup(c *gin.Context)  {
 
 // user login in
 func Login(c *gin.Context)  {
+	// todo: 避免多次重复登陆
+
 	type UserLogin struct {
 		Name 		string 	`json:"name" binding:"required,min=4,max=20"`
 		Password 	string 	`json:"password" binding:"required,min=3,max=20"`

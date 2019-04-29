@@ -85,8 +85,6 @@ func GetUserIdByToken(token string) (uint, error) {
 	return uint(userId), nil
 }
 
-
-
 // user info to redis
 func SaveUserToRedis(user User) error {
 	userKey := fmt.Sprintf("user:%d", user.ID)
