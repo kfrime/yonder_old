@@ -58,7 +58,6 @@ func CateCreate(c *gin.Context)  {
 	SendResp(c, gin.H{
 		"cate": cate,
 	})
-
 }
 
 func CateUpdate(c *gin.Context)  {
