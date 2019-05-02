@@ -8,8 +8,8 @@ import (
 
 type Article struct {
 	gorm.Model
-	UserId uint `gorm:"not null;index" json:"userId"`
-	User   User
+	UserId uint `gorm:"not null;index"`
+	//User   User
 	//CateId 		uint 	`gorm:"not null;index" json:"userId" binding:"required"`
 	//Category 	Category
 	Title string `gorm:"not null;index" json:"title" binding:"required,min=3,max=20"`
