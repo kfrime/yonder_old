@@ -12,7 +12,7 @@ type Article struct {
 	//User   User
 	//CateId 		uint 	`gorm:"not null;index" json:"userId" binding:"required"`
 	//Category 	Category
-	Title string `gorm:"not null;index" json:"title" binding:"required,min=3,max=20"`
+	Title string `gorm:"not null;index" binding:"required,min=3,max=20"`
 }
 
 func (ac *Article) checkTitle() error {
@@ -40,7 +40,7 @@ func (ac *Article) Update(id int) error {
 
 	upd := make(map[string]interface{})
 	upd["title"] = ac.Title
-	upd["userId"] = ac.UserId
+	//upd["userId"] = ac.UserId
 
 	if err := DB.Where("id = ?", id).First(&ac).Error; err != nil {
 		log.Println(err)
