@@ -2,6 +2,7 @@ package middleware
 
 import (
 	"backend/api"
+	"backend/config"
 	"backend/model"
 	"errors"
 	"github.com/gin-gonic/gin"
@@ -50,7 +51,8 @@ func AdminRequired(c *gin.Context) {
 		return
 	}
 
-	if user.Role != model.UserRoleAdmin {
+	adminName := config.AllConfig.Admin.Name
+	if user.Role != model.UserRoleAdmin && user.Name == adminName {
 		api.SendErrResp(c, "permission denied")
 		return
 	}

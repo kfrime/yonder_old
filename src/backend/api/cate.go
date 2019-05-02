@@ -105,7 +105,7 @@ func CateDestroy(c *gin.Context)  {
 
 	if err := model.DB.Delete(&cate).Error; err != nil {
 		log.Println(err)
-		SendErrResp(c, "delele category error")
+		SendErrResp(c, "delete category error")
 		return
 	}
 

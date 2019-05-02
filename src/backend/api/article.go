@@ -128,5 +128,26 @@ func ArticleUpdate(c *gin.Context)  {
 }
 
 func ArticleDestroy(c *gin.Context)  {
+	id, err := strconv.Atoi(c.Param("id"))
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "invalid article id")
+		return
+	}
 
+	var ac model.Article
+	err = model.DB.First(&ac, "id = ?", id).Error
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "article not existed")
+		return
+	}
+
+	if err := model.DB.Delete(&ac).Error; err != nil {
+		log.Println(err)
+		SendErrResp(c, "delete article error")
+		return
+	}
+
+	SendResp(c, gin.H{})
 }
