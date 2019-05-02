@@ -5,8 +5,20 @@ import (
 	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
+	"time"
 )
 
+// for article list
+type SimpleArticle struct {
+	ID        uint
+	CreatedAt time.Time
+	UpdatedAt time.Time
+	Title 	  string
+	UserId 	  uint
+	Username  string
+}
+
+// for article retrieve
 type ArticleDetail struct {
 	model.Article
 	User model.User
@@ -16,11 +28,22 @@ func ArticleList(c *gin.Context)  {
 	// todo: page and limit
 	// todo: filter by cateId
 
-	//val, _ := c.Get("user")		// interface{}
-	//user := val.(model.User)
+	var al []SimpleArticle
 
-	//sql := `
-	//SELECT * FROM articles a INNER JOIN users u ON a.userId = u.id `
+	var sql = `
+	SELECT a.id, a.title, a.created_at, a.updated_at, a.user_id, b.name as username 
+	FROM articles a INNER JOIN users b ON a.user_id = b.id 
+	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL;`
+
+	if err := model.DB.Raw(sql).Scan(&al).Error; err != nil {
+		log.Println(err)
+		SendErrResp(c, "can not get article list")
+		return
+	}
+
+	SendResp(c, gin.H{
+		"al": al,
+	})
 }
 
 func ArticleRetrieve(c *gin.Context)  {
