@@ -14,6 +14,8 @@ func migrate() {
 	db.AutoMigrate(&model.User{})
 	db.AutoMigrate(&model.Category{})
 	db.AutoMigrate(&model.Article{})
+
+	model.CreateAdminUser()
 }
 
 func main() {

@@ -27,10 +27,16 @@ type ServerConfig struct {
 	Salt	string
 }
 
+type AdminConfig struct {
+	Name 		string
+	Password 	string
+}
+
 type allConfig struct {
 	Database 	DbConfig		`json:"database"`
 	Redis		RedisConfig		`json:"redis"`
 	Server 		ServerConfig 	`json:"server"`
+	Admin 		AdminConfig 	`json:"admin"`
 }
 
 // 加载json配置

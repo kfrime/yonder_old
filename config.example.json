@@ -15,5 +15,9 @@
   },
   "server": {
     "salt": "a secret key"
+  },
+  "admin": {
+    "name": "",
+    "password": ""
   }
 }

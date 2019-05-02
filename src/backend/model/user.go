@@ -125,6 +125,32 @@ func GetUserFromRedis(userId uint) (User, error) {
 	return user, nil
 }
 
+
+func CreateAdminUser() {
+	adminName := config.AllConfig.Admin.Name
+	adminPasswd := config.AllConfig.Admin.Password
+	if (adminName == "") || (adminPasswd == "") {
+		fmt.Println("admin name or password is invalid")
+		return
+	}
+
+	var user User
+	err := DB.First(&user, "name = ?", adminName).Error
+	if err == nil {
+		fmt.Println("admin user has existed")
+		return
+	}
+
+	admin := User{
+		Name: adminName,
+		Role: UserRoleAdmin,
+		Status: UserStatusActive,
+	}
+	admin.Passwd = admin.EncryptPasswd(adminPasswd)
+
+	DB.Create(&admin)
+}
+
 const (
 	UserRoleAdmin  = 1
 	UserRoleNormal = 2
