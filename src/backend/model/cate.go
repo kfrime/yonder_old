@@ -62,3 +62,15 @@ func (cate *Category) Update(id int) error {
 
 	return nil
 }
+
+// 分类是否存在，存在返回nil
+func IsCateExisted(id uint) error {
+	var cate Category
+	err := DB.Where("id = ?", id).Find(&cate).Error
+	if err != nil {
+		return errors.New("category not existed")
+	}
+
+	//说明该分类已经存在
+	return nil
+}

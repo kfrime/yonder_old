@@ -16,6 +16,8 @@ type SimpleArticle struct {
 	Title 	  string
 	UserId 	  uint
 	Username  string
+	CateId 	  uint
+	CateName  string
 }
 
 // for article retrieve
@@ -31,9 +33,10 @@ func ArticleList(c *gin.Context)  {
 	var al []SimpleArticle
 
 	var sql = `
-	SELECT a.id, a.title, a.created_at, a.updated_at, a.user_id, b.name as username 
+	SELECT a.id, a.title, a.created_at, a.updated_at, a.user_id, b.name as username, a.cate_id, c.name
 	FROM articles a INNER JOIN users b ON a.user_id = b.id 
-	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL;`
+	INNER JOIN categories c ON a.cate_id = c.id
+	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL;`
 
 	if err := model.DB.Raw(sql).Scan(&al).Error; err != nil {
 		log.Println(err)
