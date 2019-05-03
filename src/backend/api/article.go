@@ -15,15 +15,16 @@ type SimpleArticle struct {
 	UpdatedAt time.Time
 	Title 	  string
 	UserId 	  uint
-	Username  string
-	CateId 	  uint
-	CateName  string
+	Username  string		// sql field: username
+	CateId 	  uint			// sql field: cate_id
+	CateName  string 		// sql field: cate_name
 }
 
 // for article retrieve
 type ArticleDetail struct {
 	model.Article
 	User model.User
+	Category model.Category
 }
 
 func ArticleList(c *gin.Context)  {
@@ -33,7 +34,8 @@ func ArticleList(c *gin.Context)  {
 	var al []SimpleArticle
 
 	var sql = `
-	SELECT a.id, a.title, a.created_at, a.updated_at, a.user_id, b.name as username, a.cate_id, c.name
+	SELECT a.id, a.title, a.created_at, a.updated_at, a.user_id, b.name as username, 
+	a.cate_id, c.name as cate_name
 	FROM articles a INNER JOIN users b ON a.user_id = b.id 
 	INNER JOIN categories c ON a.cate_id = c.id
 	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL;`
@@ -67,10 +69,19 @@ func ArticleRetrieve(c *gin.Context)  {
 		return
 	}
 
+	// 作者
 	err = model.DB.Where("id = ?", ad.Article.UserId).Find(&ad.User).Error
 	if err != nil {
 		log.Println(err)
 		SendErrResp(c, "article author not existed")
+		return
+	}
+
+	// 分类
+	err = model.DB.Where("id = ?", ad.Article.CateId).Find(&ad.Category).Error
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "article category not existed")
 		return
 	}
 

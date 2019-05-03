@@ -12,11 +12,13 @@ type Article struct {
 	//User   User
 	CateId 		uint 	`gorm:"not null;index" binding:"required"`
 	//Category 	Category
-	Title string `gorm:"not null;index" binding:"required,min=3,max=20"`
+	Title 		string `gorm:"not null;index" binding:"required,min=3,max=20"`
+	Content  string 	`binding:"required"`
 }
 
 func (ac *Article) checkInput() error {
 	ac.Title = PreventXSS(ac.Title)
+	ac.Content = PreventXSS(ac.Content)
 
 	// 检查分类是否存在
 	if err := IsCateExisted(ac.CateId); err != nil{
