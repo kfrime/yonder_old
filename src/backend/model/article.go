@@ -26,7 +26,7 @@ func (ac *Article) checkInput() error {
 	}
 
 	// 同标题的文章是否存在
-	err := DB.Where("title = ?", ac.Title).Find(&ac).Error
+	err := DB.Select("id").Where("title = ?", ac.Title).Find(&ac).Error
 	if err == nil {
 		//说明该标题已经存在
 		return errors.New("article has been existed")
@@ -55,6 +55,7 @@ func (ac *Article) Update(id int) error {
 	upd := make(map[string]interface{})
 	upd["title"] = ac.Title
 	upd["cateId"] = ac.CateId
+	upd["content"] = ac.Content
 	//upd["userId"] = ac.UserId
 
 	if err := DB.Where("id = ?", id).First(&ac).Error; err != nil {
