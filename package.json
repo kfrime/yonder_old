@@ -1,0 +1,9 @@
+{
+  "name": "yonder_frontend",
+  "scripts": {
+    "dev": "nuxt"
+  },
+  "dependencies": {
+    "nuxt": "^2.7.1"
+  }
+}
