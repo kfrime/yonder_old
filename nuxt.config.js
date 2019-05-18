@@ -7,5 +7,8 @@ module.exports = {
     link: [
       { rel: 'stylesheet', href: '/styles/index.css' }
     ]
+  },
+  build: {
+    vendor: ['axios', 'iview']
   }
 }
