@@ -1,9 +1,13 @@
 {
   "name": "yonder_frontend",
   "scripts": {
-    "dev": "nuxt"
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start"
   },
   "dependencies": {
+    "axios": "^0.18.0",
+    "iview": "^3.4.1",
     "nuxt": "^2.7.1"
   }
 }
