@@ -11,5 +11,8 @@ module.exports = {
   },
   build: {
     vendor: ['axios', 'iview']
-  }
+  },
+  plugins: [
+    { src: '~/plugins/iview.js', ssr: true }
+  ]
 }
