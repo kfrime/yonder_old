@@ -1,25 +1,21 @@
 <template>
   <div class="app-header">
-    <Menu mode="horizontal" :theme="menu_theme">
+    <Menu mode="horizontal" :theme="menu_theme" @on-select="navRoute">
+      <div class="nav-header">
+
       <div class="app-logo">
-        <!--<a href="/">Yonder</a>-->
-        <nuxt-link to="/">Yonder</nuxt-link>
+        <a href="/">Yonder</a>
       </div>
-      <MenuItem name="home">
-        <nuxt-link to="/">Home</nuxt-link>
-      </MenuItem>
-      <MenuItem name="archive">
-        <nuxt-link to="/archive">Archive</nuxt-link>
-      </MenuItem>
-      <MenuItem name="about">About</MenuItem>
-      <MenuItem name="search">
-        <div>
-          <Input suffix="ios-search" placeholder="Enter text" style="width: auto" />
-        </div>
-      </MenuItem>
       <div class="app-header-right">
+        <MenuItem name="home">Home</MenuItem>
+        <MenuItem name="archive" >Archive</MenuItem>
+        <MenuItem name="about">About</MenuItem>
         <MenuItem name="signup">Sign up</MenuItem>
         <MenuItem name="login">Login</MenuItem>
+      </div>
+      <div class="app-header-search">
+        <Input suffix="ios-search" placeholder="Enter text"/>
+      </div>
       </div>
     </Menu>
   </div>
@@ -29,7 +25,12 @@
   export default {
     data () {
       return {
-        menu_theme: 'dark'
+        menu_theme: 'light'
+      }
+    },
+    methods: {
+      navRoute (name) {
+        console.log("name:", name)
       }
     }
   }
@@ -38,14 +39,23 @@
 <style scoped>
   .app-header {
     position: relative;
-    /*overflow: hidden;*/
+    overflow: hidden;
+  }
+  .nav-header {
+    /*margin: 0 15%;*/
   }
   .app-logo {
     position: relative;
     float: left;
     color: rgba(255,255,255,.7);
     font-size: 20px;
-    /*margin-left: 16.2rem;*/
+    padding: 0 20px;
+  }
+  .app-header-search{
+    position: relative;
+    float: right;
+    display: inline;
+    /*position: center;*/
     padding: 0 20px;
   }
   .app-header-right {
