@@ -16,7 +16,7 @@
       </div>
       <div class="app-header-right">
         <MenuItem name="signup">Sign up</MenuItem>
-        <MenuItem name="login">Sign in</MenuItem>
+        <MenuItem name="signin">Sign in</MenuItem>
       </div>
     </Menu>
   </div>
@@ -32,6 +32,26 @@
     methods: {
       navRoute (name) {
         console.log("name:", name)
+        switch (name) {
+          case 'home':
+            this.$router.push("/")
+            break
+          case 'archive':
+            this.$router.push("/archive")
+            break
+          case 'about':
+            this.$router.push("/about")
+            break
+          case 'signup':
+            this.$router.push("/signup")
+            break
+          case 'signin':
+            this.$router.push("/signin")
+            break
+          default:
+            console.log("page not found")
+        }
+
       }
     }
   }
