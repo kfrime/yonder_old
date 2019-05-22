@@ -31,7 +31,6 @@
     },
     methods: {
       navRoute (name) {
-        console.log("name:", name)
         switch (name) {
           case 'home':
             this.$router.push("/")
@@ -49,6 +48,7 @@
             this.$router.push("/signin")
             break
           default:
+            // todo: page not found
             console.log("page not found")
         }
 
