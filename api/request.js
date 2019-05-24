@@ -12,6 +12,7 @@ function send(key, options) {
 
     let url = apiConf.url
     console.log("url:", url)
+    console.log("env", process.env.NODE_ENV)
 
     let axiosConf = {
       method: apiConf.method,

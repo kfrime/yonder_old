@@ -15,5 +15,19 @@ module.exports = {
   plugins: [
     { src: '~/plugins/iview.js', ssr: true }
     // { src: '~/plugins/iview.js', mode: "server"}
+  ],
+  modules: [
+    '@nuxtjs/axios',
+    '@nuxtjs/proxy'
+  ],
+  proxy: [
+    [
+      '/api',{
+      target: 'http://localhost:6060',
+      // target: 'https://elm-api.caibowen.net',
+      changeOrigin: true,
+      // pathRewrite: { '^/api' : '/' }
+    }
+    ]
   ]
 }
