@@ -9,6 +9,10 @@ module.exports = {
       { rel: 'stylesheet', href: '/styles/iview-3.4.1.css' }
     ]
   },
+  env: {
+    // 好像没起作用？
+    NODE_ENV: process.env.NODE_ENV || 'development'
+  },
   build: {
     vendor: ['axios', 'iview']
   },
