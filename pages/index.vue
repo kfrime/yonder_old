@@ -1,12 +1,18 @@
 <template>
   <div>
-    home page
-    <div v-for="ar in articles">{{ar}}</div>
+    <article-item
+      v-for="ar in articles"
+      :article="ar"
+      :key="ar.ID"
+    >
+    </article-item>
+    <!--<div v-for="ar in articles">{{ar}}</div>-->
   </div>
 </template>
 
 <script>
   import request from '~/api/request'
+  import ArticleItem from '~/components/articleItem'
 
   export default {
     asyncData (ctx) {
@@ -18,6 +24,8 @@
       ]).then(resp => {
         console.log("get data:", resp)
         let articles = resp[0].data.al || []
+        console.log("articles", articles)
+
         return {
           articles: articles
         }
@@ -31,5 +39,8 @@
       }
     },
     layout: 'default',
+    components: {
+      'article-item': ArticleItem
+    }
   }
 </script>
