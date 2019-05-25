@@ -12,7 +12,7 @@
 
 <script>
   import request from '~/api/request'
-  import ArticleItem from '~/components/articleItem'
+  import ArticleItem from '~/components/ArticleItem'
 
   export default {
     asyncData (ctx) {

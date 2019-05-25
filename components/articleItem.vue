@@ -37,12 +37,4 @@
   .article-cell {
     padding: 8px;
   }
-  .title {
-    padding-bottom: 8px;
-    font-size: 20px;
-    font-weight: normal;
-  }
-  .card-body {
-    /*padding: 0;*/
-  }
 </style>
