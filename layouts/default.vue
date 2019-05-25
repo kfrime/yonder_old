@@ -3,7 +3,7 @@
     <app-header />
     <div class="app-container">
       <!-- 间隔16px -->
-      <Row :gutter="16">
+      <Row :gutter="32">
         <!--<Col span="3">a</Col>-->
         <Col span="16">
           <nuxt />
