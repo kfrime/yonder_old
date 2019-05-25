@@ -5,7 +5,7 @@
     "Title": "lua", "UserId": 1, "Username": "admin", "CateId": 1, "CateName": "lua" }
     -->
     <Card>
-      <p slot="title">
+      <p slot="title" class="article-title">
         {{article.Title}}
       </p>
       <ButtonGroup slot="extra" v-if="isAdmin">
@@ -36,5 +36,8 @@
 <style scoped>
   .article-cell {
     padding: 8px;
+  }
+  .article-title {
+    font-size: 20px;
   }
 </style>
