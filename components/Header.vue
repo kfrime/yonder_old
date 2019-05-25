@@ -67,6 +67,7 @@
     float: left;
     color: rgba(255,255,255,.7);
     font-size: 20px;
+    font-weight: bold;
     padding: 0 40px;
   }
   .app-header-search{

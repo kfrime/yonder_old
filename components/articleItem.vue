@@ -5,11 +5,14 @@
     "Title": "lua", "UserId": 1, "Username": "admin", "CateId": 1, "CateName": "lua" }
     -->
     <Card>
-      <p slot="title">{{article.Title}}</p>
       <div class="card-body">
-        <Button type="text">{{article.Username}}</Button>
-        <Button type="text">{{article.UpdatedAt}}</Button>
-        <Button type="text">{{article.CateName}}</Button>
+        <div class="title">
+          <a>{{article.Title}}</a>
+        </div>
+        <!--<br/>-->
+        <Button :size="buttonSize" type="default">{{article.Username}}</Button>
+        <Button :size="buttonSize" type="default">{{article.UpdatedAt}}</Button>
+        <Button :size="buttonSize" type="info" shape="circle">{{article.CateName}}</Button>
       </div>
     </Card>
   </div>
@@ -18,6 +21,11 @@
 <script>
   export default {
     props: ['article'],
+    data () {
+      return {
+        buttonSize: "small"
+      }
+    }
   }
 </script>
 
@@ -25,7 +33,12 @@
   .article-cell {
     padding: 8px;
   }
+  .title {
+    padding-bottom: 8px;
+    font-size: 20px;
+    font-weight: normal;
+  }
   .card-body {
-    padding: 0;
+    /*padding: 0;*/
   }
 </style>
