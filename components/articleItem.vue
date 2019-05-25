@@ -5,11 +5,14 @@
     "Title": "lua", "UserId": 1, "Username": "admin", "CateId": 1, "CateName": "lua" }
     -->
     <Card>
+      <p slot="title">
+        {{article.Title}}
+      </p>
+      <ButtonGroup slot="extra" v-if="isAdmin">
+        <Button :size="buttonSize"><Icon type="ios-code" /></Button>
+        <!--<Button :size="buttonSize"><Icon type="ios-close" /></Button>-->
+      </ButtonGroup>
       <div class="card-body">
-        <div class="title">
-          <a>{{article.Title}}</a>
-        </div>
-        <!--<br/>-->
         <Button :size="buttonSize" type="default">{{article.Username}}</Button>
         <Button :size="buttonSize" type="default">{{article.UpdatedAt}}</Button>
         <Button :size="buttonSize" type="info" shape="circle">{{article.CateName}}</Button>
@@ -23,7 +26,8 @@
     props: ['article'],
     data () {
       return {
-        buttonSize: "small"
+        buttonSize: "small",
+        isAdmin: true
       }
     }
   }
