@@ -15,10 +15,16 @@ const store = () => new Vuex.Store({
 })
 
 export const state = () => {
-  artilces: []
+  return {
+    cates: [],
+    articles: []
+  }
 }
 
 export const mutations = {
+  setCates (state, cates) {
+    state.cates = cates
+  },
   setArticles (state, articles) {
     state.articles = articles
   }

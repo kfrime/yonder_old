@@ -10,6 +10,10 @@ const apiList = {
   getArticles: {
     url: baseUrl + "/articles",
     method: "GET"
+  },
+  getCates: {
+    url: baseUrl + "/categories",
+    method: "GET"
   }
 }
 

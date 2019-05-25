@@ -18,13 +18,23 @@
     asyncData (ctx) {
       // console.log("index asyncData")
       return Promise.all([
+        request.getCates({
+          client: ctx.req
+        }),
         request.getArticles({
           client: ctx.req,
         })
       ]).then(resp => {
         console.log("get data:", resp)
-        let articles = resp[0].data.al || []
+
+        let cates = resp[0].data.cateList || []
+        console.log("cates", cates)
+        ctx.store.commit('setCates', cates)
+
+        // articles
+        let articles = resp[1].data.al || []
         console.log("articles", articles)
+        ctx.store.commit('setArticles', articles)
 
         return {
           articles: articles
