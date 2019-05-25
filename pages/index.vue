@@ -17,13 +17,14 @@
       ]).then(data => {
         console.log("get data:", data)
       }).catch(err => {
-        // console.log(err.message)
-        ctx.error({ message: "not found", statusCode: 404 })
+        console.log(err.message)
+        // ctx.error({ message: "not found", statusCode: 404 })
       })
     },
     data () {
       return {
       }
-    }
+    },
+    layout: 'default',
   }
 </script>
