@@ -1,6 +1,7 @@
 <template>
   <div>
     home page
+    <div v-for="ar in articles">{{ar}}</div>
   </div>
 </template>
 
@@ -9,16 +10,20 @@
 
   export default {
     asyncData (ctx) {
-      console.log("index asyncData")
+      // console.log("index asyncData")
       return Promise.all([
         request.getArticles({
           client: ctx.req,
         })
-      ]).then(data => {
-        console.log("get data:", data)
+      ]).then(resp => {
+        console.log("get data:", resp)
+        let articles = resp[0].data.al || []
+        return {
+          articles: articles
+        }
       }).catch(err => {
-        console.log(err.message)
-        // ctx.error({ message: "not found", statusCode: 404 })
+        console.log("catch error:", err)
+        ctx.error({ message: "not found", statusCode: 404 })
       })
     },
     data () {
