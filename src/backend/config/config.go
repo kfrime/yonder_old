@@ -32,11 +32,16 @@ type AdminConfig struct {
 	Password 	string
 }
 
+type PageConfig struct {
+	Size 	uint
+}
+
 type allConfig struct {
 	Database 	DbConfig		`json:"database"`
 	Redis		RedisConfig		`json:"redis"`
 	Server 		ServerConfig 	`json:"server"`
 	Admin 		AdminConfig 	`json:"admin"`
+	Page 		PageConfig		`json:"page"`
 }
 
 // 加载json配置

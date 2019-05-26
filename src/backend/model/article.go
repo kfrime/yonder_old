@@ -52,6 +52,8 @@ func (ac *Article) Update(id int) error {
 		return err
 	}
 
+	// todo: 可优化，只有url中传进来的字段才更新
+	// 目前要求文章的所有字段都要传进来
 	upd := make(map[string]interface{})
 	upd["title"] = ac.Title
 	upd["cateId"] = ac.CateId

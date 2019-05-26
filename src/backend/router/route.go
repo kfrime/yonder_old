@@ -19,12 +19,12 @@ func Route(router *gin.Engine)  {
 	apiGrp.PUT("/category/:cateId", api.CateUpdate)
 	apiGrp.DELETE("/category/:cateId", api.CateDestroy)
 	apiGrp.GET("/category/:cateId", api.CateRetrieve)
-	apiGrp.GET("/category", api.CateList)
+	apiGrp.GET("/categories", api.CateList)
 
 	// 文章
 	apiGrp.POST("/article", middleware.AdminRequired, api.ArticleCreate)
 	apiGrp.PUT("/article/:id", middleware.AdminRequired, api.ArticleUpdate)
 	apiGrp.DELETE("/article/:id", middleware.AdminRequired, api.ArticleDestroy)
 	apiGrp.GET("/article/:id", api.ArticleRetrieve)
-	apiGrp.GET("/article", api.ArticleList)
+	apiGrp.GET("/articles", api.ArticleList)
 }

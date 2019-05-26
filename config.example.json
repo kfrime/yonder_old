@@ -19,5 +19,8 @@
   "admin": {
     "name": "",
     "password": ""
+  },
+  "page": {
+    "size": 10
   }
 }
