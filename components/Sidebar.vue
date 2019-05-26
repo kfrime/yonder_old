@@ -1,6 +1,6 @@
 <template>
   <div class="cate-cell">
-    <Card>
+    <Card dis-hover>
       <p slot="title" class="cate-card-title">文章分类</p>
       <ButtonGroup slot="extra" v-if="isAdmin">
         <Button :size="buttonSize"><Icon type="ios-code" /></Button>

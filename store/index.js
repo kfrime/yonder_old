@@ -19,6 +19,7 @@ Vue.use(Vuex)
 // })
 
 export const state = () => ({
+  // todo: isAdmin ?
   isAdmin: true,
   cates: [],
   articles: []

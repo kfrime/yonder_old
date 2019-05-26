@@ -27,6 +27,7 @@
       ]).then(resp => {
         // console.log("get data:", resp)
 
+        // categories
         let cates = resp[0].data.cateList || []
         // console.log("cates", cates)
         ctx.store.commit('setCates', cates)

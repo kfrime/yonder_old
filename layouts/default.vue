@@ -2,8 +2,8 @@
   <div>
     <app-header />
     <div class="app-container">
-      <!-- 间隔16px -->
-      <Row :gutter="32">
+      <!-- 间隔32px -->
+      <Row :gutter="16">
         <!--<Col span="3">a</Col>-->
         <Col span="16">
           <nuxt />
@@ -31,6 +31,7 @@
 
 <style scoped>
   .app-container {
+    background:#eee;
     width: 1080px;
     margin: 20px auto;
     min-height: 300px;
