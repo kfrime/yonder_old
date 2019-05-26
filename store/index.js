@@ -19,6 +19,7 @@ Vue.use(Vuex)
 // })
 
 export const state = () => ({
+  isAdmin: true,
   cates: [],
   articles: []
 })

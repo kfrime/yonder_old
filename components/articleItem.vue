@@ -28,7 +28,7 @@
     data () {
       return {
         buttonSize: "small",
-        isAdmin: true
+        isAdmin: this.$store.state.isAdmin || false,
       }
     }
   }
