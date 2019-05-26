@@ -11,6 +11,11 @@ const apiList = {
     url: baseUrl + "/articles",
     method: "GET"
   },
+  // 获取文章详情
+  getArticleDetail: {
+    url: baseUrl + "/article/:id",
+    method: "GET"
+  },
   getCates: {
     url: baseUrl + "/categories",
     method: "GET"
