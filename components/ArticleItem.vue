@@ -5,8 +5,7 @@
     "Title": "lua", "UserId": 1, "Username": "admin", "CateId": 1, "CateName": "lua" }
     -->
     <Card :bordered="false">
-      <!--todo: to article detail page-->
-      <a slot="title" class="article-title">
+      <a slot="title" class="article-title"  @click.prevent="toDetailPage">
         {{article.Title}}
       </a>
       <!--todo: edit article-->
@@ -31,6 +30,11 @@
       return {
         buttonSize: "small",
         isAdmin: this.$store.state.isAdmin || false,
+      }
+    },
+    methods: {
+      toDetailPage () {
+        this.$router.push("/articles/" + this.article.ID)
       }
     }
   }
