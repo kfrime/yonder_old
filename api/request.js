@@ -6,7 +6,7 @@ const apiList = require('~/api/api')
 function send(key, options) {
   return new Promise( (resolve, reject) => {
     console.log("send request, key:", key)
-    console.log("typeof window:", typeof window)
+    // console.log("typeof window:", typeof window)
     let apiConf = apiList[key]
     options = options || {}
     apiConf.method = apiConf.method.toLocaleLowerCase()

@@ -5,16 +5,18 @@
     "Title": "lua", "UserId": 1, "Username": "admin", "CateId": 1, "CateName": "lua" }
     -->
     <Card :bordered="false">
-      <p slot="title" class="article-title">
+      <!--todo: to article detail page-->
+      <a slot="title" class="article-title">
         {{article.Title}}
-      </p>
+      </a>
+      <!--todo: edit article-->
       <ButtonGroup slot="extra" v-if="isAdmin">
         <Button :size="buttonSize"><Icon type="ios-code" /></Button>
-        <!--<Button :size="buttonSize"><Icon type="ios-close" /></Button>-->
       </ButtonGroup>
+
       <div class="card-body">
-        <Button :size="buttonSize" type="default">{{article.Username}}</Button>
-        <Button :size="buttonSize" type="default">{{article.UpdatedAt}}</Button>
+        <Button :size="buttonSize" type="text">{{article.Username}}</Button>
+        <Button :size="buttonSize" type="text">{{article.UpdatedAt}}</Button>
         <!-- todo: to category page -->
         <Button :size="buttonSize" type="info" shape="circle">{{article.CateName}}</Button>
       </div>
