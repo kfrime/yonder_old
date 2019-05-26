@@ -15,6 +15,7 @@
       <div class="card-body">
         <Button :size="buttonSize" type="default">{{article.Username}}</Button>
         <Button :size="buttonSize" type="default">{{article.UpdatedAt}}</Button>
+        <!-- todo: to category page -->
         <Button :size="buttonSize" type="info" shape="circle">{{article.CateName}}</Button>
       </div>
     </Card>

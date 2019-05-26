@@ -31,7 +31,7 @@
 
 <style scoped>
   .app-container {
-    width: 1200px;
+    width: 1080px;
     margin: 20px auto;
     min-height: 300px;
   }
