@@ -5,15 +5,38 @@ const apiList = require('~/api/api')
 
 function send(key, options) {
   return new Promise( (resolve, reject) => {
-    console.log("send request, key:", key)
-    // console.log("typeof window:", typeof window)
     let apiConf = apiList[key]
     options = options || {}
     apiConf.method = apiConf.method.toLocaleLowerCase()
-
     let url = apiConf.url
-    console.log("url:", url)
-    // console.log("env:", process.env.NODE_ENV)
+
+    // url: /articles/:id
+    // params: { id: 1 }
+    if (options.params) {
+      let params = options.params
+      for (let key in params) {
+        if (params.hasOwnProperty(key)) {
+          url = url.replace(":" + key, params[key])
+        }
+      }
+    }
+
+    // url: /articles
+    // query: { page: 1, rows: 10 }
+    if (options.query) {
+      let query = options.query
+      let queryArr = []
+      for (let key in query) {
+        if (query.hasOwnProperty(key)) {
+          queryArr.push(key + '=' + query[key])
+        }
+      }
+      if (queryArr.length > 0) {
+        url += '?' + queryArr.join('&')
+      }
+    }
+
+    // console.log("url:", url)
 
     let axiosConf = {
       method: apiConf.method,
@@ -21,6 +44,28 @@ function send(key, options) {
       headers: {}
     }
 
+    // headers
+    let client = options.client
+    if (typeof window === 'undefined' && !client) {
+      throw new Error(key + ":client can not be null")
+    }
+    if (client && client.headers) {
+      if (client.headers['user-agent']) {
+        axiosConf.headers['User-Agent'] = client.headers['user-agent']
+      }
+      if (client.headers['cookie']) {
+        axiosConf.headers['Cookie'] = client.headers['cookie']
+      }
+    }
+
+    // body
+    if (apiConf.method === 'post' || apiConf.method === 'put') {
+      axiosConf.body = options.body || {}
+    }
+
+    console.log("axios config:", axiosConf)
+
+    // request
     axios(axiosConf)
       .then( function (response) {
         return resolve(response.data)
