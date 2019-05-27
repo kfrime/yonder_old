@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="app-body">
     <app-header />
     <div class="app-container">
       <!-- 间隔32px -->
@@ -30,10 +30,12 @@
 </script>
 
 <style scoped>
-  .app-container {
+  .app-body {
     background:#eee;
+  }
+  .app-container {
     width: 1080px;
-    margin: 20px auto;
-    min-height: 300px;
+    margin: 8px auto;
+    min-height: 400px;
   }
 </style>
