@@ -1,8 +1,5 @@
 <template>
   <!-- 暂时没用到本组件 -->
-  <!--
-  { "ID": 1, "CreatedAt": "2019-05-03T18:46:33+08:00", "UpdatedAt": "2019-05-03T18:46:33+08:00",
-   "DeletedAt": null, "Name": "lua" }-->
   <div>
     <Button long type="default" class="cate-card-item">
       <!-- todo: to category page -->

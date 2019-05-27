@@ -1,9 +1,5 @@
 <template>
   <div class="article-cell">
-    <!--
-    { "ID": 1, "CreatedAt": "2019-05-03T18:46:48+08:00", "UpdatedAt": "2019-05-03T18:46:48+08:00",
-    "Title": "lua", "UserId": 1, "Username": "admin", "CateId": 1, "CateName": "lua" }
-    -->
     <Card :bordered="false">
       <a slot="title" class="article-title"  @click.prevent="toDetailPage">
         {{article.Title}}
