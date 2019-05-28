@@ -30,7 +30,7 @@
     },
     methods: {
       toDetailPage () {
-        this.$router.push("/articles/" + this.article.ID)
+        this.$router.push("/article/" + this.article.ID)
       }
     }
   }
