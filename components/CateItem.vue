@@ -1,5 +1,4 @@
 <template>
-  <!-- 暂时没用到本组件 -->
   <div>
     <Button long type="default" class="cate-card-item">
       <!-- todo: to category page -->
