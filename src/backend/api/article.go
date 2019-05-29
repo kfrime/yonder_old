@@ -2,6 +2,7 @@ package api
 
 import (
 	"backend/model"
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
@@ -31,14 +32,38 @@ func ArticleList(c *gin.Context)  {
 	// todo: page and limit
 	// todo: filter by cateId
 
+	var cateId int
+	var err error
 	var al []SimpleArticle
+
+	cateIdStr := c.Query("cateId")
+	if cateIdStr == "" {
+		cateId = 0
+	} else if cateId, err = strconv.Atoi(cateIdStr); err != nil {
+		log.Println(err)
+		SendErrResp(c, "cate id is not valid")
+		return
+	}
+
+	var cate model.Category
+	if cateId != 0 && model.DB.First(&cate, cateId).Error != nil {
+		SendErrResp(c, "cate id is not valid")
+		return
+	}
+
+	// 不传cateId参数呢？
 
 	var sql = `
 	SELECT a.id, a.title, a.created_at, a.updated_at, a.user_id, b.name as username, 
 	a.cate_id, c.name as cate_name
-	FROM articles a INNER JOIN users b ON a.user_id = b.id 
+	FROM articles a 
+	INNER JOIN users b ON a.user_id = b.id 
 	INNER JOIN categories c ON a.cate_id = c.id
-	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL;`
+	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL`
+
+	if cateId != 0 {
+		sql += fmt.Sprintf(` AND c.id = %d`, cateId)
+	}
 
 	if err := model.DB.Raw(sql).Scan(&al).Error; err != nil {
 		log.Println(err)

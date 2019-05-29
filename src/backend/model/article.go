@@ -13,7 +13,7 @@ type Article struct {
 	CateId 		uint 	`gorm:"not null;index" binding:"required"`
 	//Category 	Category
 	Title 		string `gorm:"not null;index" binding:"required,min=3,max=20"`
-	Content  string 	`binding:"required"`
+	Content   string 	`gorm:"type:text;not null" binding:"required"`
 }
 
 func (ac *Article) checkInput() error {
@@ -25,18 +25,19 @@ func (ac *Article) checkInput() error {
 		return err
 	}
 
-	// 同标题的文章是否存在
-	err := DB.Select("id").Where("title = ?", ac.Title).Find(&ac).Error
-	if err == nil {
-		//说明该标题已经存在
-		return errors.New("article has been existed")
-	}
 	return nil
 }
 
 func (ac *Article) Create() error {
 	if err := ac.checkInput(); err != nil {
 		return err
+	}
+
+	// 同标题的文章是否存在
+	err := DB.Select("id").Where("title = ?", ac.Title).Find(&ac).Error
+	if err == nil {
+		//说明该标题已经存在
+		return errors.New("article has been existed")
 	}
 
 	if err := DB.Create(ac).Error; err != nil {
@@ -50,6 +51,13 @@ func (ac *Article) Create() error {
 func (ac *Article) Update(id int) error {
 	if err := ac.checkInput(); err != nil {
 		return err
+	}
+
+	// 除了其自身外，同标题的文章是否存在
+	err := DB.Select("id").Where("id != ? and title = ?", id, ac.Title).Find(&ac).Error
+	if err == nil {
+		//说明该标题已经存在
+		return errors.New("article has been existed")
 	}
 
 	// todo: 可优化，只有url中传进来的字段才更新
