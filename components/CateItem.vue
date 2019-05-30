@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Button long type="default" class="cate-card-item">
+    <Button long type="default" class="cate-card-item" @click="toCatePage">
       <!-- todo: to category page -->
       <span class="cate-name">{{cate.Name}}</span>
 
@@ -22,8 +22,12 @@
       return {
         buttonSize: "small"
       }
-    }
-
+    },
+    methods: {
+      toCatePage () {
+        this.$router.push("/category/" + this.cate.ID)
+      }
+    },
   }
 </script>
 
