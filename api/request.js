@@ -60,7 +60,7 @@ function send(key, options) {
 
     // body
     if (apiConf.method === 'post' || apiConf.method === 'put') {
-      axiosConf.body = options.body || {}
+      axiosConf.data = options.body || {}
     }
 
     console.log("axios config:", axiosConf)

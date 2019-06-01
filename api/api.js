@@ -16,10 +16,19 @@ const apiList = {
     url: baseUrl + "/article/:id",
     method: "GET"
   },
+  // 分类列表
   getCates: {
     url: baseUrl + "/categories",
     method: "GET"
+  },
+  // 登陆
+  signin: {
+    url: baseUrl + "/user/login",
+    method: "POST"
   }
+
+  // 注册
+
 }
 
 module.exports = apiList
