@@ -34,6 +34,7 @@
       // console.log("article asyncData")
       console.log("params:", ctx.params)
       console.log("query:", ctx.query)
+      // 优化：分类列表可以不用每次都获取
 
       return Promise.all([
         request.getCates({

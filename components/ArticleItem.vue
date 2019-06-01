@@ -13,7 +13,9 @@
         <Button :size="buttonSize" type="text">{{article.Username}}</Button>
         <Button :size="buttonSize" type="text">{{article.CreatedAt}}</Button>
         <!-- todo: to category page -->
-        <Button :size="buttonSize" type="info" shape="circle">{{article.CateName}}</Button>
+        <Button :size="buttonSize" type="info" shape="circle" @click="toCatePage">
+          {{article.CateName}}
+        </Button>
       </div>
     </Card>
   </div>
@@ -31,6 +33,9 @@
     methods: {
       toDetailPage () {
         this.$router.push("/article/" + this.article.ID)
+      },
+      toCatePage () {
+        this.$router.push("/category/" + this.article.CateId)
       }
     }
   }
