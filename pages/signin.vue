@@ -36,6 +36,7 @@
     },
     methods: {
       login (name) {
+        let self = this
         this.$refs[name].validate((valid) => {
           if (!valid) {
             this.$Message.error('input error');
@@ -53,6 +54,8 @@
               if (resp.code === 0) {
                 // sigin success
                 this.$Message.info("signin success")
+                self.$store.commit("setToken", resp.data.token)
+                self.$store.commit("setUser", resp.data.user)
               } else {
                 this.$Message.error({
                   duration: 3,

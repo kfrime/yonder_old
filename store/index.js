@@ -18,11 +18,16 @@ Vue.use(Vuex)
 //   }
 // })
 
+const UserRoleAdmin = 1
+
+import { setTokenCookie } from "../libs/util";
+
 export const state = () => ({
-  // todo: isAdmin ?
-  isAdmin: true,
+  isAdmin: false,
   cates: [],
-  articles: []
+  articles: [],
+  token: null,
+  user: null,
 })
 
 export const mutations = {
@@ -31,7 +36,16 @@ export const mutations = {
   },
   setArticles (state, articles) {
     state.articles = articles
-  }
+  },
+  setToken (state, token) {
+    state.token = token
+    setTokenCookie(token)
+  },
+  setUser (state, user) {
+    state.user = user
+    // todo: admin name?
+    state.isAdmin = (user.Role === UserRoleAdmin)
+  },
 }
 
 // export default store

@@ -111,3 +111,36 @@
         }
     }
     ```
+    
+## signin
+    target: pages/signin.vue
+    
+    url: /api/user/login
+    method: POST
+    body: 
+    ```json
+    {
+    	"name": "username",
+    	"password": "xxx"
+    } 
+    ```
+    
+    result:
+    ```json
+    {
+        "code": 0,
+        "data": {
+            "token": "64b85f6b6bf2bb39eaffc25deecaefc2",
+            "user": {
+                "ID": 1,
+                "CreatedAt": "2019-05-03T18:46:04+08:00",
+                "UpdatedAt": "2019-05-03T18:46:04+08:00",
+                "DeletedAt": null,
+                "Name": "admin",
+                "Role": 1,
+                "Status": 1
+            }
+        },
+        "msg": "success"
+    }
+    ```
