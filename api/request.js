@@ -1,5 +1,3 @@
-import {setContext as process} from "../.nuxt/utils";
-
 const axios = require('axios')
 const apiList = require('~/api/api')
 
