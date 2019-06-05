@@ -63,7 +63,7 @@
                   content: resp.message || resp.msg,
                   })
               }
-              // this.$router.push('/')
+              this.$router.push('/')
             }
           ).catch(
             this.$Message.error({

@@ -15,8 +15,13 @@
         <Input suffix="ios-search" placeholder="search"/>
       </div>
       <div class="app-header-right">
-        <MenuItem name="signup">Sign up</MenuItem>
-        <MenuItem name="signin">Sign in</MenuItem>
+        <div v-if="user">
+          <MenuItem name="signout">Sign out</MenuItem>
+        </div>
+        <div v-else>
+          <MenuItem name="signup">Sign up</MenuItem>
+          <MenuItem name="signin">Sign in</MenuItem>
+        </div>
       </div>
     </Menu>
   </div>
@@ -26,6 +31,7 @@
   export default {
     data () {
       return {
+        user: this.$store.state.user,
         menu_theme: 'light'
       }
     },
