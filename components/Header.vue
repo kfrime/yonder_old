@@ -53,6 +53,10 @@
           case 'signin':
             this.$router.push("/signin")
             break
+          case 'signout':
+            console.log("sign out")
+            // todo: request to sign out
+            break
           default:
             // todo: page not found
             console.log("page not found")
