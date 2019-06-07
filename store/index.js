@@ -23,7 +23,8 @@ const UserRoleAdmin = 1
 import { setTokenCookie } from "../libs/util";
 
 export const state = () => ({
-  isAdmin: false,
+  // todo: isAdmin set to false
+  isAdmin: true,
   cates: [],
   articles: [],
   token: null,
@@ -44,7 +45,7 @@ export const mutations = {
   setUser (state, user) {
     state.user = user
     // todo: admin name?
-    state.isAdmin = (user.Role === UserRoleAdmin)
+    // state.isAdmin = (user.Role === UserRoleAdmin)
   },
 }
 
