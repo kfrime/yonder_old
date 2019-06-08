@@ -10,7 +10,8 @@
     "axios": "^0.18.0",
     "iview": "^3.4.1",
     "js-cookie": "^2.2.0",
-    "nuxt": "^2.7.1"
+    "nuxt": "^2.7.1",
+    "simplemde": "^1.11.2"
   },
   "devDependencies": {
     "@nuxtjs/axios": "^5.5.1",

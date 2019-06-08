@@ -15,8 +15,9 @@
           </Option>
         </Select>
       </FormItem>
-      <FormItem label="content" prop="content">
-        <Input type="textarea" v-model="formData.content" placeholder="content"></Input>
+      <FormItem prop="content">
+        <!--<Input type="textarea" v-model="formData.content" placeholder="content"></Input>-->
+        <md-editer v-model="formData.content"></md-editer>
       </FormItem>
       <FormItem>
         <Button type="primary" @click="saveArticle('formData')">Submit</Button>
@@ -30,6 +31,8 @@
 </template>
 
 <script>
+  import MarkdownEditer from '~/components/markdown'
+
   export default {
     props: [
       "user",
@@ -70,6 +73,9 @@
         })
       },
     },
+    components: {
+      "md-editer": MarkdownEditer,
+    }
     // middleware: "loginRequired",
   }
 </script>
