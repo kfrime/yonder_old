@@ -2,8 +2,7 @@
   <div>
     <Card :bordered="false">
       <p slot="title">
-        java
-        <!--{{cate.Title}}-->
+        {{cate.Name}}
       </p>
     </Card>
     <article-item
@@ -34,6 +33,7 @@
       // console.log("article asyncData")
       console.log("params:", ctx.params)
       console.log("query:", ctx.query)
+      let cateId = ctx.params.id
       // 优化：分类列表可以不用每次都获取
 
       return Promise.all([
@@ -43,22 +43,30 @@
         request.getArticles({
           client: ctx.req,
           query: {
-            cateId: ctx.params.id
+            cateId: cateId
           }
         })
       ]).then(resp => {
         console.log("get data:", resp)
         // categories
         let cates = resp[0].data.cateList || []
-        // console.log("cates", cates)
         ctx.store.commit('setCates', cates)
+
+        // 取出当前所属分类的详细信息
+        let cate = {}
+        for (let c of cates) {
+          if (c.ID.toString() === cateId) {
+            cate = c
+            break
+          }
+        }
 
         // articles
         let articles = resp[1].data.al || []
-        // console.log("articles", articles)
         ctx.store.commit('setArticles', articles)
 
         return {
+          cate: cate,
           articles: articles
         }
       }).catch(err => {
