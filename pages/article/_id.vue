@@ -4,7 +4,6 @@
       <Card dis-hover>
         <Breadcrumb>
           <BreadcrumbItem to="/">Home</BreadcrumbItem>
-          <!--todo: to category page-->
           <BreadcrumbItem :to="`/category/${article.Category.ID}`">{{article.Category.Name}}</BreadcrumbItem>
           <BreadcrumbItem>{{article.Title}}</BreadcrumbItem>
         </Breadcrumb>
@@ -19,7 +18,7 @@
         </div>
       </div>
       <ButtonGroup slot="extra" v-if="isAdmin">
-        <Button :size="buttonSize"><Icon type="ios-code" /></Button>
+        <Button :size="buttonSize" @click="updateArticle"><Icon type="ios-code" /></Button>
       </ButtonGroup>
 
       <div>
@@ -69,6 +68,11 @@
         console.log("catch error:", err)
         ctx.error({ message: "not found", statusCode: 404 })
       })
+    },
+    methods: {
+      updateArticle () {
+        this.$router.push("/article/update/" + this.article.ID)
+      }
     },
     layout: "nosidebar",
   }
