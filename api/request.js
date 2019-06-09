@@ -12,6 +12,7 @@ function send(key, options) {
     // params: { id: 1 }
     if (options.params) {
       let params = options.params
+      console.log("params:", params)
       for (let key in params) {
         if (params.hasOwnProperty(key)) {
           url = url.replace(":" + key, params[key])

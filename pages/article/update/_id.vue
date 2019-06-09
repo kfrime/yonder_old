@@ -52,6 +52,6 @@
       "article-editor": ArticleEditor,
     },
     layout: "nosidebar",
-    // todo: middleware: ""
+    middleware: "loginRequired"
   }
 </script>

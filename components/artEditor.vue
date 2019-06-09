@@ -1,7 +1,5 @@
 <template>
   <div>
-    <p>{{article}}</p>
-
     <Form ref="formData" :model="formData" :rules="validRules">
       <FormItem label="title" prop="title">
         <Input v-model="formData.title" placeholder="Enter a title"></Input>
@@ -48,7 +46,7 @@
       return {
         formData: {
           title: (this.article && this.article.Title) || '',
-          cateId: (this.article && this.article.Category.Id) || '',
+          cateId: (this.article && this.article.Category.ID) || '',
           content: (this.article && this.article.Content) || '',
         },
         validRules: {
@@ -76,7 +74,7 @@
 
           // 如果有article，表示是更新文章，否则是新建文章
           let sendReq = this.article ? request.updateArticle : request.createArticle
-          let params = this.article ? this.article.ID : null
+          let params = this.article ? { id: this.article.ID } : null
           let body = {
             title: this.formData.title,
             cateId: this.formData.cateId,
