@@ -1,2 +1,2 @@
-import MarkdownEditer from './markdown.vue'
-export default MarkdownEditer
+import MarkdownEditor from './markdown.vue'
+export default MarkdownEditor

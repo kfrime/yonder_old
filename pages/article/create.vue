@@ -1,16 +1,16 @@
 <template>
   <div>
-    <article-editer
+    <article-editor
       :user="user"
       :article="article"
       :cates="cates"
     >
-    </article-editer>
+    </article-editor>
   </div>
 </template>
 
 <script>
-  import ArticleEditer from "~/components/artEditer"
+  import ArticleEditor from "~/components/artEditor"
 
   export default {
     data () {
@@ -21,7 +21,7 @@
       }
     },
     components: {
-      "article-editer": ArticleEditer,
+      "article-editor": ArticleEditor,
     },
     layout: "nosidebar",
     // todo: middleware: ""

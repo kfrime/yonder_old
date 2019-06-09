@@ -17,21 +17,23 @@
       </FormItem>
       <FormItem prop="content">
         <!--<Input type="textarea" v-model="formData.content" placeholder="content"></Input>-->
-        <md-editer v-model="formData.content"></md-editer>
+        <div>
+          <md-editor v-model="formData.content"></md-editor>
+        </div>
       </FormItem>
       <FormItem>
         <Button type="primary" @click="saveArticle('formData')">Submit</Button>
       </FormItem>
     </Form>
 
-    <p>user: {{user}}</p>
-    <p>article: {{article}}</p>
-    <p>cates: {{cates}}</p>
+    <!--<p>user: {{user}}</p>-->
+    <!--<p>article: {{article}}</p>-->
+    <!--<p>cates: {{cates}}</p>-->
   </div>
 </template>
 
 <script>
-  import MarkdownEditer from '~/components/markdown'
+  import MarkdownEditor from '~/components/markdown'
 
   export default {
     props: [
@@ -74,7 +76,7 @@
       },
     },
     components: {
-      "md-editer": MarkdownEditer,
+      "md-editor": MarkdownEditor,
     }
     // middleware: "loginRequired",
   }

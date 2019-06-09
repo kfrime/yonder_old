@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="markdown-wrapper">
     <textarea ref="editor"></textarea>
   </div>
 </template>
@@ -9,7 +9,7 @@
   import 'simplemde/dist/simplemde.min.css'
 
   export default {
-    name: "MarkdownEditer",
+    name: "MarkdownEditor",
     props: {
       value: {
         type: String,
@@ -49,6 +49,9 @@
     mounted () {
       this.editor = new Simplemde(Object.assign(this.options, {
         element: this.$refs.editor,
+        indentWithTabs: false,
+        lineWrapping: false,
+        tabSize: 4,
       }))
 
       this.addEvents()
@@ -62,6 +65,14 @@
 
 <style lang="less">
   .markdown-wrapper{
+    font-size: 1rem;
+    /*line-height: 1.2rem;*/
+    line-height: 150%;
+
+    .CodeMirror {
+      height: 500px;
+    }
+
     .editor-toolbar.fullscreen{
       z-index: 9999;
     }
