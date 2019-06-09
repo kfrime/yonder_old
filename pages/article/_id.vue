@@ -5,8 +5,8 @@
         <Breadcrumb>
           <BreadcrumbItem to="/">Home</BreadcrumbItem>
           <!--todo: to category page-->
-          <BreadcrumbItem to="/">Components</BreadcrumbItem>
-          <BreadcrumbItem>Breadcrumb</BreadcrumbItem>
+          <BreadcrumbItem :to="`/category/${article.Category.ID}`">{{article.Category.Name}}</BreadcrumbItem>
+          <BreadcrumbItem>{{article.Title}}</BreadcrumbItem>
         </Breadcrumb>
       </Card>
     </div>
