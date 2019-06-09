@@ -26,7 +26,7 @@
         {{article.Content}}
       </div>
 
-      <div>pre article and next article</div>
+      <!-- todo: <div>pre article and next article</div>-->
     </Card>
     <!--todo: 添加文章目录 -->
   </div>

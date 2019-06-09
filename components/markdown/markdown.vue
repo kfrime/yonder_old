@@ -55,7 +55,7 @@
       }))
 
       this.addEvents()
-      let content = localStorage.mdContent
+      let content = this.value ? this.value : localStorage.mdContent
       if (content) {
         this.editor.value(content)
       }

@@ -1,5 +1,7 @@
 <template>
   <div>
+    <p>{{article}}</p>
+
     <Form ref="formData" :model="formData" :rules="validRules">
       <FormItem label="title" prop="title">
         <Input v-model="formData.title" placeholder="Enter a title"></Input>
@@ -18,7 +20,11 @@
       <FormItem prop="content">
         <!--<Input type="textarea" v-model="formData.content" placeholder="content"></Input>-->
         <div>
-          <md-editor v-model="formData.content"></md-editor>
+          <md-editor
+            :value="formData.content"
+            v-model="formData.content"
+          >
+          </md-editor>
         </div>
       </FormItem>
       <FormItem>
@@ -68,6 +74,7 @@
             return
           }
 
+          // 如果有article，表示是更新文章，否则是新建文章
           let sendReq = this.article ? request.updateArticle : request.createArticle
           let params = this.article ? this.article.ID : null
           let body = {
@@ -75,6 +82,7 @@
             cateId: this.formData.cateId,
             content: this.formData.content,
           }
+          // 发送请求
           sendReq({
             params: params,
             body: body
@@ -83,6 +91,7 @@
             if (resp.code === 0) {
               let article = resp.data.ad
               this.$Message.info("update article success")
+              // 成功后跳转到文章详情页
               this.$router.push('/article/' + article.ID)
             } else {
               this.$Message.error({

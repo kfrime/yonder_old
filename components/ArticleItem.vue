@@ -6,7 +6,7 @@
       </a>
       <!--todo: edit article-->
       <ButtonGroup slot="extra" v-if="isAdmin">
-        <Button :size="buttonSize"><Icon type="ios-code" /></Button>
+        <Button :size="buttonSize" @click="updateArticle"><Icon type="ios-code" /></Button>
       </ButtonGroup>
 
       <div class="card-body">
@@ -36,6 +36,9 @@
       },
       toCatePage () {
         this.$router.push("/category/" + this.article.CateId)
+      },
+      updateArticle () {
+        this.$router.push("/article/update/" + this.article.ID)
       }
     }
   }
