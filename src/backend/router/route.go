@@ -27,4 +27,7 @@ func Route(router *gin.Engine)  {
 	apiGrp.DELETE("/article/:id", middleware.AdminRequired, api.ArticleDestroy)
 	apiGrp.GET("/article/:id", api.ArticleRetrieve)
 	apiGrp.GET("/articles", api.ArticleList)
+
+	// 搜索
+	apiGrp.GET("/search", api.SearchArticle)
 }
