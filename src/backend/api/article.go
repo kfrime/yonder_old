@@ -2,6 +2,7 @@ package api
 
 import (
 	"backend/model"
+	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
 	"log"
@@ -26,6 +27,34 @@ type ArticleDetail struct {
 	model.Article
 	User model.User
 	Category model.Category
+}
+
+func GetArticleDetail(id uint) (ArticleDetail, error) {
+	//var ac model.Article
+	var err error
+	var ad ArticleDetail
+
+	err = model.DB.Where("id = ?", id).Find(&ad.Article).Error
+	if err != nil {
+		log.Println(err)
+		return ad, errors.New("article not existed")
+	}
+
+	// 作者
+	err = model.DB.Where("id = ?", ad.Article.UserId).Find(&ad.User).Error
+	if err != nil {
+		log.Println(err)
+		return ad, errors.New("article author not existed")
+	}
+
+	// 分类
+	err = model.DB.Where("id = ?", ad.Article.CateId).Find(&ad.Category).Error
+	if err != nil {
+		log.Println(err)
+		return ad, errors.New("article category not existed")
+	}
+
+	return ad, nil
 }
 
 func ArticleList(c *gin.Context)  {
@@ -84,29 +113,9 @@ func ArticleRetrieve(c *gin.Context)  {
 		return
 	}
 
-	//var ac model.Article
-	var ad ArticleDetail
-
-	err = model.DB.Where("id = ?", id).Find(&ad.Article).Error
+	ad, err := GetArticleDetail(uint(id))
 	if err != nil {
-		log.Println(err)
-		SendErrResp(c, "article not existed")
-		return
-	}
-
-	// 作者
-	err = model.DB.Where("id = ?", ad.Article.UserId).Find(&ad.User).Error
-	if err != nil {
-		log.Println(err)
-		SendErrResp(c, "article author not existed")
-		return
-	}
-
-	// 分类
-	err = model.DB.Where("id = ?", ad.Article.CateId).Find(&ad.Category).Error
-	if err != nil {
-		log.Println(err)
-		SendErrResp(c, "article category not existed")
+		SendErrResp(c, err.Error())
 		return
 	}
 
@@ -132,7 +141,16 @@ func ArticleCreate(c *gin.Context)  {
 		return
 	}
 
-	SendResp(c, gin.H{})
+	//SendResp(c, gin.H{})
+	ad, err := GetArticleDetail(ac.ID)
+	if err != nil {
+		SendErrResp(c, err.Error())
+		return
+	}
+
+	SendResp(c, gin.H{
+		"ad": ad,
+	})
 }
 
 func ArticleUpdate(c *gin.Context)  {
@@ -160,10 +178,16 @@ func ArticleUpdate(c *gin.Context)  {
 	}
 
 	// todo: 获取文章详情，是否可以优化
-	ArticleRetrieve(c)
-	//SendResp(c, gin.H{
-	//	"ac": ac,
-	//})
+	//ArticleRetrieve(c)
+	ad, err := GetArticleDetail(uint(id))
+	if err != nil {
+		SendErrResp(c, err.Error())
+		return
+	}
+
+	SendResp(c, gin.H{
+		"ad": ad,
+	})
 }
 
 func ArticleDestroy(c *gin.Context)  {

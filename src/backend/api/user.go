@@ -118,6 +118,10 @@ func Login(c *gin.Context)  {
 		return
 	}
 
+	// todo: max age of config
+	maxAge := 60 * 60 * 24
+	c.SetCookie("token", token, maxAge, "/", "", true, true)
+
 	SendResp(c, gin.H{
 		"token": token,
 		"user": user,

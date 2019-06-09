@@ -11,8 +11,9 @@ import (
 
 func getUser(c *gin.Context) (model.User, error)  {
 	var user model.User
-	token := c.GetHeader("token")
-	if token == "" {
+	//token := c.GetHeader("token")
+	token, err := c.Cookie("token")
+	if err != nil {
 		log.Println("token err")
 		return user, errors.New("token err")
 	}
@@ -52,7 +53,7 @@ func AdminRequired(c *gin.Context) {
 	}
 
 	adminName := config.AllConfig.Admin.Name
-	if user.Role != model.UserRoleAdmin && user.Name == adminName {
+	if !(user.Role == model.UserRoleAdmin && user.Name == adminName) {
 		api.SendErrResp(c, "permission denied")
 		return
 	}
@@ -60,4 +61,19 @@ func AdminRequired(c *gin.Context) {
 	c.Set("user", user)
 	c.Set("admin", user)
 	c.Next()
+}
+
+func isAdmin(c *gin.Context) bool {
+	val, ok := c.Get("user")
+	if !ok {
+		return false
+	}
+
+	adminName := config.AllConfig.Admin.Name
+	user := val.(model.User)
+	if user.Role == model.UserRoleAdmin && user.Name == adminName {
+		return true
+	}
+
+	return false
 }
