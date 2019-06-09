@@ -25,9 +25,22 @@ const apiList = {
   signin: {
     url: baseUrl + "/user/login",
     method: "POST"
-  }
+  },
 
-  // 注册
+  // todo: 注册
+
+  // 新建文章
+  createArticle: {
+    url: baseUrl + "/article",
+    method: "POST"
+  },
+
+  // 更新文章
+  updateArticle: {
+    url: baseUrl + "/article/:id",
+    method: "PUT"
+  },
+
 
 }
 

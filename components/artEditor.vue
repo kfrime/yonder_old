@@ -5,10 +5,10 @@
         <Input v-model="formData.title" placeholder="Enter a title"></Input>
       </FormItem>
       <FormItem label="category" prop="cate">
-        <Select v-model="formData.cate" placeholder="select a category">
+        <Select v-model="formData.cateId" placeholder="select a category">
           <Option
             v-for="cate in cates"
-            :value="cate.ID + ''"
+            :value="cate.ID"
             :key="cate.ID"
           >
             {{cate.Name}}
@@ -25,15 +25,12 @@
         <Button type="primary" @click="saveArticle('formData')">Submit</Button>
       </FormItem>
     </Form>
-
-    <!--<p>user: {{user}}</p>-->
-    <!--<p>article: {{article}}</p>-->
-    <!--<p>cates: {{cates}}</p>-->
   </div>
 </template>
 
 <script>
   import MarkdownEditor from '~/components/markdown'
+  import request from '~/api/request'
 
   export default {
     props: [
@@ -45,15 +42,15 @@
       return {
         formData: {
           title: (this.article && this.article.Title) || '',
-          cate: (this.article && this.article.Category.Id) || '',
+          cateId: (this.article && this.article.Category.Id) || '',
           content: (this.article && this.article.Content) || '',
         },
         validRules: {
           title: [
             { required: true, type:"string", trigger: "blur"},
           ],
-          cate: [
-            { required: true },
+          cateId: [
+            { required: true, type: "number"},
           ],
           content: [
             { required: true, type:"string", trigger: "blur"},
@@ -63,8 +60,6 @@
     },
     methods: {
       saveArticle (name) {
-        console.log("name:", name)
-        console.log("formData:", this.formData)
         let self = this
         this.$refs[name].validate((valid) => {
           if (!valid) {
@@ -72,6 +67,37 @@
             console.log("input not valid:", this.formData)
             return
           }
+
+          let sendReq = this.article ? request.updateArticle : request.createArticle
+          let params = this.article ? this.article.ID : null
+          let body = {
+            title: this.formData.title,
+            cateId: this.formData.cateId,
+            content: this.formData.content,
+          }
+          sendReq({
+            params: params,
+            body: body
+          }).then(resp => {
+            console.log(resp)
+            if (resp.code === 0) {
+              let article = resp.data.ad
+              this.$Message.info("update article success")
+              this.$router.push('/article/' + article.ID)
+            } else {
+              this.$Message.error({
+                duration: 3,
+                closable: true,
+                content: resp.message || resp.msg,
+              })
+            }
+          }).catch(err => {
+            this.$Message.error({
+              duration: 3,
+              closable: true,
+              content: err.message || err.msg,
+            })
+          })
         })
       },
     },
