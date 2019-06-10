@@ -12,7 +12,8 @@
       </div>
 
       <div class="app-header-search">
-        <Input suffix="ios-search" placeholder="search"/>
+        <!--<Input suffix="ios-search" placeholder="search"/>-->
+        <Input search placeholder="search ... " v-model="searchValue" @on-search="handleSearch"/>
       </div>
       <div class="app-header-right">
         <div v-if="user">
@@ -32,7 +33,8 @@
     data () {
       return {
         user: this.$store.state.user,
-        menu_theme: 'light'
+        menu_theme: 'light',
+        searchValue: ""
       }
     },
     methods: {
@@ -61,7 +63,15 @@
             // todo: page not found
             console.log("page not found")
         }
-
+      },
+      handleSearch () {
+        console.log("searchValue:", this.searchValue)
+        if (this.searchValue) {
+          this.$router.push("/search/" + this.searchValue)
+          this.searchValue = ''
+        } else {
+          this.$Message.warning("input something to search")
+        }
       }
     }
   }

@@ -1,10 +1,8 @@
 <template>
   <div>
     <Card :bordered="false">
-      <p slot="title">
-        category
-      </p>
-      <p>{{cate.Name}}</p>
+      <p slot="title">search:</p>
+      <p>{{q}}</p>
     </Card>
     <article-item
       v-for="ar in articles"
@@ -21,30 +19,24 @@
   import ArticleItem from '~/components/ArticleItem'
 
   export default {
-    validate ({ params }) {
-      // 必须是number类型
-      return /^\d+$/.test(params.id)
-    },
     data () {
-      return {
-
-      }
+      return {}
     },
     asyncData (ctx) {
       // console.log("article asyncData")
-      console.log("params:", ctx.params)
-      console.log("query:", ctx.query)
-      let cateId = ctx.params.id
+      // console.log("params:", ctx.params)
+      // console.log("query:", ctx.query)
+      let searchValue = ctx.params.q
       // 优化：分类列表可以不用每次都获取
 
       return Promise.all([
         request.getCates({
           client: ctx.req
         }),
-        request.getArticles({
+        request.searchArticle({
           client: ctx.req,
           query: {
-            cateId: cateId
+            q: searchValue
           }
         })
       ]).then(resp => {
@@ -53,21 +45,12 @@
         let cates = resp[0].data.cateList || []
         ctx.store.commit('setCates', cates)
 
-        // 取出当前所属分类的详细信息
-        let cate = {}
-        for (let c of cates) {
-          if (c.ID.toString() === cateId) {
-            cate = c
-            break
-          }
-        }
-
         // articles
         let articles = resp[1].data.al || []
         ctx.store.commit('setArticles', articles)
 
         return {
-          cate: cate,
+          q: searchValue,
           articles: articles
         }
       }).catch(err => {

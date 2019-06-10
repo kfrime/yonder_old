@@ -41,6 +41,11 @@ const apiList = {
     method: "PUT"
   },
 
+  // 搜索
+  searchArticle: {
+    url: baseUrl + "/search",
+    method: "GET"
+  }
 
 }
 
