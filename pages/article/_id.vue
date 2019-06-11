@@ -18,7 +18,7 @@
         </div>
       </div>
       <ButtonGroup slot="extra" v-if="isAdmin">
-        <Button :size="buttonSize" @click="updateArticle"><Icon type="ios-code" /></Button>
+        <article-tool :article="article"></article-tool>
       </ButtonGroup>
 
       <div>
@@ -33,6 +33,7 @@
 
 <script>
   import request from '~/api/request'
+  import ArticleTool from '~/components/article/Tool'
 
   export default {
     data () {
@@ -69,10 +70,8 @@
         ctx.error({ message: "not found", statusCode: 404 })
       })
     },
-    methods: {
-      updateArticle () {
-        this.$router.push("/article/update/" + this.article.ID)
-      }
+    components: {
+      "article-tool": ArticleTool,
     },
     layout: "nosidebar",
   }

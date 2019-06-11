@@ -6,9 +6,7 @@
       </a>
       <!--todo: edit article-->
       <div slot="extra" v-if="isAdmin">
-        <ButtonGroup >
-          <Button :size="buttonSize" @click="updateArticle"><Icon type="ios-code" /></Button>
-        </ButtonGroup>
+        <article-tool :article="article"></article-tool>
       </div>
 
       <div class="card-body">
@@ -24,6 +22,8 @@
 </template>
 
 <script>
+  import ArticleTool from '~/components/article/Tool'
+
   export default {
     props: ['article'],
     data () {
@@ -39,9 +39,9 @@
       toCatePage () {
         this.$router.push("/category/" + this.article.CateId)
       },
-      updateArticle () {
-        this.$router.push("/article/update/" + this.article.ID)
-      }
+    },
+    components: {
+      "article-tool": ArticleTool,
     }
   }
 </script>
