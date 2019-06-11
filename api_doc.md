@@ -4,7 +4,7 @@
 ## article list
     target: 
         pages/index.vue
-        components/ArticleItem.vue
+        components/article/Item.vue
         
     url: api/articles
     

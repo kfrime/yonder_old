@@ -5,9 +5,11 @@
         {{article.Title}}
       </a>
       <!--todo: edit article-->
-      <ButtonGroup slot="extra" v-if="isAdmin">
-        <Button :size="buttonSize" @click="updateArticle"><Icon type="ios-code" /></Button>
-      </ButtonGroup>
+      <div slot="extra" v-if="isAdmin">
+        <ButtonGroup >
+          <Button :size="buttonSize" @click="updateArticle"><Icon type="ios-code" /></Button>
+        </ButtonGroup>
+      </div>
 
       <div class="card-body">
         <Button :size="buttonSize" type="text">{{article.Username}}</Button>

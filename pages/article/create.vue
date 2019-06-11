@@ -10,7 +10,7 @@
 </template>
 
 <script>
-  import ArticleEditor from "~/components/artEditor"
+  import ArticleEditor from "~/components/article/Editor"
 
   export default {
     data () {
