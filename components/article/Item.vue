@@ -5,9 +5,9 @@
         {{article.Title}}
       </a>
       <!--todo: edit article-->
-      <div slot="extra" v-if="isAdmin">
-        <article-tool :article="article"></article-tool>
-      </div>
+      <!--<div slot="extra" v-if="isAdmin">-->
+        <!--<article-tool :article="article"></article-tool>-->
+      <!--</div>-->
 
       <div class="card-body">
         <Button :size="buttonSize" type="text">{{article.Username}}</Button>

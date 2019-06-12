@@ -16,18 +16,6 @@ const apiList = {
     url: baseUrl + "/article/:id",
     method: "GET"
   },
-  // 分类列表
-  getCates: {
-    url: baseUrl + "/categories",
-    method: "GET"
-  },
-  // 登陆
-  signin: {
-    url: baseUrl + "/user/login",
-    method: "POST"
-  },
-
-  // todo: 注册
 
   // 新建文章
   createArticle: {
@@ -40,6 +28,26 @@ const apiList = {
     url: baseUrl + "/article/:id",
     method: "PUT"
   },
+
+  // 删除文章
+  deleteArticle: {
+    url: baseUrl + "/article/:id",
+    method: "DELETE"
+  },
+
+  // 分类列表
+  getCates: {
+    url: baseUrl + "/categories",
+    method: "GET"
+  },
+
+  // 登陆
+  signin: {
+    url: baseUrl + "/user/login",
+    method: "POST"
+  },
+
+  // todo: 注册
 
   // 搜索
   searchArticle: {
