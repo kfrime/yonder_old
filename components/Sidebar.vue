@@ -8,6 +8,10 @@
           <Button :size="buttonSize" @click="toCreatePage">
             <Icon type="md-create" />
           </Button>
+          <Button :size="buttonSize" @click="toTrashPage">
+            <!--<Icon type="md-create" />-->
+            <Icon type="ios-trash-outline" />
+          </Button>
         </ButtonGroup>
       </Card>
     </div>
@@ -44,7 +48,11 @@
     methods: {
       toCreatePage () {
         this.$router.push("/article/create")
-      }
+      },
+      toTrashPage () {
+        // todo: to trash page
+        console.log('to trash page')
+      },
     },
     components: {
       'cate-item': CateItem
