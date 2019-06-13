@@ -20,7 +20,7 @@
       <Card dis-hover>
         <p slot="title" class="card-title">文章分类</p>
         <ButtonGroup slot="extra" v-if="isAdmin">
-          <Button :size="buttonSize"><Icon type="ios-code" /></Button>
+          <Button :size="buttonSize" @click="toCateList"><Icon type="ios-code" /></Button>
         </ButtonGroup>
 
         <cate-item
@@ -35,7 +35,7 @@
 </template>
 
 <script>
-  import CateItem from '~/components/CateItem'
+  import CateItem from '~/components/category/Item'
 
   export default {
     data () {
@@ -52,6 +52,9 @@
       toTrashPage () {
         // todo: to trash page
         console.log('to trash page')
+      },
+      toCateList () {
+        this.$router.push("/category/list")
       },
     },
     components: {
