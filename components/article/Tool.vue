@@ -2,10 +2,14 @@
   <div>
     <ButtonGroup >
       <Button :size="buttonSize" @click="updateArticle"><Icon type="ios-code" /></Button>
-      <Button :size="buttonSize" @click="deleteArticle">
-        <Icon type="ios-close" />
-        <!--<Icon type="ios-trash-outline" />-->
-      </Button>
+      <Button :size="buttonSize" @click="confirm = true"><Icon type="ios-close" /></Button>
+      <Modal
+        v-model="confirm"
+        title="delete or not ?"
+        @on-ok="deleteArticle"
+      >
+        <p>add to trash</p>
+      </Modal>
     </ButtonGroup>
   </div>
 </template>
@@ -18,6 +22,7 @@
     data () {
       return {
         buttonSize: "small",
+        confirm: false,
       }
     },
     methods: {
