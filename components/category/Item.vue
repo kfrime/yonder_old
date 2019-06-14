@@ -1,3 +1,4 @@
+<!-- 用于侧边栏 -->
 <template>
   <div>
     <Button long type="default" class="cate-card-item" @click="toCatePage">
