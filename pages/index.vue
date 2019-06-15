@@ -6,7 +6,12 @@
       :key="ar.ID"
     >
     </article-item>
-    <Page :total="total" :page-size="3" @on-change="getArticleList"></Page>
+    <Page
+      v-if="total > pageSize "
+      :total="total"
+      :page-size="pageSize"
+      @on-change="onPageChange"
+    ></Page>
     <!--<div v-for="ar in articles">{{ar}}</div>-->
   </div>
 </template>
@@ -14,8 +19,16 @@
 <script>
   import request from '~/api/request'
   import ArticleItem from '~/components/article/Item'
+  import config from '~/config'
 
   export default {
+    data () {
+      return {
+        pageSize: config.pageSize,
+        articles: this.$store.state.articles,
+        total: this.$store.state.total
+      }
+    },
     asyncData (ctx) {
       // console.log("index asyncData")
       return Promise.all([
@@ -50,14 +63,8 @@
         ctx.error({ message: "not found", statusCode: 404 })
       })
     },
-    data () {
-      return {
-        articles: this.$store.state.articles,
-        total: this.$store.state.total
-      }
-    },
     methods: {
-      getArticleList (page) {
+      onPageChange (page) {
         console.log('get article list, page: ', page)
         request.getArticles({
           query: {
