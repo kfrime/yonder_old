@@ -39,6 +39,7 @@
     },
     components: {
       "cate-entry": CateEntry,
-    }
+    },
+    middleware: "loginRequired",
   }
 </script>

@@ -40,6 +40,26 @@ const apiList = {
     url: baseUrl + "/categories",
     method: "GET"
   },
+  // 分类详情
+  getCateDetail: {
+    url: baseUrl + "/category/:id",
+    method: "GET"
+  },
+  // 新建分类
+  createCate: {
+    url: baseUrl + "/category",
+    method: "POST"
+  },
+  // 更新分类
+  updateCate: {
+    url: baseUrl + "/category/:id",
+    method: "PUT"
+  },
+  // 删除分类
+  deleteCate: {
+    url: baseUrl + "/category/:id",
+    method: "DELETE"
+  },
 
   // 登陆
   signin: {

@@ -110,7 +110,7 @@
     },
     components: {
       "md-editor": MarkdownEditor,
-    }
-    // middleware: "loginRequired",
+    },
+    middleware: "loginRequired",
   }
 </script>

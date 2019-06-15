@@ -29,7 +29,7 @@
     },
     methods: {
       toEditPage () {
-        console.log("update category")
+        this.$router.push("/category/update/" + this.cate.ID)
       },
       deleteCategory () {
         console.log("delete category")
