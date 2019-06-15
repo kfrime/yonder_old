@@ -18,6 +18,8 @@
 </template>
 
 <script>
+  import request from '~/api/request'
+
   export default {
     props: ["cate"],
     data () {
@@ -32,7 +34,31 @@
         this.$router.push("/category/update/" + this.cate.ID)
       },
       deleteCategory () {
-        console.log("delete category")
+        console.log('delete category')
+        console.log(this.$router.history.current)
+        let self = this
+        request.deleteCate({
+          params: {
+            id: this.cate.ID,
+          }
+        }).then(resp => {
+          if (resp.code === 0) {
+            this.$Message.info("delete category success")
+            this.$router.push('/')
+          } else {
+            this.$Message.error({
+              duration: 3,
+              closable: true,
+              content: resp.message || resp.msg,
+            })
+          }
+        }).catch(err => {
+          this.$Message.error({
+            duration: 3,
+            closable: true,
+            content: err.message || err.msg,
+          })
+        })
       },
     },
   }
