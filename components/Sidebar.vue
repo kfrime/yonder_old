@@ -5,7 +5,7 @@
       <Card dis-hover v-if="isAdmin">
         <p slot="title" class="card-title">操作</p>
         <ButtonGroup>
-          <Button :size="buttonSize" @click="toCreatePage">
+          <Button :size="buttonSize" @click="toCreateArticle">
             <Icon type="md-create" />
           </Button>
           <Button :size="buttonSize" @click="toTrashPage">
@@ -21,6 +21,7 @@
         <p slot="title" class="card-title">文章分类</p>
         <ButtonGroup slot="extra" v-if="isAdmin">
           <Button :size="buttonSize" @click="toCateList"><Icon type="ios-code" /></Button>
+          <Button :size="buttonSize" @click="toCreateCate"><Icon type="md-create" /></Button>
         </ButtonGroup>
 
         <cate-item
@@ -46,7 +47,7 @@
       }
     },
     methods: {
-      toCreatePage () {
+      toCreateArticle () {
         this.$router.push("/article/create")
       },
       toTrashPage () {
@@ -56,6 +57,9 @@
       toCateList () {
         this.$router.push("/category/list")
       },
+      toCreateCate () {
+        this.$router.push("/category/create")
+      }
     },
     components: {
       'cate-item': CateItem

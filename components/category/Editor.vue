@@ -23,7 +23,7 @@
         },
         validRules: {
           name: [
-            { required: true, type:"string", trigger: "blur"},
+            { required: true, type:"string", min:3, max:20, trigger: "blur"},
           ],
         }
       }
