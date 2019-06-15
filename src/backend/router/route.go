@@ -15,9 +15,9 @@ func Route(router *gin.Engine)  {
 	apiGrp.POST("/user/password/update", middleware.LoginRequired, api.ResetPasswd)
 
 	// 分类
-	apiGrp.POST("/category", api.CateCreate)
-	apiGrp.PUT("/category/:cateId", api.CateUpdate)
-	apiGrp.DELETE("/category/:cateId", api.CateDestroy)
+	apiGrp.POST("/category", middleware.AdminRequired, api.CateCreate)
+	apiGrp.PUT("/category/:cateId", middleware.AdminRequired, api.CateUpdate)
+	apiGrp.DELETE("/category/:cateId", middleware.AdminRequired, api.CateDestroy)
 	apiGrp.GET("/category/:cateId", api.CateRetrieve)
 	apiGrp.GET("/categories", api.CateList)
 
