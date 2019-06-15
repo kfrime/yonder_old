@@ -2,6 +2,7 @@ package api
 
 import (
 	"backend/model"
+	"backend/utils"
 	"errors"
 	"fmt"
 	"github.com/gin-gonic/gin"
@@ -93,7 +94,7 @@ func ArticleList(c *gin.Context)  {
 
 	limitStr := c.Query("limit")
 	if limitStr == "" {
-		limit = 3
+		limit = 5
 	} else if limit, err = strconv.Atoi(limitStr); err != nil {
 		log.Println(err)
 		SendErrResp(c, "param limit is not valid")
@@ -162,6 +163,12 @@ func ArticleRetrieve(c *gin.Context)  {
 	if err != nil {
 		SendErrResp(c, err.Error())
 		return
+	}
+
+	// content type
+	ct := c.Query("ct")
+	if ct == "html" {
+		ad.Content = utils.MarkdownToHtml(ad.Content)
 	}
 
 	SendResp(c, gin.H{

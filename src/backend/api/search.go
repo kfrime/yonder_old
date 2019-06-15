@@ -38,7 +38,7 @@ func SearchArticle(c *gin.Context)  {
 
 	limitStr := c.Query("limit")
 	if limitStr == "" {
-		limit = 3
+		limit = 5
 	} else if limit, err = strconv.Atoi(limitStr); err != nil {
 		log.Println(err)
 		SendErrResp(c, "param limit is not valid")

@@ -18,7 +18,7 @@ type Article struct {
 
 func (ac *Article) checkInput() error {
 	ac.Title = PreventXSS(ac.Title)
-	ac.Content = PreventXSS(ac.Content)
+	//ac.Content = PreventXSS(ac.Content)
 
 	// 检查分类是否存在
 	if err := IsCateExisted(ac.CateId); err != nil{
