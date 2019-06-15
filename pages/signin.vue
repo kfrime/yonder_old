@@ -56,6 +56,7 @@
                 this.$Message.info("signin success")
                 self.$store.commit("setToken", resp.data.token)
                 self.$store.commit("setUser", resp.data.user)
+                this.$router.push('/')
               } else {
                 this.$Message.error({
                   duration: 3,
@@ -63,7 +64,6 @@
                   content: resp.message || resp.msg,
                   })
               }
-              this.$router.push('/')
             }
           ).catch(
             this.$Message.error({

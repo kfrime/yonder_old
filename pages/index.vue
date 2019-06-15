@@ -6,6 +6,7 @@
       :key="ar.ID"
     >
     </article-item>
+    <Page :total="total" :page-size="3" @on-change="getArticleList"></Page>
     <!--<div v-for="ar in articles">{{ar}}</div>-->
   </div>
 </template>
@@ -37,9 +38,13 @@
         // console.log("articles", articles)
         ctx.store.commit('setArticles', articles)
 
-        return {
-          articles: articles
-        }
+        let total = resp[1].data.total
+        ctx.store.commit("setTotal", total)
+
+        // return {
+        //   articles: articles,
+        //   total: total
+        // }
       }).catch(err => {
         console.log("catch error:", err)
         ctx.error({ message: "not found", statusCode: 404 })
@@ -47,6 +52,42 @@
     },
     data () {
       return {
+        articles: this.$store.state.articles,
+        total: this.$store.state.total
+      }
+    },
+    methods: {
+      getArticleList (page) {
+        console.log('get article list, page: ', page)
+        request.getArticles({
+          query: {
+            page: page,
+          }
+        }).then(resp => {
+          if (resp.code === 0) {
+            // articles
+            let articles = resp.data.al || []
+            // console.log("articles", articles)
+            this.$store.commit('setArticles', articles)
+            this.articles = articles
+
+            let total = resp.data.total
+            this.$store.commit("setTotal", total)
+            this.total = total
+          } else {
+            this.$Message.error({
+              duration: 3,
+              closable: true,
+              content: resp.message || resp.msg,
+            })
+          }
+        }).catch(err => {
+          this.$Message.error({
+            duration: 3,
+            closable: true,
+            content: err.message || err.msg,
+          })
+        })
       }
     },
     layout: 'default',

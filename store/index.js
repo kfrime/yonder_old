@@ -27,6 +27,7 @@ export const state = () => ({
   isAdmin: true,
   cates: [],
   articles: [],
+  total: 0,
   token: null,
   user: null,
 })
@@ -37,6 +38,9 @@ export const mutations = {
   },
   setArticles (state, articles) {
     state.articles = articles
+  },
+  setTotal (state, total) {
+    state.total = total
   },
   setToken (state, token) {
     state.token = token
