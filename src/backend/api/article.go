@@ -1,6 +1,7 @@
 package api
 
 import (
+	"backend/config"
 	"backend/model"
 	"backend/utils"
 	"errors"
@@ -94,7 +95,7 @@ func ArticleList(c *gin.Context)  {
 
 	limitStr := c.Query("limit")
 	if limitStr == "" {
-		limit = 5
+		limit = config.AllConfig.Page.Size
 	} else if limit, err = strconv.Atoi(limitStr); err != nil {
 		log.Println(err)
 		SendErrResp(c, "param limit is not valid")

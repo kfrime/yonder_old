@@ -33,7 +33,7 @@ type AdminConfig struct {
 }
 
 type PageConfig struct {
-	Size 	uint
+	Size 	int
 }
 
 type allConfig struct {
