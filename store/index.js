@@ -31,6 +31,7 @@ export const state = () => ({
   cate: null,
   token: null,
   user: null,
+  q: '',
 })
 
 export const mutations = {
@@ -55,6 +56,9 @@ export const mutations = {
     // todo: admin name?
     // state.isAdmin = (user.Role === UserRoleAdmin)
   },
+  setSearch (state, q) {
+    state.q = q
+  }
 }
 
 // export default store
