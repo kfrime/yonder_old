@@ -10,6 +10,10 @@ import (
 	"time"
 )
 
+type Pagination struct {
+	Total int
+}
+
 // for article list
 type SimpleArticle struct {
 	ID        uint
@@ -64,6 +68,9 @@ func ArticleList(c *gin.Context)  {
 	var cateId int
 	var err error
 	var al []SimpleArticle
+	var page, limit int
+	//var total uint
+	var pagination Pagination
 
 	cateIdStr := c.Query("cateId")
 	if cateIdStr == "" {
@@ -74,13 +81,39 @@ func ArticleList(c *gin.Context)  {
 		return
 	}
 
+	pageStr := c.Query("page")
+	if pageStr == "" {
+		// 不传page参数，默认为1
+		page = 1
+	} else if page, err = strconv.Atoi(pageStr); err != nil {
+		log.Println(err)
+		SendErrResp(c, "param page no is not valid")
+		return
+	}
+
+	limitStr := c.Query("limit")
+	if limitStr == "" {
+		limit = 3
+	} else if limit, err = strconv.Atoi(limitStr); err != nil {
+		log.Println(err)
+		SendErrResp(c, "param limit is not valid")
+		return
+	}
+
 	var cate model.Category
 	if cateId != 0 && model.DB.First(&cate, cateId).Error != nil {
 		SendErrResp(c, "cate id is not valid")
 		return
 	}
 
-	// 不传cateId参数呢？
+	// 可展示的文章总数
+	// import !!! 必须要用别名 total，否则gorm对结果无法解析
+	var totalSql = `
+	SELECT count(1) as total
+	FROM articles a 
+	INNER JOIN users b ON a.user_id = b.id 
+	INNER JOIN categories c ON a.cate_id = c.id
+	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL`
 
 	var sql = `
 	SELECT a.id, a.title, a.created_at, a.updated_at, a.user_id, b.name as username, 
@@ -91,8 +124,19 @@ func ArticleList(c *gin.Context)  {
 	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL`
 
 	if cateId != 0 {
-		sql += fmt.Sprintf(` AND c.id = %d`, cateId)
+		extra := fmt.Sprintf(` AND c.id = %d`, cateId)
+		totalSql += extra
+		sql += extra
 	}
+
+	if err := model.DB.Raw(totalSql).First(&pagination).Error; err != nil {
+		log.Println(err)
+		SendErrResp(c, "can not get article counts")
+		return
+	}
+
+	// 限制数目
+	sql += fmt.Sprintf(" LIMIT %d, %d", (page - 1) * limit, limit)
 
 	if err := model.DB.Raw(sql).Scan(&al).Error; err != nil {
 		log.Println(err)
@@ -102,6 +146,7 @@ func ArticleList(c *gin.Context)  {
 
 	SendResp(c, gin.H{
 		"al": al,
+		"total": pagination.Total,
 	})
 }
 
