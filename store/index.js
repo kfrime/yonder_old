@@ -28,6 +28,7 @@ export const state = () => ({
   cates: [],
   articles: [],
   total: 0,
+  cate: null,
   token: null,
   user: null,
 })
@@ -35,6 +36,9 @@ export const state = () => ({
 export const mutations = {
   setCates (state, cates) {
     state.cates = cates
+  },
+  setCate (state, cate) {
+    state.cate = cate
   },
   setArticles (state, articles) {
     state.articles = articles

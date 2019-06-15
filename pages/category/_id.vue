@@ -12,6 +12,12 @@
       :key="ar.ID"
     >
     </article-item>
+    <Page
+      v-if="total > pageSize "
+      :total="total"
+      :page-size="pageSize"
+      @on-change="onPageChange"
+    ></Page>
     <!--<div v-for="ar in articles">{{ar}}</div>-->
   </div>
 </template>
@@ -19,6 +25,7 @@
 <script>
   import request from '~/api/request'
   import ArticleItem from '~/components/article/Item'
+  import config from '~/config'
 
   export default {
     validate ({ params }) {
@@ -27,7 +34,10 @@
     },
     data () {
       return {
-
+        pageSize: config.pageSize,
+        cate: this.$store.state.cate,
+        articles: this.$store.state.articles,
+        total: this.$store.state.total,
       }
     },
     asyncData (ctx) {
@@ -61,19 +71,52 @@
             break
           }
         }
+        ctx.store.commit('setCate', cate)
 
         // articles
         let articles = resp[1].data.al || []
         ctx.store.commit('setArticles', articles)
 
-        return {
-          cate: cate,
-          articles: articles
-        }
+        let total = resp[1].data.total || 0
+        ctx.store.commit('setTotal', total)
       }).catch(err => {
         console.log("catch error:", err)
         ctx.error({ message: "not found", statusCode: 404 })
       })
+    },
+    methods: {
+      onPageChange (page) {
+        console.log('get article list, page: ', page)
+        request.getArticles({
+          query: {
+            cateId: this.cate.ID,
+            page: page,
+          }
+        }).then(resp => {
+          if (resp.code === 0) {
+            // articles
+            let articles = resp.data.al || []
+            this.$store.commit('setArticles', articles)
+            this.articles = articles
+
+            let total = resp.data.total
+            this.$store.commit("setTotal", total)
+            this.total = total
+          } else {
+            this.$Message.error({
+              duration: 3,
+              closable: true,
+              content: resp.message || resp.msg,
+            })
+          }
+        }).catch(err => {
+          this.$Message.error({
+            duration: 3,
+            closable: true,
+            content: err.message || err.msg,
+          })
+        })
+      },
     },
     layout: "default",
     components: {
