@@ -21,8 +21,8 @@
         <article-tool :article="article"></article-tool>
       </ButtonGroup>
 
-      <div>
-        {{article.Content}}
+      <div class="article-content" >
+        <div v-html="article.Content"></div>
       </div>
 
       <!-- todo: <div>pre article and next article</div>-->
@@ -56,6 +56,9 @@
           client: ctx.req,
           params: {
             id: ctx.params.id
+          },
+          query: {
+            ct: "html"
           }
         })
       ]).then(resp => {
@@ -77,7 +80,7 @@
   }
 </script>
 
-<style scoped>
+<style lang="less">
   .article-title {
     /*font-size: 30px;*/
     /*font-weight: 700;*/
@@ -86,5 +89,18 @@
   }
   .article-info {
     /*margin: 5px 8px;*/
+  }
+  .article-content {
+    padding: 0 12px;
+    font-size: 16px;
+
+    p {
+      padding: 8px;
+    }
+    pre {
+      margin: 5px;
+      padding: 8px;
+      background-color: #f6f6f6;
+    }
   }
 </style>

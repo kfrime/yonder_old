@@ -32,6 +32,7 @@
 <style scoped>
   .app-body {
     background:#eee;
+    padding-bottom: 8px;
   }
   .app-container {
     width: 1080px;
