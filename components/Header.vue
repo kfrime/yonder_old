@@ -29,6 +29,8 @@
 </template>
 
 <script>
+  import request from '~/api/request'
+
   export default {
     data () {
       return {
@@ -56,8 +58,7 @@
             this.$router.push("/signin")
             break
           case 'signout':
-            console.log("sign out")
-            // todo: request to sign out
+            this.onSignout()
             break
           default:
             // todo: page not found
@@ -72,7 +73,29 @@
         } else {
           this.$Message.warning("input something to search")
         }
-      }
+      },
+      onSignout () {
+        request.signout()
+          .then(resp => {
+            if (resp.code === 0) {
+              this.$store.commit('setUser', null)
+              this.$Message.info({
+                duration: 3,
+                closable: true,
+                content: "signout success"
+              })
+              // fresh user state and reload page
+              window.location.href = '/'
+            }
+          })
+          .catch(err => {
+            this.$Message.error({
+              duration: 3,
+              closable: true,
+              content: err.message || err.msg,
+            })
+          })
+      },
     }
   }
 </script>

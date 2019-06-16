@@ -66,6 +66,14 @@ const apiList = {
     url: baseUrl + "/user/login",
     method: "POST"
   },
+  signout: {
+    url: baseUrl + "/user/signout",
+    method: "GET"
+  },
+  getUserInfo: {
+    url: baseUrl + "/user/info",
+    method: "GET"
+  },
 
   // todo: 注册
 

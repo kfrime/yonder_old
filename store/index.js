@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import request from '~/api/request'
 
 Vue.use(Vuex)
 
@@ -24,7 +25,7 @@ import { setTokenCookie } from "../libs/util";
 
 export const state = () => ({
   // todo: isAdmin set to false
-  isAdmin: true,
+  isAdmin: false,
   cates: [],
   articles: [],
   total: 0,
@@ -53,11 +54,27 @@ export const mutations = {
   },
   setUser (state, user) {
     state.user = user
-    // todo: admin name?
-    // state.isAdmin = (user.Role === UserRoleAdmin)
+    state.isAdmin = (user && (user.Role === UserRoleAdmin))
   },
   setSearch (state, q) {
     state.q = q
+  }
+}
+
+export const actions = {
+  nuxtServerInit( { commit }, { req } ) {
+    // console.log(commit)
+    // console.log('nuxtServerInit', req.headers)
+    Promise.all([
+      request.getUserInfo({ client: req }),
+    ]).then( (resp) => {
+      let user = resp[0].data.user
+      console.log('nuxtServerInit', user)
+      commit("setUser", user)
+      // next()
+    }).catch( (err) => {
+      console.log(err)
+    })
   }
 }
 
