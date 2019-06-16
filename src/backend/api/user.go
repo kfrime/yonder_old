@@ -139,7 +139,7 @@ func ResetPasswd(c *gin.Context) {
 }
 
 
-func UserList(c *gin.Context)  {
+func UserList(c *gin.Context) {
 	var users []model.User
 	if err := model.DB.Order("id asc").Find(&users).Error; err != nil {
 		msg := "can not get user list"
@@ -155,4 +155,12 @@ func UserList(c *gin.Context)  {
 			"users": users,
 		},
 	})
+}
+
+func UserInfo(c *gin.Context) {
+	if user, ok := c.Get("user"); ok {
+		SendResp(c, gin.H{
+			"user": user,
+		})
+	}
 }

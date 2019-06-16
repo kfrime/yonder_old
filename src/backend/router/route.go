@@ -10,6 +10,7 @@ func Route(router *gin.Engine)  {
 	apiGrp := router.Group("/api")
 
 	// 用户
+	apiGrp.GET("/user/info", middleware.LoginRequired, api.UserInfo)
 	apiGrp.POST("/user/signup", api.Signup)
 	apiGrp.POST("/user/login", api.Login)
 	apiGrp.POST("/user/password/update", middleware.LoginRequired, api.ResetPasswd)
