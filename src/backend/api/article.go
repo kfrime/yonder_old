@@ -35,6 +35,14 @@ type ArticleDetail struct {
 	Category model.Category
 }
 
+func getArticleDetail(id uint) (ArticleDetail, error) {
+	var err error
+	var ad ArticleDetail
+	//sql := ``
+
+	return ad, err
+}
+
 func GetArticleDetail(id uint) (ArticleDetail, error) {
 	//var ac model.Article
 	var err error
@@ -172,8 +180,22 @@ func ArticleRetrieve(c *gin.Context)  {
 		ad.Content = utils.MarkdownToHtml(ad.Content)
 	}
 
+	pre, err := ad.GetPre()
+	if err != nil {
+		log.Println(err)
+		pre = nil
+	}
+
+	next, err := ad.GetNext()
+	if err != nil {
+		log.Println(err)
+		next = nil
+	}
+
 	SendResp(c, gin.H{
 		"ad": ad,
+		"pre": pre,
+		"next": next,
 	})
 }
 

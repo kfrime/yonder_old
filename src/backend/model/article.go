@@ -80,3 +80,17 @@ func (ac *Article) Update(id int) error {
 
 	return nil
 }
+
+func (ac *Article) GetPre() (*Article, error) {
+	var pre Article
+
+	err := DB.Select("id, title").Where("id < ?", ac.ID).Last(&pre).Error
+	return &pre, err
+}
+
+func (ac *Article) GetNext() (*Article, error) {
+	var next Article
+
+	err := DB.Select("id, title").Where("id > ?", ac.ID).First(&next).Error
+	return &next, err
+}
