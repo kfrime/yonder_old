@@ -25,7 +25,19 @@
         <div v-html="article.Content"></div>
       </div>
 
-      <!-- todo: <div>pre article and next article</div>-->
+      <!-- pre article and next article -->
+    </Card>
+    <Card>
+      <div class="pre-next">
+        <div v-if="pre" class="pre-article">
+          <Icon type="md-arrow-round-back" />
+          <a @click.prevent="toPreArticle">{{pre.Title}}</a>
+        </div>
+        <div v-if="next" class="next-article">
+          <a @click.prevent="toNextArticle">{{next.Title}}</a>
+          <Icon type="md-arrow-round-forward" />
+        </div>
+      </div>
     </Card>
     <!--todo: 添加文章目录 -->
   </div>
@@ -63,15 +75,28 @@
         })
       ]).then(resp => {
         console.log("get data:", resp)
-        let article = resp[0].data.ad || {}
+        let result = resp[0].data
+        let article = result.ad || {}
+        let pre = result.pre
+        let next = result.next
 
         return {
-          article: article
+          article: article,
+          pre: pre,
+          next: next,
         }
       }).catch(err => {
         console.log("catch error:", err)
         ctx.error({ message: "not found", statusCode: 404 })
       })
+    },
+    methods: {
+      toPreArticle () {
+        this.$router.push('/article/' + this.pre.ID)
+      },
+      toNextArticle () {
+        this.$router.push('/article/' + this.next.ID)
+      }
     },
     components: {
       "article-tool": ArticleTool,
@@ -102,5 +127,14 @@
       padding: 8px;
       background-color: #f6f6f6;
     }
+  }
+  .pre-next {
+    overflow: auto;
+  }
+  .pre-article {
+    float: left;
+  }
+  .next-article {
+    float: right;
   }
 </style>
