@@ -7,13 +7,47 @@ import (
 	"strconv"
 )
 
+type ArticleCount struct {
+	CateId uint	// category id
+	Count uint	// 该分类下的可见文章总数
+}
+
+type CateWithCount struct {
+	model.Category
+	Count uint		// 该分类下的可见文章总数
+}
+
 func CateList(c *gin.Context)  {
 	// todo: add page and limit
-	var cateList []model.Category
-	if err := model.DB.Find(&cateList).Error; err != nil {
+	var cateList []CateWithCount
+	var results []ArticleCount
+	acMap := make(map[uint]uint)
+	if err := model.DB.Table("categories").Find(&cateList).Error; err != nil {
 		log.Println(err)
 		SendErrResp(c, err.Error())
 		return
+	}
+
+	err := model.DB.Table("articles").Select("cate_id, count(*) as count").Where(
+		"deleted_at IS NULL").Group(
+		"cate_id").Scan(&results).Error
+	if err != nil {
+		log.Println(err)
+		SendErrResp(c, "can not count articles")
+		return
+	}
+	// array to map
+	for _, v := range results {
+		acMap[v.CateId] = v.Count
+	}
+
+	// set article counts of each category
+	for i, c := range cateList {
+		cnt, ok := acMap[c.ID]
+		if !ok {
+			cateList[i].Count = 0
+		}
+		cateList[i].Count = cnt
 	}
 
 	SendResp(c, gin.H{

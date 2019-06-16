@@ -180,12 +180,14 @@ func ArticleRetrieve(c *gin.Context)  {
 		ad.Content = utils.MarkdownToHtml(ad.Content)
 	}
 
+	// get pre article
 	pre, err := ad.GetPre()
 	if err != nil {
 		log.Println(err)
 		pre = nil
 	}
 
+	// get next article
 	next, err := ad.GetNext()
 	if err != nil {
 		log.Println(err)
