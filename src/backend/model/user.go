@@ -21,6 +21,21 @@ type User struct {
 	//Articles []Article	`gorm:"foreignkey:ID"`
 }
 
+const (
+	UserRoleAdmin  = 1
+	UserRoleNormal = 2
+)
+
+const (
+	UserStatusActive = 1
+	UserStatusDelete = 2
+)
+
+const (
+	//UserActiveDuration = 24 * 60 * 60
+	UserActiveDuration = 10 * 60
+)
+
 func (user User) CheckPasswd(passwd string) bool {
 	return user.Passwd == user.EncryptPasswd(passwd)
 }
@@ -125,6 +140,18 @@ func GetUserFromRedis(userId uint) (User, error) {
 	return user, nil
 }
 
+func RemoveUserFromRedis(user User) error {
+	userKey := fmt.Sprintf("user:%d", user.ID)
+	rds := RedisPool.Get()
+	defer rds.Close()
+
+	if _, err := rds.Do("DEL", userKey); err != nil {
+		log.Println(err)
+		return err
+	}
+
+	return nil
+}
 
 func CreateAdminUser() {
 	adminName := config.AllConfig.Admin.Name
@@ -150,18 +177,3 @@ func CreateAdminUser() {
 
 	DB.Create(&admin)
 }
-
-const (
-	UserRoleAdmin  = 1
-	UserRoleNormal = 2
-)
-
-const (
-	UserStatusActive = 1
-	UserStatusDelete = 2
-)
-
-const (
-	//UserActiveDuration = 24 * 60 * 60
-	UserActiveDuration = 10 * 60
-)

@@ -11,6 +11,7 @@ func Route(router *gin.Engine)  {
 
 	// 用户
 	apiGrp.GET("/user/info", middleware.LoginRequired, api.UserInfo)
+	apiGrp.GET("/user/signout", middleware.LoginRequired, api.SignOut)
 	apiGrp.POST("/user/signup", api.Signup)
 	apiGrp.POST("/user/login", api.Login)
 	apiGrp.POST("/user/password/update", middleware.LoginRequired, api.ResetPasswd)

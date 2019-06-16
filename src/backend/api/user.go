@@ -158,9 +158,22 @@ func UserList(c *gin.Context) {
 }
 
 func UserInfo(c *gin.Context) {
-	if user, ok := c.Get("user"); ok {
+	var user model.User
+	if userInfo, ok := c.Get("user"); ok {
+		user = userInfo.(model.User)
 		SendResp(c, gin.H{
 			"user": user,
 		})
+	}
+}
+
+func SignOut(c *gin.Context) {
+	if userInfo, ok := c.Get("user"); ok {
+		user := userInfo.(model.User)
+		if err := model.RemoveUserFromRedis(user); err != nil {
+			SendErrResp(c, "sign out error")
+		}
+
+		SendResp(c, gin.H{})
 	}
 }
