@@ -26,6 +26,7 @@
 
         <cate-item
           v-for="cate in cates"
+          v-if="cate.Count > 0"
           :cate="cate"
           :key="cate.ID"
         >

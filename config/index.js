@@ -1,7 +1,7 @@
 var config = {
   baseUrl: "/api",
   backendURl: "http://127.0.0.1:6060/api",
-  pageSize: 5,
+  pageSize: 10,
 }
 
 module.exports = config

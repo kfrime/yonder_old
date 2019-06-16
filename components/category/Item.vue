@@ -9,7 +9,7 @@
          <!--Badge, Tag, Button -->
          <!--type: success、primary、normal、error、warning、info	 -->
         <!-- todo: 该分类下的文章总数 -->
-        <Badge type="normal" :count="10"></Badge>
+        <Badge type="normal" :count="cate.Count"></Badge>
       </div>
 
     </Button>
