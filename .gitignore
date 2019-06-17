@@ -1,3 +1,11 @@
 .idea
-pkg
-config.json
+.DS_Store
+
+yonder_server_go/pkg
+yonder_server_go/config.json
+
+yonder_frontend_vue/.nuxt
+yonder_frontend_vue/node_modules
+yonder_frontend_vue/dist
+yonder_frontend_vue/stash
+
