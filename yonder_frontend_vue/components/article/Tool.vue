@@ -30,8 +30,8 @@
         this.$router.push("/article/update/" + this.article.ID)
       },
       deleteArticle () {
-        console.log('delete article')
-        console.log(this.$router.history.current)
+        // console.log('delete article')
+        // console.log(this.$router.history.current)
         let self = this
         request.deleteArticle({
           params: {

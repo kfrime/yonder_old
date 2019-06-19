@@ -50,7 +50,7 @@
             params: params,
             body: body
           }).then(resp => {
-            console.log(resp)
+            // console.log(resp)
             if (resp.code === 0) {
               let cate = resp.data.cate
               this.$Message.info("update cate success")

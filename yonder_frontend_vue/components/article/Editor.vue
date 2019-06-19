@@ -85,7 +85,7 @@
             params: params,
             body: body
           }).then(resp => {
-            console.log(resp)
+            // console.log(resp)
             if (resp.code === 0) {
               let article = resp.data.ad
               this.$Message.info("update article success")

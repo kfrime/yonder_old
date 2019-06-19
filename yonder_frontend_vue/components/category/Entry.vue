@@ -34,8 +34,8 @@
         this.$router.push("/category/update/" + this.cate.ID)
       },
       deleteCategory () {
-        console.log('delete category')
-        console.log(this.$router.history.current)
+        // console.log('delete category')
+        // console.log(this.$router.history.current)
         let self = this
         request.deleteCate({
           params: {

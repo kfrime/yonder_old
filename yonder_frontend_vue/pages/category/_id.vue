@@ -42,8 +42,8 @@
     },
     asyncData (ctx) {
       // console.log("article asyncData")
-      console.log("params:", ctx.params)
-      console.log("query:", ctx.query)
+      // console.log("params:", ctx.params)
+      // console.log("query:", ctx.query)
       let cateId = ctx.params.id
       // 优化：分类列表可以不用每次都获取
 
@@ -58,7 +58,7 @@
           }
         })
       ]).then(resp => {
-        console.log("get data:", resp)
+        // console.log("get data:", resp)
         // categories
         let cates = resp[0].data.cateList || []
         ctx.store.commit('setCates', cates)

@@ -66,7 +66,7 @@
         }
       },
       handleSearch () {
-        console.log("searchValue:", this.searchValue)
+        // console.log("searchValue:", this.searchValue)
         if (this.searchValue) {
           this.$router.push("/search/" + this.searchValue)
           this.searchValue = ''

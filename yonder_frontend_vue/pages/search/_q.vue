@@ -52,7 +52,7 @@
         })
       ]).then(resp => {
         ctx.store.commit('setSearch', searchValue)
-        console.log("get data:", resp)
+        // console.log("get data:", resp)
         // categories
         let cates = resp[0].data.cateList || []
         ctx.store.commit('setCates', cates)
@@ -75,7 +75,7 @@
     },
     methods: {
       onPageChange (page) {
-        console.log('get article list, page: ', page)
+        // console.log('get article list, page: ', page)
         request.searchArticle({
           query: {
             q: this.q,

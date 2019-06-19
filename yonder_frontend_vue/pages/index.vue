@@ -65,7 +65,7 @@
     },
     methods: {
       onPageChange (page) {
-        console.log('get article list, page: ', page)
+        // console.log('get article list, page: ', page)
         request.getArticles({
           query: {
             page: page,

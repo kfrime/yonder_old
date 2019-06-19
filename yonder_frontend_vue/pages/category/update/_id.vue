@@ -21,7 +21,7 @@
     },
     asyncData (ctx) {
       // console.log("article asyncData")
-      console.log("params:", ctx.params)
+      // console.log("params:", ctx.params)
 
       return Promise.all([
         request.getCateDetail({

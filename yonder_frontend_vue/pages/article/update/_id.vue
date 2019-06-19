@@ -27,7 +27,7 @@
     },
     asyncData (ctx) {
       // console.log("article asyncData")
-      console.log("params:", ctx.params)
+      // console.log("params:", ctx.params)
 
       return Promise.all([
         request.getArticleDetail({
@@ -37,7 +37,7 @@
           }
         })
       ]).then(resp => {
-        console.log("get data:", resp)
+        // console.log("get data:", resp)
         let article = resp[0].data.ad || null
 
         return {

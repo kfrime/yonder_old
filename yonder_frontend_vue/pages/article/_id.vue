@@ -60,8 +60,8 @@
     },
     asyncData (ctx) {
       // console.log("article asyncData")
-      console.log("params:", ctx.params)
-      console.log("query:", ctx.query)
+      // console.log("params:", ctx.params)
+      // console.log("query:", ctx.query)
 
       return Promise.all([
         request.getArticleDetail({
@@ -74,7 +74,7 @@
           }
         })
       ]).then(resp => {
-        console.log("get data:", resp)
+        // console.log("get data:", resp)
         let result = resp[0].data
         let article = result.ad || {}
         let pre = result.pre
@@ -86,7 +86,7 @@
           next: next,
         }
       }).catch(err => {
-        console.log("catch error:", err)
+        // console.log("catch error:", err)
         ctx.error({ message: "not found", statusCode: 404 })
       })
     },

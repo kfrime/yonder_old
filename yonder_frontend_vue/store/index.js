@@ -69,7 +69,7 @@ export const actions = {
       request.getUserInfo({ client: req }),
     ]).then( (resp) => {
       let user = resp[0].data.user
-      console.log('nuxtServerInit', user)
+      // console.log('nuxtServerInit', user)
       commit("setUser", user)
       // next()
     }).catch( (err) => {
