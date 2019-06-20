@@ -3,8 +3,7 @@
 
 ## 部署
     1. `npm i`
-    2. `npm run dev`
-
+    2. `npm start`
 
 ## todo
     分页优化

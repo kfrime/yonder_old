@@ -3,8 +3,29 @@
 
 ## blog_mini_server_go
     mini server of blog implemented by golang
+
+## 依赖和准备
+    系统以 ubuntu 16.04 为例
+    1. mysql
+    1.1 启动mysql
+    service mysql start/restart/stop
+
+    1.2 创建用户
+    CREATE USER 'username'@'localhost' IDENTIFIED BY 'password'; 
+
+    1.3 授权
+    GRANT <privileges> ON databasename.tablename TO 'username'@'host'
+    GRANT ALL ON *.* TO 'username'@'localhost';
+
+    1.4 创建数据库
+    create database <dbname>;
+
+    2. redis
+    1. 启动redis
+    redis-server --port 6381 
     
 ## 部署
+
     1. 创建配置文件，并填入个人密码等敏感信息
     `cp config.example.json config.json`
     
@@ -13,8 +34,7 @@
     
 ## todo
     log 
-    分页
-    搜索
+    搜索(solr)
     Archive页
     数据库备份
 
