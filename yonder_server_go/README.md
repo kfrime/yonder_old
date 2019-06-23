@@ -25,7 +25,7 @@
     redis-server --port 6381 
     
     3. 启动后端服务
-
+    /etc/nginx/conf.d
 
 
 ## 部署
