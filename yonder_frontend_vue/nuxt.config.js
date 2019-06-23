@@ -1,4 +1,8 @@
 module.exports = {
+  server: {
+    port: 6050,       // default: 3000
+    host: '0.0.0.0',  // default: localhost
+  },
   head: {
     meta: [
       { charset: 'utf-8' },
