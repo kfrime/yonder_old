@@ -9,6 +9,7 @@ import (
 	"log"
 )
 
+// 根据请求中的token从redis中获取用户信息
 func getUser(c *gin.Context) (model.User, error)  {
 	var user model.User
 	//token := c.GetHeader("token")
@@ -33,6 +34,7 @@ func getUser(c *gin.Context) (model.User, error)  {
 	return user, nil
 }
 
+// 部分数据必须登陆才能查看
 func LoginRequired(c *gin.Context) {
 	// todo: 后续可以通过 jwt 验证
 	user, err := getUser(c)
@@ -45,6 +47,7 @@ func LoginRequired(c *gin.Context) {
 	c.Next()
 }
 
+// 必须是管理员权限
 func AdminRequired(c *gin.Context) {
 	user, err := getUser(c)
 	if err != nil {

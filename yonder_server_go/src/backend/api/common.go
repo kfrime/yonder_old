@@ -19,6 +19,7 @@ var ErrCode = errCode{
 	ERROR: 	 1,
 }
 
+// 发送正确请求
 func SendResp(c *gin.Context, data gin.H) {
 	c.JSON(http.StatusOK, gin.H{
 		"code": ErrCode.SUCCESS,
@@ -29,6 +30,7 @@ func SendResp(c *gin.Context, data gin.H) {
 
 
 // args: errNo, ...
+// 如果服务器出错，返回错误信息和错误码
 func SendErrResp(c *gin.Context, msg string, args ...interface{})  {
 
 	var errNo = ErrCode.ERROR
