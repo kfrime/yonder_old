@@ -1,12 +1,14 @@
 package middleware
 
 import (
+	"errors"
+	"log"
+
+	"github.com/gin-gonic/gin"
+
 	"backend/api"
 	"backend/config"
 	"backend/model"
-	"errors"
-	"github.com/gin-gonic/gin"
-	"log"
 )
 
 // 根据请求中的token从redis中获取用户信息

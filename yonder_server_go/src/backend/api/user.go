@@ -1,11 +1,13 @@
 package api
 
 import (
-	"backend/model"
-	"github.com/gin-gonic/gin"
 	"log"
 	"net/http"
 	"strings"
+
+	"github.com/gin-gonic/gin"
+
+	"backend/model"
 )
 
 

@@ -1,10 +1,12 @@
 package config
 
 import (
-	"backend/debug"
 	"encoding/json"
-	_ "github.com/go-sql-driver/mysql"
 	"io/ioutil"
+
+	_ "github.com/go-sql-driver/mysql"
+
+	"backend/debug"
 )
 
 type DbConfig struct {

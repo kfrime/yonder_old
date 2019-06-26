@@ -2,8 +2,9 @@ package model
 
 import (
 	"errors"
-	"github.com/jinzhu/gorm"
 	"log"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Article struct {

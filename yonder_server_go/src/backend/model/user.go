@@ -1,15 +1,17 @@
 package model
 
 import (
-	"backend/config"
-	"backend/debug"
 	"crypto/md5"
 	"encoding/json"
 	"errors"
 	"fmt"
+	"log"
+
 	"github.com/garyburd/redigo/redis"
 	"github.com/jinzhu/gorm"
-	"log"
+
+	"backend/config"
+	"backend/debug"
 )
 
 type User struct {

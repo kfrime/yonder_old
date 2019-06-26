@@ -3,10 +3,10 @@ package api
 import (
 	"bytes"
 	"encoding/gob"
-	"github.com/gin-gonic/gin"
 	"log"
-
 	"net/http"
+
+	"github.com/gin-gonic/gin"
 )
 
 type errCode struct {

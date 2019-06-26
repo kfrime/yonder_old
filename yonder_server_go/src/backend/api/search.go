@@ -1,12 +1,14 @@
 package api
 
 import (
-	"backend/config"
-	"backend/model"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+
+	"backend/config"
+	"backend/model"
 )
 
 func paginate(x []SimpleArticle, skip int, size int) []SimpleArticle {

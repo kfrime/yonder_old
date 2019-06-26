@@ -1,10 +1,12 @@
 package api
 
 import (
-	"backend/model"
-	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
+
+	"github.com/gin-gonic/gin"
+
+	"backend/model"
 )
 
 type ArticleCount struct {

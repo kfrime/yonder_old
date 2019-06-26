@@ -1,8 +1,9 @@
 package model
 
 import (
-	"github.com/microcosm-cc/bluemonday"
 	"time"
+
+	"github.com/microcosm-cc/bluemonday"
 )
 
 type BaseModel struct {

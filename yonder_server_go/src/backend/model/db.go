@@ -1,11 +1,13 @@
 package model
 
 import (
-	"backend/config"
 	"fmt"
+	"time"
+
 	"github.com/garyburd/redigo/redis"
 	"github.com/jinzhu/gorm"
-	"time"
+
+	"backend/config"
 )
 
 var DB *gorm.DB

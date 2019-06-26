@@ -1,15 +1,17 @@
 package api
 
 import (
-	"backend/config"
-	"backend/model"
-	"backend/utils"
 	"errors"
 	"fmt"
-	"github.com/gin-gonic/gin"
 	"log"
 	"strconv"
 	"time"
+
+	"github.com/gin-gonic/gin"
+
+	"backend/config"
+	"backend/model"
+	"backend/utils"
 )
 
 type Pagination struct {

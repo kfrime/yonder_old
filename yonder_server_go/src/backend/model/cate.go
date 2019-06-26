@@ -2,9 +2,10 @@ package model
 
 import (
 	"errors"
-	"github.com/jinzhu/gorm"
 	"log"
 	"regexp"
+
+	"github.com/jinzhu/gorm"
 )
 
 type Category struct {
