@@ -3,17 +3,28 @@
 package main
 
 import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+
+	"backend/config"
 	"backend/model"
 	"backend/router"
-	"github.com/gin-gonic/gin"
 )
 
 func migrate() {
+	var dc = config.AllConfig.Database
 	db := model.DB
 
-	db.AutoMigrate(&model.User{})
-	db.AutoMigrate(&model.Category{})
-	db.AutoMigrate(&model.Article{})
+	options := fmt.Sprintf("ENGINE=InnoDB CHARSET=%s auto_increment=1;", dc.Charset)
+
+	db.Set("gorm:table_options", options).AutoMigrate(&model.Category{})
+	db.Set("gorm:table_options", options).AutoMigrate(&model.Article{})
+	db.Set("gorm:table_options", options).AutoMigrate(&model.User{})
+
+	//db.AutoMigrate(&model.User{})
+	//db.AutoMigrate(&model.Category{})
+	//db.AutoMigrate(&model.Article{})
 
 	model.CreateAdminUser()
 }
