@@ -34,8 +34,9 @@ const (
 )
 
 const (
-	//UserActiveDuration = 24 * 60 * 60
-	UserActiveDuration = 10 * 60
+	// 用户登陆过期时间
+	UserActiveDuration = 24 * 60 * 60
+	//UserActiveDuration = 10 * 60
 )
 
 func (user User) CheckPasswd(passwd string) bool {
