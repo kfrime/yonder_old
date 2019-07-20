@@ -14,7 +14,8 @@
     "MaxActive": 5
   },
   "server": {
-    "salt": "a secret key"    // 用于加密用户密码和生成HTTP token
+    "salt": "a secret key",    // 用于加密用户密码和生成HTTP token
+    "LogPath": "/work/logs/yonder/backend/server.log"
   },
   "admin": {
     "name": "",               // 网站管理员用户名

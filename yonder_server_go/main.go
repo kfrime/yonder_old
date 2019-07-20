@@ -4,6 +4,9 @@ package main
 
 import (
 	"fmt"
+	"io"
+	"log"
+	"os"
 
 	"github.com/gin-gonic/gin"
 
@@ -29,7 +32,19 @@ func migrate() {
 	model.CreateAdminUser()
 }
 
+func logInit() {
+	var logPath = config.AllConfig.Server.LogPath
+	logFile, err := os.Create(logPath)
+	if err != nil {
+		panic(err)
+	}
+	gin.DefaultWriter = io.MultiWriter(logFile, os.Stdout)
+	log.SetOutput(gin.DefaultWriter)
+}
+
 func main() {
+	logInit()
+
 	// create table
 	migrate()
 

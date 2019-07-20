@@ -27,6 +27,7 @@ type RedisConfig struct {
 
 type ServerConfig struct {
 	Salt	string
+	LogPath string
 }
 
 type AdminConfig struct {
