@@ -26,6 +26,7 @@ type RedisConfig struct {
 }
 
 type ServerConfig struct {
+	Mode 	string
 	Salt	string
 	LogPath string
 }
@@ -61,6 +62,14 @@ func loadConf(cfgFile string) {
 		panic(err.Error())
 	}
 	dbg.Dbg("AllConfig:", AllConfig)
+}
+
+func IsDev() bool {
+	return AllConfig.Server.Mode == "dev"
+}
+
+func IsRelease() bool {
+	return AllConfig.Server.Mode == "release"
 }
 
 func InitConf()  {

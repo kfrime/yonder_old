@@ -38,18 +38,36 @@ func logInit() {
 	if err != nil {
 		panic(err)
 	}
-	gin.DefaultWriter = io.MultiWriter(logFile, os.Stdout)
+	// gin logger
+	w := io.MultiWriter(logFile, os.Stdout)
+	gin.DefaultWriter = w
+	gin.Logger()
+
+	// std logger
 	log.SetOutput(gin.DefaultWriter)
+	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
+	log.SetPrefix("\r\n")
+
+	// new logger
+	//logFlags := log.Ldate | log.Ltime | log.Lshortfile
+	//logger := log.New(w, "\r\n", 0)
+	//logger.Println("test")
 }
 
 func main() {
 	logInit()
+
+	log.Println(fmt.Sprintf("env mode: %s", config.AllConfig.Server.Mode))
 
 	// create table
 	migrate()
 
 	// Creates a router without any middleware by default
 	app := gin.New()
+
+	if config.IsRelease() {
+		gin.SetMode(gin.ReleaseMode)
+	}
 
 	// Global middleware
 	// Logger middleware will write the logs to gin.DefaultWriter even if you set with GIN_MODE=release.
