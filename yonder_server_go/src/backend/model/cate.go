@@ -3,7 +3,6 @@ package model
 import (
 	"errors"
 	"log"
-	"regexp"
 
 	"github.com/jinzhu/gorm"
 )
@@ -14,11 +13,6 @@ type Category struct {
 }
 
 func (cate *Category) checkCate() error {
-	// 正则判断名称是否正确
-	pat := `^[_0-9a-zA-Z]+$`
-	if ok, _ := regexp.MatchString(pat, cate.Name); !ok {
-		return errors.New("category name is invalid")
-	}
 	cate.Name = PreventXSS(cate.Name)
 
 	err := DB.Where("name = ?", cate.Name).Find(&cate).Error
