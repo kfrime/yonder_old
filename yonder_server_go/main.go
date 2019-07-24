@@ -41,12 +41,10 @@ func logInit() {
 	// gin logger
 	w := io.MultiWriter(logFile, os.Stdout)
 	gin.DefaultWriter = w
-	gin.Logger()
 
 	// std logger
 	log.SetOutput(gin.DefaultWriter)
 	log.SetFlags(log.Ldate | log.Ltime | log.Lshortfile)
-	log.SetPrefix("\r\n")
 
 	// new logger
 	//logFlags := log.Ldate | log.Ltime | log.Lshortfile
