@@ -12,12 +12,9 @@ PASSWORD=root
 DB=yonder
 
 # 备份目录
-BACKUP_ROOT=.
+BACKUP_FILE=./${DB}_backup.sql
 
 set -x
 
 # 备份命令
-mysqldump -h${HOST} -P${PORT} -u${USER} -p${PASSWORD} -B ${DB} > ${BACKUP_ROOT}/${DB}.sql
-
-# 数据恢复命令
-# mysql -h${HOST} -P${PORT} -u${USER} -p${PASSWORD} -B ${DB} < ${BACKUP_ROOT}/${DB}.sql
+mysqldump -h${HOST} -P${PORT} -u${USER} -p${PASSWORD} -B ${DB} > ${BACKUP_FILE}
