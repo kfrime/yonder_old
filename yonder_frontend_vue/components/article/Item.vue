@@ -48,7 +48,7 @@
 
 <style scoped>
   .article-cell {
-    padding: 8px;
+    padding-bottom: 8px;
   }
   .article-title {
     font-size: 20px;

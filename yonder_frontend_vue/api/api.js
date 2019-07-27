@@ -81,7 +81,13 @@ const apiList = {
   searchArticle: {
     url: baseUrl + "/search",
     method: "GET"
-  }
+  },
+
+  // 归档页面
+  getArchive: {
+    url: baseUrl + "/archive",
+    method: "GET"
+  },
 
 }
 
