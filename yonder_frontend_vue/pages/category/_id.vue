@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Card :bordered="false">
-      <p slot="title">
-        category
-      </p>
-      <p>{{cate.Name}}</p>
+    <Card :bordered="false" class="category-cell">
+      <p slot="title" class="title">category</p>
+      <p class="content">{{cate.Name}}</p>
     </Card>
+
     <article-item
       v-for="ar in articles"
       :article="ar"
       :key="ar.ID"
     >
     </article-item>
+
     <Page
       v-if="total > pageSize "
       :total="total"
@@ -124,3 +124,12 @@
     }
   }
 </script>
+
+<style >
+  .category-cell {
+    margin-bottom: 8px;
+  }
+  .category-cell .title, .category-cell .content {
+    font-size: 16px;
+  }
+</style>
