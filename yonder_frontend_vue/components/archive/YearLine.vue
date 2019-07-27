@@ -30,8 +30,11 @@
   .card-title {
     font-size: 16px;
   }
-  .time, .content {
-    font-size: 15px;
+  .time {
+    font-size: 14px;
+  }
+  .content {
+    font-size: 16px;
   }
   .time-item {
     padding: 0;

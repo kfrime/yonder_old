@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Card :bordered="false" class="category-cell">
+    <Card :bordered="false" class="category-info">
       <p slot="title" class="title">category</p>
       <p class="content">{{cate.Name}}</p>
     </Card>
@@ -13,7 +13,7 @@
     </article-item>
 
     <Page
-      v-if="total > pageSize "
+      v-if="total > pageSize"
       :total="total"
       :page-size="pageSize"
       @on-change="onPageChange"
@@ -125,11 +125,11 @@
   }
 </script>
 
-<style >
-  .category-cell {
+<style scoped>
+  .category-info {
     margin-bottom: 8px;
   }
-  .category-cell .title, .category-cell .content {
+  .category-info .title, .category-info .content {
     font-size: 16px;
   }
 </style>
