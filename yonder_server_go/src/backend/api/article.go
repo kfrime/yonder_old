@@ -44,20 +44,6 @@ type TinyArticle struct {
 	Title 	  string
 }
 
-type ArticleArchive struct {
-	ArtList []TinyArticle
-	Count 	int
-}
-
-func (box *ArticleArchive) AddItem(item TinyArticle) []TinyArticle {
-	box.ArtList = append(box.ArtList, item)
-	return box.ArtList
-}
-
-func (box *ArticleArchive) ItemLen() int {
-	return len(box.ArtList)
-}
-
 func getArticleDetail(id uint) (ArticleDetail, error) {
 	var err error
 	var ad ArticleDetail
@@ -313,45 +299,4 @@ func ArticleDestroy(c *gin.Context)  {
 	}
 
 	SendResp(c, gin.H{})
-}
-
-func Archive(c *gin.Context)  {
-	var arList []TinyArticle
-
-	// 可展示的文章总数
-	// import !!! 必须要用别名 total，否则gorm对结果无法解析
-	var sql = `
-	SELECT a.id, a.title, a.created_at, a.updated_at
-	FROM articles a 
-	INNER JOIN users b ON a.user_id = b.id 
-	INNER JOIN categories c ON a.cate_id = c.id
-	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL`
-
-	if err := model.DB.Raw(sql).Scan(&arList).Error; err != nil {
-		log.Println(err)
-		SendErrResp(c, "can not get article list")
-		return
-	}
-
-	alMap := make(map[int]ArticleArchive)
-
-	for _, a := range arList {
-		year := a.CreatedAt.Year()
-		_, ok := alMap[year]
-		if !ok {
-			alMap[year] = ArticleArchive{ArtList: []TinyArticle{}, Count: 0}
-		}
-		yearArts, _ := alMap[year]
-		yearArts.AddItem(a)
-		alMap[year] = yearArts
-	}
-
-	for year, arts := range alMap {
-		arts.Count = len(arts.ArtList)
-		alMap[year] = arts
-	}
-
-	SendResp(c, gin.H{
-		"al": alMap,
-	})
 }
