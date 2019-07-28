@@ -74,7 +74,7 @@
   }
   .cate-cell {
     /*padding: 8px;*/
-    padding-top: 8px;
+    /*padding-top: 8px;*/
   }
   .card-title {
     font-size: 16px;

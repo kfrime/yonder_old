@@ -1,8 +1,8 @@
 <template>
   <div>
-    <Card :bordered="false">
-      <p slot="title">search:</p>
-      <p>{{q}}</p>
+    <Card :bordered="false" class="search-info">
+      <p slot="title" class="title">search:</p>
+      <p class="content">{{q}}</p>
     </Card>
     <article-item
       v-for="ar in articles"
@@ -113,3 +113,12 @@
     }
   }
 </script>
+
+<style scoped>
+  .search-info {
+    margin-bottom: 8px;
+  }
+  .search-info .title, .search-info .content {
+    font-size: 16px;
+  }
+</style>
