@@ -33,6 +33,7 @@ func Route(router *gin.Engine)  {
 
 	// 文章归档
 	apiGrp.GET("/archive", api.Archive)
+	apiGrp.GET("/about", api.About)
 
 	// 搜索
 	apiGrp.GET("/search", api.SearchArticle)
