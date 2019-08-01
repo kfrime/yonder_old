@@ -1,9 +1,12 @@
 package api
 
 import (
-	"backend/model"
-	"github.com/gin-gonic/gin"
 	"log"
+
+	"github.com/gin-gonic/gin"
+
+	"backend/model"
+	"backend/utils"
 )
 
 func About(c *gin.Context) {
@@ -32,6 +35,12 @@ func About(c *gin.Context) {
 		log.Println(err)
 		SendErrResp(c, err.Error())
 		return
+	}
+
+	// content type
+	ct := c.Query("ct")
+	if ct == "html" {
+		ad.Content = utils.MarkdownToHtml(ad.Content)
 	}
 
 	SendResp(c, gin.H{
