@@ -89,6 +89,11 @@ const apiList = {
     method: "GET"
   },
 
+  // 关于页面
+  getAbout: {
+    url: baseUrl + '/about',
+    method: "GET"
+  },
 }
 
 module.exports = apiList
