@@ -3,12 +3,11 @@ package model
 import (
 	"errors"
 	"log"
-
-	"github.com/jinzhu/gorm"
 )
 
 type Category struct {
-	gorm.Model
+	//gorm.Model
+	BaseModel
 	Name   string `gorm:"not null;index" binding:"required,min=3,max=20"`
 }
 

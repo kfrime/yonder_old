@@ -7,15 +7,14 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/garyburd/redigo/redis"
-	"github.com/jinzhu/gorm"
-
 	"backend/config"
 	"backend/debug"
+	"github.com/garyburd/redigo/redis"
 )
 
 type User struct {
-	gorm.Model
+	//gorm.Model
+	BaseModel
 	Name   string `gorm:"not null;index"`
 	Passwd string `gorm:"not null" json:"-"`
 	Role   int    `gorm:"not null"`

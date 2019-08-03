@@ -3,12 +3,11 @@ package model
 import (
 	"errors"
 	"log"
-
-	"github.com/jinzhu/gorm"
 )
 
 type Article struct {
-	gorm.Model
+	//gorm.Model
+	BaseModel
 	UserId uint `gorm:"not null;index"`
 	//User   User
 	CateId 		uint 	`gorm:"not null;index" binding:"required"`
