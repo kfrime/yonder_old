@@ -27,7 +27,7 @@
 
       <!-- pre article and next article -->
     </Card>
-    <Card>
+    <Card dis-hover>
       <div class="pre-next">
         <div v-if="pre" class="pre-article">
           <Icon type="md-arrow-round-back" />
