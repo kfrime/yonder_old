@@ -28,10 +28,10 @@
     padding-bottom: 8px;
   }
   .card-title {
-    font-size: 16px;
+    font-size: 18px;
   }
   .time {
-    font-size: 14px;
+    font-size: 16px;
   }
   .content {
     font-size: 16px;
