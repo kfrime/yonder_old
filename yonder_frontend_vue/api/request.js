@@ -62,7 +62,7 @@ function send(key, options) {
       axiosConf.data = options.body || {}
     }
 
-    console.log("axios config:", axiosConf)
+    // console.log("axios config:", axiosConf)
 
     // request
     axios(axiosConf)
