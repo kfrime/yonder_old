@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"log"
 	"strconv"
-	"time"
+	//"time"
 
 	"github.com/gin-gonic/gin"
 
@@ -21,8 +21,8 @@ type Pagination struct {
 // for article list
 type SimpleArticle struct {
 	ID        uint
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	CreatedAt utils.JSONTime
+	UpdatedAt utils.JSONTime
 	Title 	  string
 	UserId 	  uint
 	Username  string		// sql field: username
@@ -39,8 +39,8 @@ type ArticleDetail struct {
 
 type TinyArticle struct {
 	ID        uint
-	CreatedAt time.Time
-	UpdatedAt time.Time
+	CreatedAt utils.JSONTime
+	UpdatedAt utils.JSONTime
 	Title 	  string
 }
 
