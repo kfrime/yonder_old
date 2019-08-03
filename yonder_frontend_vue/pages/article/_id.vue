@@ -105,7 +105,7 @@
   }
 </script>
 
-<style lang="less">
+<style lang="less" scoped>
   .article-title {
     /*font-size: 30px;*/
     /*font-weight: 700;*/
