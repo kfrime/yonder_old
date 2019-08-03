@@ -25,7 +25,7 @@
   .app-container {
     background:#eee;
     width: 1080px;
-    margin: 16px auto;
+    margin: 8px auto;
     min-height: 300px;
   }
 </style>
