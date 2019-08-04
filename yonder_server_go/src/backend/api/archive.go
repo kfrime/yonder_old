@@ -89,7 +89,8 @@ func Archive(c *gin.Context) {
 	FROM articles a 
 	INNER JOIN users b ON a.user_id = b.id 
 	INNER JOIN categories c ON a.cate_id = c.id
-	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL`
+	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL
+	ORDER BY a.created_at DESC`
 
 	if err := model.DB.Raw(sql).Scan(&arList).Error; err != nil {
 		log.Println(err)
