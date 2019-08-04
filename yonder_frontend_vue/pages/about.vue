@@ -32,10 +32,6 @@
       }
     },
     asyncData (ctx) {
-      console.log("article asyncData")
-      // console.log("params:", ctx.params)
-      // console.log("query:", ctx.query)
-
       return Promise.all([
         request.getAbout({
           client: ctx.req,
@@ -45,9 +41,12 @@
         })
       ]).then(resp => {
         // console.log("get data:", resp)
-        let result = resp[0].data
-        let article = result.ad || {}
+        let result = resp[0]
 
+        if (result.code !== 0) {
+          ctx.error({ message: "not found", statusCode: 404 })
+        }
+        let article = result.data.ad || {}
         return {
           article: article,
         }
