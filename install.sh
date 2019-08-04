@@ -120,7 +120,7 @@ case $1 in
         install_backup
         ;;
     all)
-        install_all
+        install_all_without_conf
         ;;
     *)
         echo "$0 {nginx|vue|go|config|backup|all}" 
