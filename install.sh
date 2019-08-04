@@ -9,6 +9,10 @@
 # git clone https://github.com/kfrime/yonder.git
 # edit yonder_server_go/config.example.json
 
+
+echo "edit mysql config of 'yonder/data_backup/sh/backup.sh' first"
+echo "edit config of 'yonder/yonder_server_go/config.example.json' first"
+
 set -x
 
 # root dir
@@ -42,8 +46,8 @@ function install_yonder_frontend() {
     cd ${WORK_FRONTEND}
     sudo kill -9 $(ps aux | grep 'yonder_frontend_vue' | grep -v grep | awk '{print $2}')
     npm i
-    npm run build
-    npm run start & > /dev/null 2>&1
+    sudo npm run build
+    sudo npm run start & > /dev/null 2>&1
     ps aux | grep yonder_frontend_vue | grep -v grep 
 }
 
@@ -65,7 +69,7 @@ function install_yonder_server_go() {
     cd ${WORK_SERVER_GO}
     sudo kill -9 $(ps aux | grep 'yonder_server_go' | grep -v grep | awk '{print $2}')
     # cp ${WORK_SERVER_GO}/config.example.json ${WORK_SERVER_GO}/config.json
-    ./yonder_server_go & > /dev/null 2>&1
+    sudo ./yonder_server_go & > /dev/null 2>&1
 
     ps aux | grep yonder_server_go | grep -v grep 
 }
@@ -79,7 +83,6 @@ BACKUP_SCRIPT=${PROJECT_DIR}/data_backup
 BACKUP_DIR=${WORK_HOME}/backup
 
 function install_backup() {
-    echo "edit mysql config of data_backup/sh/backup.sh first"
     echo "install backup script ..."
 
     if [ ! -d ${BACKUP_DIR} ]; then
@@ -90,6 +93,15 @@ function install_backup() {
 
     ls /etc/cron.d/
 }
+
+function install_all_without_conf() {
+    install_yonder_nginx
+    install_yonder_frontend
+    install_yonder_server_go
+    # install_go_config
+    install_backup
+}
+
 
 case $1 in
     nginx)
@@ -107,8 +119,11 @@ case $1 in
     backup)
         install_backup
         ;;
+    all)
+        install_all
+        ;;
     *)
-        echo "$0 {nginx|vue|go|config|backup}" 
+        echo "$0 {nginx|vue|go|config|backup|all}" 
         exit 1
         ;;
 esac
