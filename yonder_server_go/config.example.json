@@ -16,7 +16,7 @@
   "server": {
     "mode": "dev",   // dev or release
     "salt": "a secret key",    // 用于加密用户密码和生成HTTP token
-    "LogPath": "/work/logs/yonder/yonser_server_go/server.log",
+    "LogPath": "/work/logs/yonder/yonder_server_go/server.log",
   },
   "admin": {
     "name": "",               // 网站管理员用户名
