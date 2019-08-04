@@ -12,7 +12,13 @@ PASSWORD=root
 DB=yonder
 
 # 备份目录
-BACKUP_FILE=./${DB}_backup.sql
+BACKUP_DIR=/work/backup
+BACKUP_FILE=${BACKUP_DIR}/${DB}_backup.sql
+
+# 创建目录
+if [ ! -d ${BACKUP_DIR} ]; then
+  mkdir ${BACKUP_DIR}
+fi
 
 set -x
 
