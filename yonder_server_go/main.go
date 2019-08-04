@@ -57,15 +57,15 @@ func main() {
 
 	log.Println(fmt.Sprintf("env mode: %s", config.AllConfig.Server.Mode))
 
+	if config.IsRelease() {
+		gin.SetMode(gin.ReleaseMode)
+	}
+
 	// create table
 	migrate()
 
 	// Creates a router without any middleware by default
 	app := gin.New()
-
-	if config.IsRelease() {
-		gin.SetMode(gin.ReleaseMode)
-	}
 
 	// Global middleware
 	// Logger middleware will write the logs to gin.DefaultWriter even if you set with GIN_MODE=release.
