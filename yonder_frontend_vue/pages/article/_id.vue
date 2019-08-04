@@ -75,6 +75,10 @@
         })
       ]).then(resp => {
         // console.log("get data:", resp)
+        if (resp[0].code !== 0) {
+          ctx.error({ message: "not found", statusCode: 404 })
+        }
+
         let result = resp[0].data
         let article = result.ad || {}
         let pre = result.pre

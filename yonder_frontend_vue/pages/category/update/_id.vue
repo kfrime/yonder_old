@@ -31,7 +31,7 @@
           }
         })
       ]).then(resp => {
-        console.log("get data:", resp)
+        // console.log("get data:", resp)
         let cate = resp[0].data.cate || null
 
         return {

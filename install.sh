@@ -12,6 +12,7 @@
 
 echo "edit mysql config of 'yonder/data_backup/sh/backup.sh' first"
 echo "edit config of 'yonder/yonder_server_go/config.example.json' first"
+echo "edit yonder/nginx/nginx.example.conf config, listen server ip in nginx"
 
 set -x
 
