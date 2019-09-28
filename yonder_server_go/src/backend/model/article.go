@@ -12,7 +12,7 @@ type Article struct {
 	//User   User
 	CateId 		uint 	`gorm:"not null;index" binding:"required"`
 	//Category 	Category
-	Title 		string `gorm:"not null;index" binding:"required,min=3,max=20"`
+	Title 		string `gorm:"not null;index" binding:"required"`
 	Content   string 	`gorm:"type:text;not null" binding:"required"`
 }
 
