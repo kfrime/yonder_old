@@ -140,11 +140,14 @@ func ArticleList(c *gin.Context)  {
 	FROM articles a 
 	INNER JOIN users b ON a.user_id = b.id 
 	INNER JOIN categories c ON a.cate_id = c.id
-	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL`
+	WHERE a.deleted_at IS NULL AND b.deleted_at IS NULL AND c.deleted_at IS NULL `
 
 	if cateId != 0 {
 		extra := fmt.Sprintf(` AND c.id = %d`, cateId)
 		totalSql += extra
+		sql += extra
+	} else {
+		extra := fmt.Sprintf(` ORDER BY a.updated_at DESC`)
 		sql += extra
 	}
 
