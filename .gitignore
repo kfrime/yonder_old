@@ -4,3 +4,6 @@
 # 备份数据
 *_backup.sql
 
+# 可执行文件
+yonder_server_go
+
