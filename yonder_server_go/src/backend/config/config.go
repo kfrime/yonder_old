@@ -3,6 +3,7 @@ package config
 import (
 	"encoding/json"
 	"io/ioutil"
+	"regexp"
 
 	_ "github.com/go-sql-driver/mysql"
 
@@ -57,6 +58,12 @@ func loadConf(cfgFile string) {
 	if err != nil {
 		panic(err.Error())
 	}
+
+	// 去掉json中的注释
+	confStr := string(data)
+	reg := regexp.MustCompile(`/\*.*\*/`)
+	confStr = reg.ReplaceAllString(confStr, "")
+	data = []byte(confStr)
 
 	if err := json.Unmarshal(data, &AllConfig); err != nil {
 		panic(err.Error())
