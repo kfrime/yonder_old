@@ -1,0 +1,30 @@
+/* sidebar css */
+
+.sidebar-module{
+  clear: both;
+}
+div .sidebar-item {
+  display: inline-block;
+}
+.sidebar-item {
+  margin-bottom: 0.3rem;
+  margin-left: 0.3rem;
+}
+.round-btn {
+  border-radius: 1020px;
+}
+.sidebar-btn {
+  padding: 0.1rem 0.5rem;
+  border-color: #ccc;
+  color: #6c757d;
+}
+.sidebar-btn:hover, .sidebar-btn:active {
+  color: #333;
+  background-color: #e6e6e6;
+  border: 1px solid #ddd;
+}
+.sidebar-btn .badge {
+  color: #fff;
+  border-radius: 1020px;
+  padding: 2px;
+}

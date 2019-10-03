@@ -1,0 +1,255 @@
+body {
+    background: #f4f4f4;
+    /*padding-top:4.8rem;*/
+    display: -webkit-flex; /* Safari */
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+
+.app-main {
+    padding-top: 1rem;
+    flex: 1 0 auto;
+}
+
+a {
+    color: inherit;
+}
+a:hover {
+    text-decoration: none;
+    color: #ea6f5a;
+}
+
+.h1, h1 {
+    font-size: 1.4em;
+}
+.h2, h2 {
+    font-size: 1.3em;
+}
+.h3, h3 {
+    font-size: 1.2em;
+}
+.h4, h4 {
+    font-size: 1.1em;
+}
+.h5, h5 {
+    font-size: 1.05em;
+}
+.h6, h6 {
+    font-size: 1em;
+}
+.f-17 {
+    font-size:13px;
+}
+.f-16 {
+    font-size:12px;
+}
+.f-15 {
+    font-size:11px;
+}
+.f-14 {
+    font-size:10px;
+}
+.f-13 {
+    font-size:9px;
+}
+.f-12 {
+    font-size:8px;
+}
+
+/* card css ------------------ */
+#home-card .card-header,
+#tag-card .card-header,
+#category-card .card-header,
+#friends-card .card-header {
+    border-bottom: 2px solid #f0f0f0;
+    padding-bottom:10px;
+}
+
+#home-card .card-header strong,
+#tag-card .card-header strong,
+#category-card .card-header strong,
+#friends-card .card-header strong {
+    padding-bottom:12px;
+    border-bottom: 2px solid #00AAEE;
+}
+
+/* category card ------------------ */
+#category-card .badge {
+    width: 2.2rem;
+    background-color: #17a2b8;
+    color: #fff;
+    font-weight: 700;
+    border-radius: .2rem;
+}
+
+.category-item:before {
+    position: absolute;
+    top: 1em;
+    left: .2rem;
+    width: 0;
+    height: 0;
+    border-style: solid;
+    border-color: #fff #fff #fff #4285f4;
+    -webkit-transform-origin: 25% center;
+    transform-origin: 25% center;
+    border-width: 4px;
+    content: "";
+}
+
+/* 标签 */
+.tag-list {
+    width: 100%;
+    margin: auto;
+    overflow: hidden;
+    text-align: left;
+}
+.tags {
+    color:#fff;
+    padding: .08rem .4rem;
+    float: left;
+    text-align: center;
+    margin: .3rem;
+    transition: all .5s;
+}
+/*云标签颜色*/
+.tags:nth-child(9n+1) {
+    background:#78BBE6;
+}
+.tags:nth-child(9n+2){
+    background:#FF895D;
+}
+.tags:nth-child(9n+3) {
+    background:#A3DE83;
+}
+.tags:nth-child(9n+4) {
+    background:#00BBF0;
+}
+.tags:nth-child(9n+5) {
+    background:#FF2E63;
+}
+.tags:nth-child(9n+6) {
+    background:#0D7377;
+}
+.tags:nth-child(9n+7) {
+    background:#AC005D;
+}
+.tags:nth-child(9n+8) {
+    background:#0881A3;
+}
+.tags:nth-child(9n+9) {
+    background:#EDA045;
+}
+.tags:hover {
+    color: #fff;
+    background: #333;
+}
+
+/* other css ------------------ */
+
+/* Small devices (landscape phones, 576px and up) */
+/* X-iPhone6 AND plus */
+@media (min-width: 576px) {
+    .container {
+        max-width: none;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    .f-17 {
+        font-size:14px;
+    }
+    .f-16 {
+        font-size:13px;
+    }
+    .f-15 {
+        font-size:12px;
+    }
+    .f-14 {
+        font-size:11px;
+    }
+    .f-13 {
+        font-size:10px;
+    }
+    .f-12 {
+        font-size:9px;
+    }
+}
+
+/* Medium devices (tablets, 768px and up) */
+/* Y-iPad mini */
+@media (min-width: 768px) {
+    .container {
+        max-width: 750px;
+        padding-right: 12px;
+        padding-left: 12px;
+    }
+    .f-17 {
+        font-size:16px;
+    }
+    .f-16 {
+        font-size:15px;
+    }
+    .f-15 {
+        font-size:14px;
+    }
+    .f-14 {
+        font-size:13px;
+    }
+    .f-13 {
+        font-size:12px;
+    }
+    .f-12 {
+        font-size:11px;
+    }
+    .article-list .avatar {
+        width:1.35rem;
+        heigth:1.35rem;
+    }
+}
+
+/* Large devices (desktops, 992px and up) */
+/* X-iPad Y-iPad Pro*/
+@media (min-width: 992px) {
+    .container {
+        max-width: 970px;
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+}
+
+/* Extra large devices (large desktops, 1200px and up) */
+/* PC X-iPad Pro*/
+@media (min-width: 1200px) {
+    .container {
+        max-width: 1140px;
+    }
+    .f-17 {
+        font-size:17px;
+    }
+    .f-16 {
+        font-size:16px;
+    }
+    .f-15 {
+        font-size:15px;
+    }
+    .f-14 {
+        font-size:14px;
+    }
+    .f-13 {
+        font-size:13px;
+    }
+    .f-12 {
+        font-size:12px;
+    }
+
+    .article-list .media:hover {
+        box-shadow:0 2px 6px rgba(0, 0, 0, 0.275)
+    }
+    .article-list .avatar {
+        width:1.5rem;
+        heigth:1.5rem;
+    }
+}
+
+
+

@@ -4,7 +4,6 @@
 # 备份数据
 *_backup.sql
 
-=======
 # private config
 blog_server_django/conf/base.py
 logs/
@@ -118,3 +117,10 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+.DS_Store
+.idea
+public
+dist
+node_modules
+
