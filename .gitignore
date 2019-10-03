@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 .idea
 .DS_Store
 
@@ -13,16 +14,35 @@ static/
 # pycharm
 .idea/
 
+=======
+>>>>>>> iseek_backend/master
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
 *$py.class
 
+<<<<<<< HEAD
+=======
+.DS_Store
+iseek_backend/base_settings.py
+
+#
+log/
+migrations
+
+# PyCharm
+.idea/
+
+>>>>>>> iseek_backend/master
 # C extensions
 *.so
 
 # Distribution / packaging
 .Python
+<<<<<<< HEAD
+=======
+env/
+>>>>>>> iseek_backend/master
 build/
 develop-eggs/
 dist/
@@ -38,7 +58,10 @@ wheels/
 *.egg-info/
 .installed.cfg
 *.egg
+<<<<<<< HEAD
 MANIFEST
+=======
+>>>>>>> iseek_backend/master
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
@@ -60,7 +83,10 @@ nosetests.xml
 coverage.xml
 *.cover
 .hypothesis/
+<<<<<<< HEAD
 .pytest_cache/
+=======
+>>>>>>> iseek_backend/master
 
 # Translations
 *.mo
@@ -69,7 +95,10 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
+<<<<<<< HEAD
 db.sqlite3
+=======
+>>>>>>> iseek_backend/master
 
 # Flask stuff:
 instance/
@@ -105,6 +134,15 @@ ENV/
 env.bak/
 venv.bak/
 
+# dotenv
+.env
+
+# virtualenv
+.venv
+venv/
+ENV/
+>>>>>>> iseek_backend/master
+
 # Spyder project settings
 .spyderproject
 .spyproject
@@ -117,6 +155,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+<<<<<<< HEAD
 
 .DS_Store
 .idea

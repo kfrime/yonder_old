@@ -1,0 +1,40 @@
+{% load blog_tags static %}
+
+<!-- 个人空间 -->
+
+<!-- 分类 -->
+<div class="card border-0 rounded-0 px-3 mb-2 mb-md-3" id="category-card">
+    <div class="card-header bg-white px-0">
+        <strong><i class="fa fa-book mr-2 f-17"></i>文章分类</strong>
+    </div>
+    {% get_topic_list as topics %}
+    <ul class="list-group list-group-flush f-16">
+        {% for each in topics %}
+        <li class="list-group-item d-flex justify-content-between align-items-center pr-2 py-2">
+            <a class="category-item" href="{{ each.get_absolute_url }}"
+               title="查看【{{ each.name }}】分类下所有文章">{{ each.name }}</a>
+            <span class="badge text-center" title="当前分类下有{{ each.total_num }}篇文章">{{ each.total_num }}</span>
+        </li>
+        {% endfor %}
+    </ul>
+</div>
+
+<!-- 标签 -->
+<div class="card border-0 rounded-0 px-3 mb-2 mb-md-3" id="tag-card">
+    <div class="card-header bg-white px-0">
+        <strong><i class="fa fa-tags mr-2 f-17"></i>标&nbsp;签</strong>
+    </div>
+    <div class="card-body px-0 py-3">
+        <div class="tag-cloud">
+            {% get_tag_list as tag_list %}
+            {% for tag in tag_list %}
+            <a href="{{ tag.get_absolute_url }}" class="tags f-16" id="tag-{{ forloop.counter }}">
+                {{ tag.name }}
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+
