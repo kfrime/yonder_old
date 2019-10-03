@@ -17,3 +17,6 @@
     2. 部署前端
 
     3. 准备nginx
+
+# blog_django_server
+blog backend server with django
