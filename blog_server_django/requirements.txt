@@ -2,7 +2,7 @@ Django==2.1
 django-cors-headers==2.4.0
 django-js-asset==1.1.0
 django-mptt==0.9.1
-djangorestframework==3.9.0
+djangorestframework==3.11.2
 gunicorn==19.9.0
 Markdown==3.0.1
 PyMySQL==0.9.3
